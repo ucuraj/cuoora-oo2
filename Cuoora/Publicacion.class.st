@@ -12,6 +12,15 @@ Class {
 	#category : #Cuoora
 }
 
+{ #category : #'instance creation' }
+Publicacion class >> newPublicacion [
+| publicacion |
+publicacion := self new.
+publicacion likes: Set new.
+publicacion dislikes: Set new.
+^publicacion
+]
+
 { #category : #accessing }
 Publicacion >> dislikes [
 	^ dislikes

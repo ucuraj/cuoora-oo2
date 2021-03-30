@@ -12,6 +12,24 @@ Class {
 	#category : #Cuoora
 }
 
+{ #category : #'as yet unclassified' }
+Cuoora class >> conUsuarios:usuarios conTopicos:topicos [
+  | cuoora |
+  cuoora := self new.
+  cuoora usuariosCreados: usuarios.
+  cuoora topicos: topicos.
+  ^cuoora
+]
+
+{ #category : #'as yet unclassified' }
+Cuoora class >> newCuoora [
+  | cuoora |
+  cuoora := self new.
+  cuoora usuariosCreados: Set new.
+  cuoora topicos: Set new.
+  ^cuoora
+]
+
 { #category : #accessing }
 Cuoora >> cuoora [
 	^ cuoora

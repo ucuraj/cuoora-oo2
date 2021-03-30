@@ -13,6 +13,16 @@ Class {
 	#category : #Cuoora
 }
 
+{ #category : #'as yet unclassified' }
+Pregunta class >> conTitulo:unTitulo Descripcion:unaDescripcion Usuario:unUsuario [
+|publicacion|
+publicacion := self new.
+publicacion titulo:unTitulo.
+publicacion descripcion:unaDescripcion.
+publicacion usuario:unUsuario.
+^publicacion.
+]
+
 { #category : #accessing }
 Pregunta >> descripcion [
 	^ descripcion
