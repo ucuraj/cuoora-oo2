@@ -31,7 +31,8 @@ Class {
 	#instVars : [
 		'user',
 		'pass',
-		'fechaCreacion'
+		'fechaCreacion',
+		'preguntas'
 	],
 	#category : #Cuoora
 }
@@ -54,6 +55,16 @@ Usuario >> pass [
 { #category : #accessing }
 Usuario >> pass: anObject [
 	pass := anObject
+]
+
+{ #category : #accessing }
+Usuario >> preguntas [
+	^ preguntas
+]
+
+{ #category : #accessing }
+Usuario >> preguntas: anObject [
+	preguntas := anObject
 ]
 
 { #category : #accessing }

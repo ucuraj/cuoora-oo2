@@ -21,6 +21,14 @@ publicacion dislikes: Set new.
 ^publicacion
 ]
 
+{ #category : #'as yet unclassified' }
+Publicacion >> calcularPuntaje [
+]
+
+{ #category : #'as yet unclassified' }
+Publicacion >> dislikeUsuario:unUsuario [
+]
+
 { #category : #accessing }
 Publicacion >> dislikes [
 	^ dislikes
@@ -41,6 +49,10 @@ Publicacion >> fechaCreacion: anObject [
 	fechaCreacion := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+Publicacion >> likeUsuario:unUsuario [
+]
+
 { #category : #accessing }
 Publicacion >> likes [
 	^ likes
@@ -49,4 +61,12 @@ Publicacion >> likes [
 { #category : #accessing }
 Publicacion >> likes: anObject [
 	likes := anObject
+]
+
+{ #category : #'as yet unclassified' }
+Publicacion >> totalDislikes [
+]
+
+{ #category : #'as yet unclassified' }
+Publicacion >> totalLikes [
 ]
