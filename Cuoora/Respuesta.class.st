@@ -36,6 +36,28 @@ Class {
 	#category : #Cuoora
 }
 
+{ #category : #'as yet unclassified' }
+Respuesta class >> conTexto:unTexto conUsuario:unUsuario [
+|respuesta|
+respuesta := self new.
+respuesta texto:unTexto.
+respuesta usuario:unUsuario.
+^respuesta.
+]
+
+{ #category : #'instance creation' }
+Respuesta class >> newRespuesta [
+|respuesta|
+respuesta := self new.
+respuesta texto: String new.
+respuesta usuario: Usuario new.
+^respuesta.
+]
+
+{ #category : #'as yet unclassified' }
+Respuesta >> calcularPuntaje [
+]
+
 { #category : #accessing }
 Respuesta >> descripcion [
 	^ descripcion
