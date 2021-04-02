@@ -34,14 +34,25 @@ Class {
 	#category : #Cuoora
 }
 
+{ #category : #'instance creation' }
+Topico class >> conNombre: aName Descripcion: aDescription [
+	^ self new conNombre: aName Descripcion: aDescription
+]
+
+{ #category : #initialization }
+Topico >> conNombre: unNombre Descripcion: unaDescripcion [
+	self nombre: unNombre.
+	self descripcion: unaDescripcion.
+]
+
 { #category : #accessing }
 Topico >> descripcion [
 	^ descripcion
 ]
 
 { #category : #accessing }
-Topico >> descripcion: anObject [
-	descripcion := anObject
+Topico >> descripcion: unaDescripcion [
+	descripcion := unaDescripcion
 ]
 
 { #category : #accessing }
@@ -50,6 +61,6 @@ Topico >> nombre [
 ]
 
 { #category : #accessing }
-Topico >> nombre: anObject [
-	nombre := anObject
+Topico >> nombre: unNombre [
+	nombre := unNombre
 ]
