@@ -9,7 +9,7 @@ Class {
 		'likes',
 		'dislikes'
 	],
-	#category : #'Cuoora-Model-Cuoora-Model'
+	#category : #'Cuoora-Model-Cuoora-Components'
 }
 
 { #category : #methods }
