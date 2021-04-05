@@ -5,91 +5,126 @@ Class {
 	#name : #Cuoora,
 	#superclass : #Object,
 	#instVars : [
-		'cuoora',
 		'usuariosCreados',
 		'topicos'
 	],
 	#category : #Cuoora
 }
 
-{ #category : #'as yet unclassified' }
-Cuoora class >> conUsuarios:usuarios conTopicos:topicos [
-  | cuoora |
-  cuoora := self new.
-  cuoora usuariosCreados: usuarios.
-  cuoora topicos: topicos.
-  ^cuoora
+{ #category : #'instance creation' }
+Cuoora class >> conUsuarios: usuarios Topicos: topicos [
+	^ self new conUsuarios: usuarios Topicos: topicos
 ]
 
-{ #category : #'as yet unclassified' }
-Cuoora class >> newCuoora [
-  | cuoora |
-  cuoora := self new.
-  cuoora usuariosCreados: Set new.
-  cuoora topicos: Set new.
-  ^cuoora
+{ #category : #methods }
+Cuoora >> agregarTopico: unTopico [
+	"Agrega un topico al set topicos, 
+	Chequea que el nombre del topico 
+	no existe en el sistema"
+
+	(self existeTopico: unTopico nombre)
+		ifNil: [ self topicos add: unTopico ]
 ]
 
-{ #category : #'as yet unclassified' }
-Cuoora >> agregarTopico:unTopico [
-(self topicos) add:unTopico
+{ #category : #methods }
+Cuoora >> agregarUsuario: unUsuario [
+	"Agrega un usuario al set 
+	usuariosCreados. Chequea que el 
+	nombre de usuario no exista."
+
+	(self existeUsuario: unUsuario user)
+		ifNil: [ self usuariosCreados add: unUsuario ]
 ]
 
-{ #category : #'as yet unclassified' }
-Cuoora >> agregarUsuario:unUsuario [
-(self usuariosCreados) add:unUsuario
+{ #category : #'instance creation' }
+Cuoora >> conUsuarios: unosUsuarios Topicos: unosTopicos [
+	self usuariosCreados: unosUsuarios.
+	self topicos: unosTopicos
 ]
 
-{ #category : #'as yet unclassified' }
-Cuoora >> buscarUsuarioCon:unUser [
-^(self usuariosCreados) collect: [ :each | ((each user) == unUser) ].
+{ #category : #methods }
+Cuoora >> existeTopico: unNombre [
+	"Busca un topico por nombre. Si existe 
+	devuelve un objeto Topico sino nil"
+	
+	^ self topicos
+		detect: [ :each | each nombre = unNombre ]
+		ifNone: [ nil ]
 ]
 
-{ #category : #accessing }
-Cuoora >> cuoora [
-	^ cuoora
+{ #category : #methods }
+Cuoora >> existeUsuario: unUsername [
+	"Busca un usuario por nombre de usuario. 
+	Si existe devuelve el objeto usuario, sino nil."
+	
+	^ self usuariosCreados
+		detect: [ :each | each user = unUsername ]
+		ifNone: [ nil ]
 ]
 
-{ #category : #accessing }
-Cuoora >> cuoora: anObject [
-	cuoora := anObject
+{ #category : #methods }
+Cuoora >> getPreguntasDeTopico: unTopico [
+	"Recorre todos los usuarios y obtiene las preguntas 
+	cuyo topico sea unTopico. Devuelve a un set de preguntas"
+
+	| preguntas |
+	preguntas := Set new.
+	
+	self usuariosCreados
+		do: [ :usuario | 
+			preguntas
+				addAll:
+					(usuario preguntas
+						select:
+							[ :pregunta | pregunta topicos anySatisfy: [ :topico | topico = unTopico ] ]) ].
+					
+	^ preguntas
 ]
 
-{ #category : #'as yet unclassified' }
-Cuoora >> existeTopico:unNombre [
-^(self topicos) detect: [ :each | ((each nombre) == unNombre) ]
-ifNone: [ nil ]
+{ #category : #methods }
+Cuoora >> getPreguntasDeTopicos: unosTopicos [
+	| preguntas |
+	preguntas := Set new.
+	
+	unosTopicos
+		do: [ :topico | preguntas addAll: (self getPreguntasDeTopico: topico) ].
+		
+	^preguntas
 ]
 
-{ #category : #'as yet unclassified' }
-Cuoora >> existeUsuario:unUser [
-^(self usuariosCreados) detect: [ :each | ((each user) == unUser) ]
-ifNone: [ nil ]
+{ #category : #methods }
+Cuoora >> getRespuestasDeUnUsuario: unUsuario [
+	"Recorre usuariosCreados. Por cada usuario 
+	recorre sus preguntas, y a su vez las respuestas 
+	de cada pregunta,  agregando a un conjunto las 
+	preguntas que  hayan sido creadas por unUsuario "
+	
+	| rtas |
+	rtas := Set new.
+	
+	self usuariosCreados
+		do: [ :usuario | 
+			usuario preguntas
+				do: [ :eachPregunta | 
+					rtas
+						addAll:
+							(eachPregunta respuestas
+								select: [ :each | each usuario user = unUsuario user ]) ] ].
+	^ rtas
 ]
 
-{ #category : #'as yet unclassified' }
-Cuoora >> getPreguntasDeTopicos:unosTopicos [
-^(unosTopicos) collect:[ :eachTopico |
-((self usuariosCreados) preguntas) do: [ :eachPregunta |
-		(eachPregunta topicos) do: [ :each | (each nombre) == (eachTopico nombre) ].
-		]
-	]
-
-]
-
-{ #category : #'as yet unclassified' }
-Cuoora >> getRespuestasDeUnUsuario:unUsuario [
-|rtas|
-rtas := Set new.
-^((self usuariosCreados) preguntas) collect: [ :eachPregunta |
-		(eachPregunta respuestas) collect: [ :each | (each usuario) == (unUsuario) ]
-		]
+{ #category : #initialization }
+Cuoora >> initialize [
+	self usuariosCreados: Set new.
+	self topicos: Set new.
 ]
 
 { #category : #protocol }
-Cuoora >> loginUser:unUser  password:unaPass [ 
-^(self usuariosCreados) detect:[ :eachUsuario | ((eachUsuario user == unUser) & (eachUsuario pass == unaPass)) ]
-ifNone:[nil].
+Cuoora >> loginUser: unUser password: unaPass [
+	^ self usuariosCreados
+		detect:
+			[ :eachUsuario | eachUsuario user = unUser & (eachUsuario pass = unaPass) ]
+		ifNone: [ nil ]
 ]
 
 { #category : #accessing }

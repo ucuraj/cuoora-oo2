@@ -29,43 +29,33 @@ Class {
 	#name : #Respuesta,
 	#superclass : #Publicacion,
 	#instVars : [
-		'texto',
-		'descripcion',
-		'topicos'
+		'usuario',
+		'texto'
 	],
 	#category : #Cuoora
 }
 
-{ #category : #'as yet unclassified' }
-Respuesta class >> conTexto:unTexto conUsuario:unUsuario [
-|respuesta|
-respuesta := self new.
-respuesta texto:unTexto.
-respuesta usuario:unUsuario.
-^respuesta.
+{ #category : #'instance creation' }
+Respuesta class >> conTexto: unTexto Usuario: unUsuario [
+	^ self new conTexto: unTexto Usuario: unUsuario
+]
+
+{ #category : #methods }
+Respuesta >> calcularPuntaje [
+
+	^ 50 + self likes size - self dislikes size
 ]
 
 { #category : #'instance creation' }
-Respuesta class >> newRespuesta [
-|respuesta|
-respuesta := self new.
-respuesta texto: String new.
-respuesta usuario: Usuario new.
-^respuesta.
+Respuesta >> conTexto: unTexto Usuario: unUsuario [
+	self texto: unTexto.
+	self usuario: unUsuario
 ]
 
-{ #category : #'as yet unclassified' }
-Respuesta >> calcularPuntaje [
-]
-
-{ #category : #accessing }
-Respuesta >> descripcion [
-	^ descripcion
-]
-
-{ #category : #accessing }
-Respuesta >> descripcion: anObject [
-	descripcion := anObject
+{ #category : #initialization }
+Respuesta >> initialize [
+	super initialize.
+	self texto: ''.
 ]
 
 { #category : #accessing }
@@ -79,11 +69,11 @@ Respuesta >> texto: anObject [
 ]
 
 { #category : #accessing }
-Respuesta >> topicos [
-	^ topicos
+Respuesta >> usuario [
+	^usuario
 ]
 
 { #category : #accessing }
-Respuesta >> topicos: anObject [
-	topicos := anObject
+Respuesta >> usuario: unUsuario [
+	usuario := unUsuario
 ]

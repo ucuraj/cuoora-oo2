@@ -44,7 +44,55 @@ Usuario class >> conNombre: unNombre Password: unaPassword [
 	^ self new conNombre: unNombre Password: unaPassword
 ]
 
-{ #category : #initialization }
+{ #category : #methods }
+Usuario >> agregarPregunta: unaPregunta [
+	self preguntas add: unaPregunta 
+]
+
+{ #category : #methods }
+Usuario >> borrarPregunta: unaPregunta [
+	"Intenta eliminar una pregunta, 
+	devuelve true si la elimina.
+	Si no existe la pregunta devuelve false"
+	
+	
+	^((self preguntas remove: unaPregunta ifAbsent: nil) isNotNil).
+]
+
+{ #category : #methods }
+Usuario >> buscarPregunta: unTitulo [
+	"Busca una pregunta por titulo en las preguntas
+	 realizadas por el usuario. 
+	
+	Devuelve la primer coincidencia en caso de que 
+	haya mas de una pregunta con el mismo titulo."
+	
+	^ self preguntas
+		detect: [ :pregunta | pregunta titulo = unTitulo ]
+		ifNone: [ nil ]
+]
+
+{ #category : #methods }
+Usuario >> calcularPuntaje [
+	"Recorre las preguntas de un usuario y llama a calcularPuntaje
+	Obtiene las respuestas de un usuario y llama a calcularPuntaje.
+	
+	Preguntar soleInstance de cuoora."
+	
+	| puntaje cuoora |
+	puntaje := 0.
+	cuoora := Cuoora soleInstance.
+	
+	self preguntas
+		inject: puntaje
+		into: [ :punt :eachPregunta | punt + eachPregunta calcularPuntaje ].
+	
+	(cuoora getRespuestasDeUnUsuario: self)
+		inject: puntaje
+		into: [ :punt :eachRespuesta | punt + eachRespuesta calcularPuntaje ]
+]
+
+{ #category : #'instance creation' }
 Usuario >> conNombre: unNombre Password: unaPassword [
 	self user: unNombre.
 	self pass: unaPassword.
@@ -90,13 +138,20 @@ Usuario >> preguntas: anObject [
 
 { #category : #methods }
 Usuario >> preguntasInteres [
-	"Recorre los usuarios segudos y obtiene las preguntas realizadas por cada uno de ellos. 
+	"Recorre los usuarios seguidos y obtiene las preguntas realizadas por cada uno de ellos. 
 	Recorre los topicos de interes y obtiene las preguntas de cada tópico, a través de Cuoora.
 	Devuelve un set de preguntas"
 
-	| pregs |
+	| pregs cuoora |
 	pregs := Set new.
-	"obtener preguntas topicos de interes"
+	cuoora := Cuoora soleInstance. "preguntar"
+	
+	
+	self topicosInteres
+		do: [ :topico | pregs addAll: (cuoora getPreguntasDeTopico: topico) ].
+		
+	"get preguntas topicos de interes desde cuoora"
+	
 	self seguidos do: [ :seguido | pregs addAll: seguido preguntas ].
 	^ pregs
 ]
@@ -120,6 +175,7 @@ Usuario >> seguidos: anObject [
 { #category : #methods }
 Usuario >> seguirUsuario: unUsuario [
 	"Agrega un usuario a la lista de usuarios seguidos."
+	
 	(self seguidos includes: unUsuario)
 		ifFalse: [ self seguidos add: unUsuario ]
 ]

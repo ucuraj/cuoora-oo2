@@ -55,6 +55,12 @@ Topico >> descripcion: unaDescripcion [
 	descripcion := unaDescripcion
 ]
 
+{ #category : #initialization }
+Topico >> initialize [
+	self descripcion: ''.
+	self nombre: ''.
+]
+
 { #category : #accessing }
 Topico >> nombre [
 	^ nombre
