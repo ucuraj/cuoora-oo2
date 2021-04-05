@@ -31,7 +31,7 @@ Pregunta >> agregarTopico: unTopico [
 { #category : #methods }
 Pregunta >> calcularPuntaje [
 
-	^ 20 + self likes size - self dislikes size
+	^ 20 + (self totalLikes asNumber - self totalDislikes asNumber)
 ]
 
 { #category : #'instance creation' }

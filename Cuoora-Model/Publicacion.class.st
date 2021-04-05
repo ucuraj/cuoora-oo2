@@ -105,8 +105,10 @@ Publicacion >> likes: anObject [
 
 { #category : #methods }
 Publicacion >> totalDislikes [
+	^ self dislikes size asString 
 ]
 
 { #category : #methods }
 Publicacion >> totalLikes [
+	^ self likes size asString.
 ]
