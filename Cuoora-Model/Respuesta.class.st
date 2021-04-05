@@ -43,7 +43,7 @@ Respuesta class >> conTexto: unTexto Usuario: unUsuario [
 { #category : #methods }
 Respuesta >> calcularPuntaje [
 
-	^ 50 + (self totalLikes asNumber - self totalLikes asNumber)
+	^ 50 + (self totalLikes asNumber - self totalDislikes asNumber)
 ]
 
 { #category : #'instance creation' }
