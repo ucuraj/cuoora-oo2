@@ -149,10 +149,9 @@ Usuario >> preguntasInteres [
 	
 	self topicosInteres
 		do: [ :topico | pregs addAll: (cuoora getPreguntasDeTopico: topico) ].
-		
-	"get preguntas topicos de interes desde cuoora"
 	
 	self seguidos do: [ :seguido | pregs addAll: seguido preguntas ].
+	
 	^ pregs
 ]
 
@@ -175,7 +174,10 @@ Usuario >> seguidos: anObject [
 { #category : #methods }
 Usuario >> seguirUsuario: unUsuario [
 	"Agrega un usuario a la lista de usuarios seguidos."
-	
+
+	unUsuario = self
+		ifTrue: [ ^ false ].
+		
 	(self seguidos includes: unUsuario)
 		ifFalse: [ self seguidos add: unUsuario ]
 ]
