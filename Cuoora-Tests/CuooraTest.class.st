@@ -74,7 +74,7 @@ CuooraTest >> testAgregarUsuario [
 { #category : #tests }
 CuooraTest >> testConUsuariosTopicos [
 	self assert: cuoora usuariosCreados size equals: 3.
-	self assert: cuoora topicos size equals: 3
+	self assert: cuoora topicos size equals: 5
 ]
 
 { #category : #tests }
