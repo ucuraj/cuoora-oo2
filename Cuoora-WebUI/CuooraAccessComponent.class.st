@@ -30,7 +30,7 @@ CuooraAccessComponent >> pass: unaPass [
 
 { #category : #private }
 CuooraAccessComponent >> proceedWith: unUsuario [
-	self session usuario: unUsuario.
+	self session user: unUsuario.
 	self call: CuooraHomeComponent new.
 ]
 
@@ -51,9 +51,9 @@ CuooraAccessComponent >> renderContentOn: html [
 { #category : #rendering }
 CuooraAccessComponent >> renderInputElementsOn: html [
 	html label: 'Usuario'.
-	html paragraph: [ html textInput on: #usuario of: self ].
+	html paragraph: [ html textInput on: #user of: self ].
 	html label: 'Contraseña'.
-	html paragraph: [  html passwordInput on: #contrasena of: self ]
+	html paragraph: [  html passwordInput on: #pass of: self ]
 ]
 
 { #category : #actions }

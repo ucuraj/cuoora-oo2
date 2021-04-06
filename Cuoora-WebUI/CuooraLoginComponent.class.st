@@ -10,7 +10,7 @@ CuooraLoginComponent >> login [
 		ifNotNil: [ :u | self proceedWith: u ].
 	user := nil.
 	pass := nil.
-	self session usuario: 'incorrecto'
+	self session user: 'incorrecto'
 ]
 
 { #category : #rendering }
