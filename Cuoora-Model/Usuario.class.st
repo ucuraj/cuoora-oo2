@@ -75,19 +75,17 @@ Usuario >> buscarPregunta: unTitulo [
 Usuario >> calcularPuntaje [
 	"Recorre las preguntas de un usuario y llama a calcularPuntaje
 	Obtiene las respuestas de un usuario y llama a calcularPuntaje.
-	
 	Preguntar soleInstance de cuoora."
 
 	| puntaje |
-	
 	puntaje := self preguntas
 		inject: 0
 		into: [ :punt :eachPregunta | punt + eachPregunta calcularPuntaje ].
-		
-	^ puntaje +((Cuoora soleInstance getRespuestasDeUnUsuario: self)
+	^ puntaje
+		+
+			((Cuoora soleInstance getRespuestasDeUnUsuario: self)
 				inject: 0
-				into: [ :punt :eachRespuesta | punt + eachRespuesta calcularPuntaje ]).
-	
+				into: [ :punt :eachRespuesta | punt + eachRespuesta calcularPuntaje ])
 ]
 
 { #category : #'instance creation' }
@@ -141,15 +139,10 @@ Usuario >> preguntasInteres [
 	Devuelve un set de preguntas"
 
 	| pregs |
-	pregs := Set new.
-	
-	
-	self topicosInteres
-		do: [ :topico | pregs addAll: (Cuoora soleInstance getPreguntasDeTopico: topico) ].
-	
+	pregs := self topicosInteres
+		collect: [ :topico | Cuoora soleInstance getPreguntasDeTopico: topico ].
 	self seguidos do: [ :seguido | pregs addAll: seguido preguntas ].
-	
-	^ pregs
+	^ pregs asSet
 ]
 
 { #category : #methods }
