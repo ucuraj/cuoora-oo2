@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 CuooraSession >> logout [
-	self usuario: nil.
+	self user: nil.
 ]
 
 { #category : #accessing }
