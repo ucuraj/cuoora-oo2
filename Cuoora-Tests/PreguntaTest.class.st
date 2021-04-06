@@ -2,7 +2,10 @@ Class {
 	#name : #PreguntaTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'pregunta'
+		'pregunta',
+		'usuario',
+		'usuario2',
+		'usuario3'
 	],
 	#category : #'Cuoora-Tests'
 }
@@ -11,15 +14,14 @@ Class {
 PreguntaTest >> setUp [
 	super setUp.
 	pregunta := Pregunta new.	
+	usuario := Usuario conNombre: 'pepe' Password: '123'.
+	usuario2 := Usuario conNombre: 'pepe2' Password: '123'.
+	usuario3 := Usuario conNombre: 'pepe3' Password: '123'.
 ]
 
 { #category : #tests }
 PreguntaTest >> testCalcularPuntaje [
-	| usuario usuario2 usuario3 |
-	usuario := Usuario conNombre: 'pepe' Password: '123'.
-	usuario2 := Usuario conNombre: 'pepe2' Password: '123'.
-	usuario3 := Usuario conNombre: 'pepe3' Password: '123'.
-	
+
 	pregunta dislikeUsuario: usuario.
 	pregunta dislikeUsuario: usuario2.
 	pregunta likeUsuario: usuario3.
@@ -28,11 +30,19 @@ PreguntaTest >> testCalcularPuntaje [
 ]
 
 { #category : #tests }
-PreguntaTest >> testDisLikes [
-	| usuario usuario2 |
-	usuario := Usuario conNombre: 'pepe' Password: '123'.
-	usuario2 := Usuario conNombre: 'pepe2' Password: '123'.
+PreguntaTest >> testConTituloDescripcion [
 	
+	| preg |
+	
+	preg := Pregunta conTitulo: 'pregunta testing' Descripcion: 'esto es una descripcion!'.
+	 
+	self assert: preg titulo equals: 'pregunta testing'.
+	self assert: preg descripcion equals: 'esto es una descripcion!'.
+]
+
+{ #category : #tests }
+PreguntaTest >> testDisLikes [
+
 	pregunta dislikeUsuario: usuario.
 	pregunta dislikeUsuario: usuario.
 	self assert: pregunta totalDislikes equals: '1'.
@@ -46,10 +56,7 @@ PreguntaTest >> testDisLikes [
 
 { #category : #tests }
 PreguntaTest >> testLikes [
-	| usuario usuario2 |
-	usuario := Usuario conNombre: 'pepe' Password: '123'.
-	usuario2 := Usuario conNombre: 'pepe2' Password: '123'.
-	 
+
 	pregunta likeUsuario: usuario.
 	pregunta likeUsuario: usuario.
 	self assert: pregunta totalLikes equals: '1'.

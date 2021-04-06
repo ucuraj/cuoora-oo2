@@ -88,7 +88,6 @@ Usuario >> calcularPuntaje [
 				inject: 0
 				into: [ :punt :eachRespuesta | punt + eachRespuesta calcularPuntaje ]).
 	
-	
 ]
 
 { #category : #'instance creation' }

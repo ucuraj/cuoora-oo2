@@ -5,7 +5,10 @@ Class {
 		'pedro',
 		'pregunta',
 		'juan',
-		'respuesta'
+		'respuesta',
+		'interaccionPregunta',
+		'interaccionRespuesta',
+		'interaccion'
 	],
 	#category : #'Cuoora-Tests'
 }
@@ -22,25 +25,26 @@ InteraccionTest >> setUp [
 		agregarRespuesta: (Respuesta conTexto: 'Sirve para instaniar...' Usuario: juan).
 	respuesta := Respuesta
 		conTexto: 'Sirve para instaniar ....'
-		Usuario: juan
+		Usuario: juan.
+		
+	
 ]
 
 { #category : #tests }
 InteraccionTest >> testConUsuarioPublicacion [
-	| interaccionPregunta interaccionRespuesta interaccion|
-	
+
 	interaccionPregunta := Interaccion conUsuario: pedro Publicacion: pregunta.
 	interaccionRespuesta := Interaccion conUsuario: juan Publicacion: respuesta. 
 	
 	interaccion := Interaccion new.
-	
+
 	self assert: interaccionPregunta publicacion equals: pregunta.
 	self assert: interaccionPregunta usuario equals: pedro.
-	
+
 	self assert: interaccionRespuesta usuario equals: juan.
 	self assert: interaccionRespuesta publicacion equals: respuesta.
-	
+
 	self deny: interaccion fecha equals: nil.
 	self assert: interaccion usuario equals: nil.
-	self assert: interaccion publicacion equals: nil. 
+	self assert: interaccion publicacion equals: nil
 ]
