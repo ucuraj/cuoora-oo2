@@ -4,6 +4,15 @@ Class {
 	#category : #'Cuoora-WebUI'
 }
 
+{ #category : #actions }
+CuooraLoginComponent class >> logout [
+	"CUando cierro la sesión llamo a lougout, que me devuelve una nueva pagina de login con usuario en nil"
+
+	^ self new
+		logout;
+		yourself
+]
+
 { #category : #callbacks }
 CuooraLoginComponent >> login [
 	(self model loginUser: user password: pass)
