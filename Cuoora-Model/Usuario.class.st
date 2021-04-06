@@ -78,14 +78,13 @@ Usuario >> calcularPuntaje [
 	
 	Preguntar soleInstance de cuoora."
 
-	| puntaje cuoora |
-	cuoora := Cuoora soleInstance.
+	| puntaje |
 	
 	puntaje := self preguntas
 		inject: 0
 		into: [ :punt :eachPregunta | punt + eachPregunta calcularPuntaje ].
 		
-	^ puntaje +((cuoora getRespuestasDeUnUsuario: self)
+	^ puntaje +((Cuoora soleInstance getRespuestasDeUnUsuario: self)
 				inject: 0
 				into: [ :punt :eachRespuesta | punt + eachRespuesta calcularPuntaje ]).
 	
@@ -142,13 +141,12 @@ Usuario >> preguntasInteres [
 	Recorre los topicos de interes y obtiene las preguntas de cada tópico, a través de Cuoora.
 	Devuelve un set de preguntas"
 
-	| pregs cuoora |
+	| pregs |
 	pregs := Set new.
-	cuoora := Cuoora soleInstance. "preguntar"
 	
 	
 	self topicosInteres
-		do: [ :topico | pregs addAll: (cuoora getPreguntasDeTopico: topico) ].
+		do: [ :topico | pregs addAll: (Cuoora soleInstance getPreguntasDeTopico: topico) ].
 	
 	self seguidos do: [ :seguido | pregs addAll: seguido preguntas ].
 	
