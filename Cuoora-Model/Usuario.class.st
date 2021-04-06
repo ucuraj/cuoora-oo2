@@ -77,14 +77,13 @@ Usuario >> calcularPuntaje [
 	Obtiene las respuestas de un usuario y llama a calcularPuntaje.
 	Preguntar soleInstance de cuoora."
 
-	| puntaje cuoora |
-	cuoora := Cuoora soleInstance.
+	| puntaje |
 	puntaje := self preguntas
 		inject: 0
 		into: [ :punt :eachPregunta | punt + eachPregunta calcularPuntaje ].
 	^ puntaje
 		+
-			((cuoora getRespuestasDeUnUsuario: self)
+			((Cuoora soleInstance getRespuestasDeUnUsuario: self)
 				inject: 0
 				into: [ :punt :eachRespuesta | punt + eachRespuesta calcularPuntaje ])
 ]
