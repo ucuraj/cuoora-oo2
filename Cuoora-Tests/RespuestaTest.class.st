@@ -2,7 +2,10 @@ Class {
 	#name : #RespuestaTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'respuesta'
+		'respuesta',
+		'usuario',
+		'usuario2',
+		'usuario3'
 	],
 	#category : #'Cuoora-Tests'
 }
@@ -11,14 +14,13 @@ Class {
 RespuestaTest >> setUp [
 	super setUp.
 	respuesta := Respuesta new.	
+	usuario := Usuario conNombre: 'pepe' Password: '123'.
+	usuario2 := Usuario conNombre: 'pepe2' Password: '123'.
+	usuario3 := Usuario conNombre: 'pepe3' Password: '123'.
 ]
 
 { #category : #tests }
 RespuestaTest >> testCalcularPuntaje [
-	| usuario usuario2 usuario3 |
-	usuario := Usuario conNombre: 'pepe' Password: '123'.
-	usuario2 := Usuario conNombre: 'pepe2' Password: '123'.
-	usuario3 := Usuario conNombre: 'pepe3' Password: '123'.
 	
 	respuesta dislikeUsuario: usuario.
 	respuesta dislikeUsuario: usuario2.
@@ -29,10 +31,7 @@ RespuestaTest >> testCalcularPuntaje [
 
 { #category : #tests }
 RespuestaTest >> testDisLikes [
-	| usuario usuario2 |
-	usuario := Usuario conNombre: 'pepe' Password: '123'.
-	usuario2 := Usuario conNombre: 'pepe2' Password: '123'.
-	
+
 	respuesta dislikeUsuario: usuario.
 	respuesta dislikeUsuario: usuario.
 	self assert: respuesta totalDislikes equals: '1'.
@@ -46,10 +45,6 @@ RespuestaTest >> testDisLikes [
 
 { #category : #tests }
 RespuestaTest >> testLikes [
-	| usuario usuario2 |
-	usuario := Usuario conNombre: 'pepe' Password: '123'.
-	usuario2 := Usuario conNombre: 'pepe2' Password: '123'.
-	 
 	respuesta likeUsuario: usuario.
 	respuesta likeUsuario: usuario.
 	self assert: respuesta totalLikes equals: '1'.
