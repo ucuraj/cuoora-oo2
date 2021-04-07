@@ -12,9 +12,6 @@
 Class {
 	#name : #CuooraLoginComponent,
 	#superclass : #CuooraAccessComponent,
-	#instVars : [
-		'badCredentials'
-	],
 	#category : #'Cuoora-WebUI'
 }
 
@@ -27,22 +24,6 @@ CuooraLoginComponent class >> logout [
 		yourself
 ]
 
-{ #category : #accessing }
-CuooraLoginComponent >> badCredentials [
-	^ badCredentials
-]
-
-{ #category : #accessing }
-CuooraLoginComponent >> badCredentials: anObject [
-	badCredentials := anObject
-]
-
-{ #category : #initialization }
-CuooraLoginComponent >> initialize [
-	super initialize.
-	self badCredentials: false.
-]
-
 { #category : #callbacks }
 CuooraLoginComponent >> login [
 	"Chequea que user y pass sean correctos.
@@ -50,42 +31,41 @@ CuooraLoginComponent >> login [
 	y badCredentials en true, para mostrar msj de error"
 
 	(self model loginUser: user password: pass)
-		ifNotNil: [ :u | self proceedWith: u ].
+		ifNotNil: [ :u | 
+			self session badCredentials: false.
+			self proceedWith: u ].
 	user := nil.
 	pass := nil.
 	self session user: nil.
-	self badCredentials: true
+	self session badCredentials: true
 ]
 
 { #category : #rendering }
 CuooraLoginComponent >> renderButtonsOn: html [
 	self renderLoginButtonOn: html.
 	html horizontalRule .
-	html paragraph: 'No tenés cuenta? Unite a cuOOra ahora mismo!'.
+	html paragraph: '¿No tenés cuenta? Unite a cuOOra ahora mismo!'.
 	self renderRegisterButtonOn: html
 ]
 
 { #category : #rendering }
 CuooraLoginComponent >> renderInputElementsOn: html [
-	html heading
-		level: 2;
-		with: 'Bienvenido!'.
-	html paragraph: 'Ingresá tus datos para iniciar sesión'.
+	html heading level:5; with: 'Ingresá tus datos para iniciar sesión'.
+	html paragraph.
 	super renderInputElementsOn: html
+	
 ]
 
 { #category : #rendering }
 CuooraLoginComponent >> renderLoginButtonOn: html [
-	html formButton beSuccess
+	html formButton beSuccess; beSmall;
 		callback: [ self login ];
 		with: 'Iniciar sesión'.
-	self badCredentials
-		ifTrue: [ html paragraph: 'Usuario/Contraseña incorrectos' ]
 ]
 
 { #category : #rendering }
 CuooraLoginComponent >> renderRegisterButtonOn: html [
-	html submitButton
+	html outlineButton beSuccess; beSmall;
 		callback: [ 
 			self session user: nil.
 			self ];

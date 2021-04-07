@@ -3,7 +3,8 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'user',
-		'pass'
+		'pass',
+		'badCredentials'
 	],
 	#category : #'Cuoora-WebUI'
 }
@@ -35,25 +36,54 @@ CuooraAccessComponent >> proceedWith: unUsuario [
 ]
 
 { #category : #rendering }
+CuooraAccessComponent >> renderBadCredentials: html [
+	self session badCredentials
+		ifFalse: [ ^ self ].
+	html alert
+		class: 'login-input';
+		beDanger;
+		with: 'Usuario/Contraseña incorrectos'.
+	html break.
+	self session badCredentials: false
+]
+
+{ #category : #rendering }
 CuooraAccessComponent >> renderButtonsOn: html [
 	self subclassResponsibility
 ]
 
 { #category : #rendering }
 CuooraAccessComponent >> renderContentOn: html [
-	html paragraph with: [ html heading: 'CuOOra' ].
-	html paragraph.
-	html
-		form: [ self renderInputElementsOn: html.
-			self renderButtonsOn: html ]
+	html container
+		class: 'fill';
+		with: [ html jumbotron
+				class: 'login-bg';
+				with: [ html heading: 'Bienvenido a CuOOra!'.
+					html horizontalRule.
+					html
+						form: [ self renderInputElementsOn: html.
+							self renderBadCredentials: html.
+							self renderButtonsOn: html ] ] ]
 ]
 
 { #category : #rendering }
 CuooraAccessComponent >> renderInputElementsOn: html [
-	html label: 'Usuario'.
-	html paragraph: [ html textInput on: #user of: self ].
-	html label: 'Contraseña'.
-	html paragraph: [  html passwordInput on: #pass of: self ]
+	html div
+		with: [ html inputGroup
+				class: 'login-input';
+				marginBottom: 3;
+				with: [ html inputGroupPrepend: [ html inputGroupText: 'user' ].
+					html textInput formControl required
+						placeholder: '';
+						on: #user of: self ].
+			html inputGroup
+				class: 'login-input';
+				marginBottom: 3;
+				with: [ html inputGroupPrepend: [ html inputGroupText: 'pass' ].
+					html passwordInput required
+						formControl;
+						on: #pass of: self ] ].
+	
 ]
 
 { #category : #rendering }
@@ -63,8 +93,47 @@ CuooraAccessComponent >> rendererClass [
 ]
 
 { #category : #hooks }
-CuooraAccessComponent >> style [ 
-	^ ''
+CuooraAccessComponent >> style [
+	^ '
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+	
+html, body {
+	height: 100%;
+	width:100%
+}
+
+.fill { 
+	padding-top: 100px;
+	min-height: 100%;
+	height: 100%;
+	width:100%;
+	min-width: 100%;
+	background: url("https://source.unsplash.com/random/1920x1080");
+	background-size:cover;
+	box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+}	
+	
+.login-bg { 
+	background-color: rgba(0,0,0,0.5);
+	max-width: 80%;
+	margin-left: 10%;
+	color: white;
+	text-align: center;
+ }
+
+.login-bg h1, h2, h3, h4, h5, h6{
+	font-family: "Quicksand", sans-serif;
+}
+
+.login-bg hr{
+	background-color: white;
+ }
+
+ .login-input{
+	max-width: 400px;
+	margin: auto;
+}
+'
 ]
 
 { #category : #actions }

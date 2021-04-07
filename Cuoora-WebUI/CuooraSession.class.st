@@ -2,10 +2,27 @@ Class {
 	#name : #CuooraSession,
 	#superclass : #WASession,
 	#instVars : [
-		'user'
+		'user',
+		'badCredentials'
 	],
 	#category : #'Cuoora-WebUI'
 }
+
+{ #category : #accessing }
+CuooraSession >> badCredentials [
+	^ badCredentials
+]
+
+{ #category : #accessing }
+CuooraSession >> badCredentials: aBool [.
+	badCredentials := aBool.
+]
+
+{ #category : #initialization }
+CuooraSession >> initialize [
+	super initialize.
+	self badCredentials: false.
+]
 
 { #category : #accessing }
 CuooraSession >> logout [
