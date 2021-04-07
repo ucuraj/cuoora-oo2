@@ -21,7 +21,7 @@ Cuoora class >> clearSoleInstance [
 
 { #category : #'instance creation' }
 Cuoora class >> conUsuarios: usuarios Topicos: topicos [
-	^ self new conUsuarios: usuarios Topicos: topicos
+	^self soleInstance; conUsuarios: usuarios Topicos: topicos
 ]
 
 { #category : #'instance creation' }
