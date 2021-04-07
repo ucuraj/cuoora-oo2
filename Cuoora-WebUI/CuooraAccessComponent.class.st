@@ -56,6 +56,17 @@ CuooraAccessComponent >> renderInputElementsOn: html [
 	html paragraph: [  html passwordInput on: #pass of: self ]
 ]
 
+{ #category : #rendering }
+CuooraAccessComponent >> rendererClass [
+	
+	^ SBSHtmlCanvas 
+]
+
+{ #category : #hooks }
+CuooraAccessComponent >> style [ 
+	^ ''
+]
+
 { #category : #actions }
 CuooraAccessComponent >> updateRoot: anHtmlRoot title: aTitle [
 	super updateRoot: anHtmlRoot.

@@ -1,6 +1,20 @@
+"
+- Metacello new
+-      baseline:'Bootstrap4';
+-      repository: 'github://astares/Seaside-Bootstrap4:master/src';
+-      load.
+-
+- cuoora := WAAdmin register: CuooraLoginComponent asApplicationAt: 'cuoora'.
+- cuoora sessionClass: CuooraSession.
+
+
+"
 Class {
 	#name : #CuooraLoginComponent,
 	#superclass : #CuooraAccessComponent,
+	#instVars : [
+		'badCredentials'
+	],
 	#category : #'Cuoora-WebUI'
 }
 
@@ -13,13 +27,34 @@ CuooraLoginComponent class >> logout [
 		yourself
 ]
 
+{ #category : #accessing }
+CuooraLoginComponent >> badCredentials [
+	^ badCredentials
+]
+
+{ #category : #accessing }
+CuooraLoginComponent >> badCredentials: anObject [
+	badCredentials := anObject
+]
+
+{ #category : #initialization }
+CuooraLoginComponent >> initialize [
+	super initialize.
+	self badCredentials: false.
+]
+
 { #category : #callbacks }
 CuooraLoginComponent >> login [
+	"Chequea que user y pass sean correctos.
+	Si no setea user pass session->user en nil 
+	y badCredentials en true, para mostrar msj de error"
+
 	(self model loginUser: user password: pass)
 		ifNotNil: [ :u | self proceedWith: u ].
 	user := nil.
 	pass := nil.
-	self session user: 'incorrecto'
+	self session user: nil.
+	self badCredentials: true
 ]
 
 { #category : #rendering }
@@ -41,10 +76,10 @@ CuooraLoginComponent >> renderInputElementsOn: html [
 
 { #category : #rendering }
 CuooraLoginComponent >> renderLoginButtonOn: html [
-	html submitButton
+	html formButton beSuccess
 		callback: [ self login ];
 		with: 'Iniciar sesión'.
-	self session user = 'incorrecto'
+	self badCredentials
 		ifTrue: [ html paragraph: 'Usuario/Contraseña incorrectos' ]
 ]
 

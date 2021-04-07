@@ -79,11 +79,11 @@ CuooraTest >> testConUsuariosTopicos [
 
 { #category : #tests }
 CuooraTest >> testExisteTopico [
-|topico4|
-topico4 := Topico conNombre: 'topico 4' Descripcion: 'pass4'.
-cuoora agregarTopico: topico4.
-self assert: (cuoora existeTopico: 'topico 4') equals: topico4.
-self assert: (cuoora existeTopico: 'topico4') equals: nil.
+	| atopico40 |
+	atopico40 := Topico conNombre: 'topico 40' Descripcion: 'pass4'.
+	cuoora agregarTopico: atopico40.
+	self assert: (cuoora existeTopico: 'topico 40') equals: atopico40.
+	self assert: (cuoora existeTopico: 'topico4123') equals: nil
 ]
 
 { #category : #tests }
