@@ -27,11 +27,13 @@ UsuarioTest >> setUp [
 	
 	pregunta1 := Pregunta
 		conTitulo: 'Test'
-		Descripcion: 'Testing'.
+		Descripcion: 'Testing'
+		Usuario: pedro.
 		
 	pregunta2 := Pregunta
 		conTitulo: 'Prueba'
-		Descripcion: 'Esto es una prueba'.
+		Descripcion: 'Esto es una prueba'
+		Usuario: pedro.
 	
 	pregunta1 agregarTopico: topicoOO1.
 	pregunta2 agregarTopico: topicoTU.
@@ -54,9 +56,9 @@ UsuarioTest >> testAgregarPregunta [
 	self assert: juan preguntas isEmpty.
 	self assert: pedro preguntas size equals: 2.
 	
-	pedro agregarPregunta: (Pregunta conTitulo: 'pregunta nueva1' Descripcion: 'descripcion').
-	pedro agregarPregunta: (Pregunta conTitulo: 'pregunta nueva2' Descripcion: 'descripcion').
-	juan agregarPregunta: (Pregunta conTitulo: 'pregunta nueva3' Descripcion: 'descripcion').
+	pedro agregarPregunta: (Pregunta conTitulo: 'pregunta nueva1' Descripcion: 'descripcion' Usuario:pedro).
+	pedro agregarPregunta: (Pregunta conTitulo: 'pregunta nueva2' Descripcion: 'descripcion' Usuario:pedro).
+	juan agregarPregunta: (Pregunta conTitulo: 'pregunta nueva3' Descripcion: 'descripcion' Usuario:juan).
 	
 	self assert: pedro preguntas size equals: 4.
 	self assert:  juan preguntas size equals: 1.

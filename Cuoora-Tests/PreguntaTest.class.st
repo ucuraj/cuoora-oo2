@@ -30,11 +30,11 @@ PreguntaTest >> testCalcularPuntaje [
 ]
 
 { #category : #tests }
-PreguntaTest >> testConTituloDescripcion [
+PreguntaTest >> testConTituloDescripcionUsuario [
 	
-	| preg |
-	
-	preg := Pregunta conTitulo: 'pregunta testing' Descripcion: 'esto es una descripcion!'.
+	| preg user|
+	user := Usuario conNombre: 'USUARIO NUEVO' Password: '1234'.
+	preg := Pregunta conTitulo: 'pregunta testing' Descripcion: 'esto es una descripcion!' Usuario:user.
 	 
 	self assert: preg titulo equals: 'pregunta testing'.
 	self assert: preg descripcion equals: 'esto es una descripcion!'.

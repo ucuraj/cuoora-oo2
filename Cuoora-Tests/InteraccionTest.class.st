@@ -20,7 +20,8 @@ InteraccionTest >> setUp [
 	juan := Usuario conNombre: 'juan' Password: 'juan'.
 	pregunta := Pregunta
 		conTitulo: '¿Para qué sirve el método SetUp?'
-		Descripcion: 'Lorem ipsum dolor sit amet.'.
+		Descripcion: 'Lorem ipsum dolor sit amet.'
+		Usuario: pedro.
 	pregunta
 		agregarRespuesta: (Respuesta conTexto: 'Sirve para instaniar...' Usuario: juan).
 	respuesta := Respuesta

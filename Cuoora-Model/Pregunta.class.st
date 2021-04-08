@@ -14,8 +14,8 @@ Class {
 }
 
 { #category : #'instance creation' }
-Pregunta class >> conTitulo: unTitulo Descripcion: unaDescripcion [
-	^ self new conTitulo: unTitulo Descripcion: unaDescripcion
+Pregunta class >> conTitulo: unTitulo Descripcion: unaDescripcion Usuario:unUsuario [
+	^ self new conTitulo: unTitulo Descripcion: unaDescripcion Usuario:unUsuario.
 ]
 
 { #category : #methods }
@@ -35,7 +35,8 @@ Pregunta >> calcularPuntaje [
 ]
 
 { #category : #'instance creation' }
-Pregunta >> conTitulo: unTitulo Descripcion: unaDescripcion [
+Pregunta >> conTitulo: unTitulo Descripcion: unaDescripcion Usuario:unUsuario [
+   self usuario: unUsuario.
 	self titulo: unTitulo.
 	self descripcion: unaDescripcion.
 ]

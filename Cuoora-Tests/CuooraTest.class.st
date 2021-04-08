@@ -35,10 +35,12 @@ CuooraTest >> setUp [
 	rta4 := Respuesta conTexto: 'Respuesta 4' Usuario: user1.
 		pregunta := Pregunta
 		conTitulo: '¿Para qué sirve el método SetUp?'
-		Descripcion: 'Lorem ipsum dolor sit amet.'.
+		Descripcion: 'Lorem ipsum dolor sit amet.'
+		Usuario: user1.
 	pregunta2 := Pregunta
 		conTitulo: '¿Para qué sirve el método SetUp2?'
-		Descripcion: 'Lorem ipsum dolor sit amet.'.
+		Descripcion: 'Lorem ipsum dolor sit amet.'
+		Usuario: user2.
 	pregunta agregarTopico: topico4.
 	pregunta2 agregarTopico: topico4.
 	pregunta agregarTopico: topico5.
@@ -50,7 +52,9 @@ CuooraTest >> setUp [
 	user2 agregarPregunta: pregunta2.
 	usuarios addAll:(OrderedCollection with: user1 with: user2 with: user3).
    	topicos addAll:(OrderedCollection with: topic1 with: topic2 with: topic3 with: topico4 with: topico5).
-	 cuoora := Cuoora conUsuarios: usuarios Topicos: topicos.
+	cuoora := Cuoora soleInstance.
+	cuoora usuariosCreados: usuarios.
+	cuoora topicos: topicos.
 ]
 
 { #category : #tests }
@@ -60,7 +64,7 @@ CuooraTest >> testAgregarTopico [
 		conNombre: 'topico 4'
 		Descripcion: 'descripcion topico 4'.
 	cuoora agregarTopico: topico.
-	self assert: cuoora topicos size equals: 4
+	self assert: cuoora topicos size equals: 5.
 ]
 
 { #category : #tests }

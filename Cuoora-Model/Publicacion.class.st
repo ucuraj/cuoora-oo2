@@ -5,6 +5,7 @@ Class {
 	#name : #Publicacion,
 	#superclass : #Object,
 	#instVars : [
+		'usuario',
 		'fechaCreacion',
 		'likes',
 		'dislikes'
@@ -111,4 +112,14 @@ Publicacion >> totalDislikes [
 { #category : #methods }
 Publicacion >> totalLikes [
 	^ self likes size asString.
+]
+
+{ #category : #accessing }
+Publicacion >> usuario [
+	^ usuario
+]
+
+{ #category : #accessing }
+Publicacion >> usuario: anObject [
+	usuario := anObject
 ]

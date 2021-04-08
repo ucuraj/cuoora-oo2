@@ -29,7 +29,6 @@ Class {
 	#name : #Respuesta,
 	#superclass : #Publicacion,
 	#instVars : [
-		'usuario',
 		'texto'
 	],
 	#category : #'Cuoora-Model-Cuoora-Components'
@@ -66,14 +65,4 @@ Respuesta >> texto [
 { #category : #accessing }
 Respuesta >> texto: anObject [
 	texto := anObject
-]
-
-{ #category : #accessing }
-Respuesta >> usuario [
-	^usuario
-]
-
-{ #category : #accessing }
-Respuesta >> usuario: unUsuario [
-	usuario := unUsuario
 ]
