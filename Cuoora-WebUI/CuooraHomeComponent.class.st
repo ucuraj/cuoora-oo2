@@ -4,8 +4,19 @@ Class {
 	#category : #'Cuoora-WebUI'
 }
 
+{ #category : #updating }
+CuooraHomeComponent >> callLogin [
+	self call: CuooraLoginComponent new
+]
+
+{ #category : #rendering }
+CuooraHomeComponent >> renderButtonsOn: html [
+	 "self subclassResponsibility. "
+]
+
 { #category : #rendering }
 CuooraHomeComponent >> renderContentOn: html [
+	self renderHeaderOn: html.
 	self renderTitleOn: html.
 	self renderPreguntasRelevantesOn: html
 ]
