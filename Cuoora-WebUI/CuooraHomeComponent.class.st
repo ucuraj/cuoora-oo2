@@ -24,7 +24,7 @@ CuooraHomeComponent >> renderContentPageOn: html [
 CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 	html heading level2 with: 'Utimas preguntas'.
 	html span: self session user preguntasInteres size.
-	html class: ''; listGroup: [ self session user preguntasInteres
+	html listGroup class: ''; with: [ self session user preguntasInteres
 				do: [ :preguntaRelevante | 
 					preguntaRelevante.
 					html listGroupLinkedItem: preguntaRelevante titulo ] ]
