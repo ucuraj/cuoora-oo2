@@ -12,17 +12,17 @@ CuooraHomeComponent >> renderContentOn: html [
 
 { #category : #rendering }
 CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
-	"| preg |
+	| preg |
 	html
 		unorderedList: [ self session user preguntasInteres  
 				do: [ :preguntaRelevante | 
-					preg := PreguntaPageComponent pregunta: preguntaRelevante.
+					preg := CuooraVerPreguntaComponent pregunta: preguntaRelevante.
 					html anchor
 						callback: [ self verPregunta: preguntaRelevante ];
 						with: [ html div
 								id: 'pregunta-home';
 								with: [ preg renderPreguntaOn: html ] ].
-					html horizontalRule ] ]"
+					html horizontalRule ] ]
 ]
 
 { #category : #rendering }

@@ -43,7 +43,7 @@ CuooraAccessComponent >> renderBadCredentialsOn: html [
 
 { #category : #rendering }
 CuooraAccessComponent >> renderButtonsOn: html [
-	self subclassResponsibility
+	 self subclassResponsibility. 
 ]
 
 { #category : #rendering }

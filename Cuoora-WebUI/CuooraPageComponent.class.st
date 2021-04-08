@@ -24,11 +24,6 @@ CuooraPageComponent >> proceedWithHome [
 ]
 
 { #category : #rendering }
-CuooraPageComponent >> renderButtonsOn: html [
-	 self subclassResponsibility. 
-]
-
-{ #category : #rendering }
 CuooraPageComponent >> renderContentOn: html [
 	 self subclassResponsibility.
 ]
