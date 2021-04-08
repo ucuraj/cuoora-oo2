@@ -1,3 +1,12 @@
+"
+- Metacello new
+-      baseline:'Bootstrap4';
+-      repository: 'github://astares/Seaside-Bootstrap4:master/src';
+-      load.
+-
+- cuoora := WAAdmin register: CuooraLoginComponent asApplicationAt: 'cuoora'.
+- cuoora sessionClass: CuooraSession.
+"
 Class {
 	#name : #CuooraPageComponent,
 	#superclass : #WAComponent,
@@ -83,6 +92,10 @@ html, body {
  .login-input{
 	max-width: 400px;
 	margin: auto;
+}
+
+.home-list{
+	
 }
 '
 ]

@@ -22,17 +22,12 @@ CuooraHomeComponent >> renderContentPageOn: html [
 
 { #category : #rendering }
 CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
-	| preg |
-	html
-		unorderedList: [ self session user preguntasInteres  
+	html heading level2 with: 'Utimas preguntas'.
+	html span: self session user preguntasInteres size.
+	html class: ''; listGroup: [ self session user preguntasInteres
 				do: [ :preguntaRelevante | 
-					preg := CuooraVerPreguntaComponent pregunta: preguntaRelevante.
-					html anchor
-						callback: [ self verPregunta: preguntaRelevante ];
-						with: [ html div
-								id: 'pregunta-home';
-								with: [ preg renderPreguntaOn: html ] ].
-					html horizontalRule ] ]
+					preguntaRelevante.
+					html listGroupLinkedItem: preguntaRelevante titulo ] ]
 ]
 
 { #category : #rendering }
