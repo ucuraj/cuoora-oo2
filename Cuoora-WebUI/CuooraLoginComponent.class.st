@@ -40,6 +40,11 @@ CuooraLoginComponent >> login [
 	self session badCredentials: true
 ]
 
+{ #category : #callbacks }
+CuooraLoginComponent >> registerNewUser [
+	self call: CuooraRegisterComponent new.
+]
+
 { #category : #rendering }
 CuooraLoginComponent >> renderButtonsOn: html [
 	self renderLoginButtonOn: html.
@@ -68,7 +73,7 @@ CuooraLoginComponent >> renderRegisterButtonOn: html [
 	html outlineButton beSuccess; beSmall;
 		callback: [ 
 			self session user: nil.
-			self ];
+			self registerNewUser];
 		with: 'Crear nueva cuenta.'
 ]
 
