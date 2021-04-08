@@ -7,13 +7,8 @@ Class {
 	#category : #'Cuoora-WebUI'
 }
 
-{ #category : #callbacks }
-CuooraPageComponent >> buscarUsuarios [
-	"self call: BuscarUsuarioComponent new."
-]
-
 { #category : #actions }
-CuooraPageComponent >> loggedIn [
+CuooraPageComponent >> logueado [
 	^ self user isNotNil.
 	
 ]
@@ -21,23 +16,6 @@ CuooraPageComponent >> loggedIn [
 { #category : #model }
 CuooraPageComponent >> model [ 
 	^ Cuoora soleInstance
-]
-
-{ #category : #'instance creation' }
-CuooraPageComponent >> newPregunta [
-	"| preg |
-	preg := CrearPreguntaComponent pregunta: Pregunta new.
-	self call: preg.
-	preg pregunta
-		ifNotNil: [ self session user agregarPregunta: preg pregunta ]"
-]
-
-{ #category : #'instance creation' }
-CuooraPageComponent >> newTopico [
-	"| topico |
-	topico := CrearTopicoComponent topico: Topico new.
-	self call: topico.
-	topico topico ifNotNil: [ self model agregarTopico: topico topico ]"
 ]
 
 { #category : #callbacks }
@@ -53,88 +31,6 @@ CuooraPageComponent >> renderButtonsOn: html [
 { #category : #rendering }
 CuooraPageComponent >> renderContentOn: html [
 	 self subclassResponsibility.
-]
-
-{ #category : #rendering }
-CuooraPageComponent >> renderHeaderInfoOn: html [
-	self renderNavigationOn: html.
-	html text: ' | '.
-	html span
-		id: 'username';
-		with: [ html anchor
-				callback: [ self verPerfil: self session user ];
-				with: [ html strong: self session user user ] ].
-	html span: ' | '.
-	html span
-		with: [ html anchor
-				callback: [ self call: CuooraLoginComponent logout ];
-				with: [ html strong: 'Cerrar Sesión' ] ]
-]
-
-{ #category : #rendering }
-CuooraPageComponent >> renderHeaderOn: html [
-	html div
-		id: 'cuoora-header';
-		with: [ html div
-				id: 'titulo-header';
-				with: [ html anchor
-						callback: [ self proceedWithHome ];
-						with: 'CuOOra' ].
-			html div
-				id: 'header-info';
-				with: [ self renderHeaderInfoOn: html ] ]
-]
-
-{ #category : #rendering }
-CuooraPageComponent >> renderInputElementsOn: html [
-	html label: 'Usuario'.
-	html paragraph: [ html textInput on: #user of: self ].
-	html label: 'Contraseña'.
-	html paragraph: [  html passwordInput on: #pass of: self ]
-]
-
-{ #category : #rendering }
-CuooraPageComponent >> renderNavigationOn: html [
-	html anchor
-		callback: [ self buscarUsuarios ];
-		with: [ html strong: 'Buscar Usuarios' ].
-	html span: ' | '.
-	html anchor
-		callback: [ self newTopico ];
-		with: [ html strong: 'Agregar Topico' ].
-	html span: ' | '.
-	html anchor
-		callback: [ self newPregunta ];
-		with: [ html strong: 'Agregar Pregunta' ]
-]
-
-{ #category : #rendering }
-CuooraPageComponent >> renderNavigationUser: html [
-	html span
-		id: 'username';
-		with: [ html anchor
-				callback: [ self verPerfil: self session usuario ];
-				with: [ html strong: self session usuario username ] ].
-	html span: ' | '.
-	html span
-		with: [ html anchor
-				callback: [ self call: CuooraLoginComponent logout ];
-				with: [ html strong: 'Cerrar Sesión' ] ]
-]
-
-{ #category : #style }
-CuooraPageComponent >> renderPreguntasOn: html preguntas: unasPreguntas [
-	"| preg |
-	html
-		unorderedList: [ unasPreguntas
-				do: [ :pregunta | 
-					preg := self.
-					html anchor
-						callback: [ self verPregunta: pregunta ];
-						with: [ html div
-								id: 'pregunta-home';
-								with: [ preg renderPreguntaOn: html ] ].
-					html horizontalRule ] ]"
 ]
 
 { #category : #style }
@@ -307,14 +203,4 @@ CuooraPageComponent >> user [
 { #category : #accessing }
 CuooraPageComponent >> user: anUser [
 	user := anUser.
-]
-
-{ #category : #callbacks }
-CuooraPageComponent >> verPerfil: unUsuario [
-	"self call: (CuooraPerfilComponent conPerfil: unUsuario)"
-]
-
-{ #category : #callbacks }
-CuooraPageComponent >> verPregunta: unaPregunta [
-	"self call: (VerPreguntaComponent pregunta: unaPregunta)"
 ]
