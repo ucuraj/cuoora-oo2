@@ -15,7 +15,7 @@ CuooraHomeComponent >> renderButtonsOn: html [
 ]
 
 { #category : #rendering }
-CuooraHomeComponent >> renderContentOn: html [
+CuooraHomeComponent >> renderContentPageOn: html [
 	self renderTitleOn: html.
 	self renderPreguntasRelevantesOn: html
 ]

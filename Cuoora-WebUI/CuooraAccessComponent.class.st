@@ -47,17 +47,13 @@ CuooraAccessComponent >> renderButtonsOn: html [
 ]
 
 { #category : #rendering }
-CuooraAccessComponent >> renderContentOn: html [
-	html container
-		class: 'fill';
-		with: [ html jumbotron
-				class: 'login-bg';
-				with: [ html heading: 'Bienvenido a CuOOra!'.
-					html horizontalRule.
-					html
-						form: [ self renderInputElementsOn: html.
-							self renderBadCredentialsOn: html.
-							self renderButtonsOn: html ] ] ]
+CuooraAccessComponent >> renderContentPageOn: html [
+	html heading: 'Bienvenido a CuOOra!'.
+			html horizontalRule.
+			html
+				form: [ self renderInputElementsOn: html.
+					self renderBadCredentialsOn: html.
+					self renderButtonsOn: html ].
 ]
 
 { #category : #rendering }

@@ -25,7 +25,16 @@ CuooraPageComponent >> proceedWithHome [
 
 { #category : #rendering }
 CuooraPageComponent >> renderContentOn: html [
-	 self subclassResponsibility.
+	html container
+		class: 'fill';
+		with: [ html jumbotron
+				class: 'page-bg';
+				with: [ self renderContentPageOn: html ] ]
+]
+
+{ #category : #rendering }
+CuooraPageComponent >> renderContentPageOn: html [
+	self subclassResponsibility. 
 ]
 
 { #category : #rendering }
@@ -55,7 +64,7 @@ html, body {
 	box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
 }	
 	
-.login-bg { 
+.page-bg { 
 	background-color: rgba(0,0,0,0.5);
 	max-width: 80%;
 	margin-left: 10%;
@@ -63,11 +72,11 @@ html, body {
 	text-align: center;
  }
 
-.login-bg h1, h2, h3, h4, h5, h6{
+.page-bg h1, h2, h3, h4, h5, h6{
 	font-family: "Quicksand", sans-serif;
 }
 
-.login-bg hr{
+.page-bg hr{
 	background-color: white;
  }
 
