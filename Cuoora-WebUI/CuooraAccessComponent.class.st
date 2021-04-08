@@ -36,7 +36,7 @@ CuooraAccessComponent >> proceedWith: unUsuario [
 ]
 
 { #category : #rendering }
-CuooraAccessComponent >> renderBadCredentials: html [
+CuooraAccessComponent >> renderBadCredentialsOn: html [
 	self session badCredentials
 		ifFalse: [ ^ self ].
 	html alert
@@ -62,7 +62,7 @@ CuooraAccessComponent >> renderContentOn: html [
 					html horizontalRule.
 					html
 						form: [ self renderInputElementsOn: html.
-							self renderBadCredentials: html.
+							self renderBadCredentialsOn: html.
 							self renderButtonsOn: html ] ] ]
 ]
 
