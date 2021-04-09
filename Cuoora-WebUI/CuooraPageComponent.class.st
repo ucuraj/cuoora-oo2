@@ -27,9 +27,9 @@ CuooraPageComponent >> model [
 	^ Cuoora soleInstance
 ]
 
-{ #category : #callbacks }
-CuooraPageComponent >> proceedWithHome [
-	self call: CuooraHomeComponent new.
+{ #category : #private }
+CuooraPageComponent >> proceedWith: unObjeto [
+	self subclassResponsibility. 
 ]
 
 { #category : #rendering }

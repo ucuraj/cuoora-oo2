@@ -13,6 +13,30 @@ Class {
 	#category : #'Cuoora-Model-Cuoora-Components'
 }
 
+{ #category : #comparing }
+Publicacion >> < unaPregunta [
+
+	^ self fechaCreacion < unaPregunta fechaCreacion.
+]
+
+{ #category : #comparing }
+Publicacion >> <= unaPregunta [
+
+	^ self fechaCreacion <= unaPregunta fechaCreacion.
+]
+
+{ #category : #comparing }
+Publicacion >> > unaPregunta [
+	
+	^ self fechaCreacion > unaPregunta fechaCreacion.
+]
+
+{ #category : #comparing }
+Publicacion >> >= unaPregunta [
+	
+	^ self fechaCreacion >= unaPregunta fechaCreacion.
+]
+
 { #category : #methods }
 Publicacion >> buscarDislike: unUsername [
 	"Busca dentro de los dislikes a unUsername."

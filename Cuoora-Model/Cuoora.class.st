@@ -103,13 +103,8 @@ Cuoora >> getPreguntasDeTopico: unTopico [
 
 { #category : #methods }
 Cuoora >> getPreguntasDeTopicos: unosTopicos [
-	| preguntas |
-	preguntas := Set new.
-	
-	unosTopicos
-		do: [ :topico | preguntas addAll: (self getPreguntasDeTopico: topico) ].
-		
-	^preguntas
+	^ unosTopicos
+		collectAll: [ :topico | self getPreguntasDeTopico: topico ] asSet.
 ]
 
 { #category : #methods }
