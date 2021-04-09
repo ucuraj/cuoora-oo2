@@ -70,7 +70,7 @@ CuooraLoginComponent >> renderLoginButtonOn: html [
 
 { #category : #rendering }
 CuooraLoginComponent >> renderRegisterButtonOn: html [
-	html outlineButton beSuccess; beSmall;
+	html outlineButton beWarning; beSmall;
 		callback: [ 
 			self session user: nil.
 			self registerNewUser];

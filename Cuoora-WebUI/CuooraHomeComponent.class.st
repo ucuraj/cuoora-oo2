@@ -22,12 +22,20 @@ CuooraHomeComponent >> renderContentPageOn: html [
 
 { #category : #rendering }
 CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
+|preg|
+	html outlineButton beSuccess; beSmall;
+		callback: [ 
+			self session user: nil.
+			self call: CuooraRegisterComponent new.];
+		with: 'Crear nueva cuenta.'.
 	html heading level2 with: 'Utimas preguntas'.
 	html span: self session user preguntasInteres size.
 	html listGroup class: ''; with: [ self session user preguntasInteres
 				do: [ :preguntaRelevante | 
 					preguntaRelevante.
-					html listGroupLinkedItem: preguntaRelevante titulo ] ]
+					preg := CuooraVerPreguntaComponent pregunta:preguntaRelevante.
+					preg renderPreguntaConRespuestasOn: html.
+ ] ]
 ]
 
 { #category : #rendering }

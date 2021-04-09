@@ -102,5 +102,5 @@ Pregunta >> topicos: anObject [
 
 { #category : #methods }
 Pregunta >> totalRespuestas [
-	^ self respuestas length
+	^ self respuestas size
 ]
