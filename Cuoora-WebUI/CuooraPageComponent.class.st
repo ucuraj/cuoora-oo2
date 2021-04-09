@@ -32,6 +32,12 @@ CuooraPageComponent >> proceedWith: unObjeto [
 	self subclassResponsibility. 
 ]
 
+{ #category : #private }
+CuooraPageComponent >> proceedWithHome: unUsuario [
+	self session user: unUsuario.
+	self call: CuooraHomeComponent new.
+]
+
 { #category : #rendering }
 CuooraPageComponent >> renderContentOn: html [
 	(self session user) isNotNil 
@@ -52,6 +58,7 @@ CuooraPageComponent >> renderContentPageOn: html [
 CuooraPageComponent >> renderNavBarOn:html [ 
 	| bar id aBlock|
 	aBlock := [
+		html navigationLink callback:[self proceedWithHome: self session user]; with: 'Home'.
 		html navigationLink url: ''; with: 'Agregar Pregunta'.
 		html navigationLink url: ''; with: 'Buscar Usuario'.
 		html navigationLink url: ''; with: 'Agregar Topico'.
@@ -63,7 +70,7 @@ CuooraPageComponent >> renderNavBarOn:html [
 	bar background beLight.
 	
 	bar with: [ 
-		html navigationBarBrand: 'CuOOra'.
+		html navigationBarBrand:'CuoOOra'.
 		html
 			navigationBarToggler
 			beButtonType;
