@@ -144,13 +144,10 @@ PreguntaPageComponent >> renderRespuestasOn: html [
 PreguntaPageComponent >> renderTituloDescripcionOn: html [
 	html div
 		id: 'titulo-pregunta';
-		with: [ html anchor
-				id: 'titulo';
-				callback: [ self call: CuooraRegisterComponent new ];
-				with: self pregunta titulo].
+		with: [ html heading: self pregunta titulo].
 	html paragraph
 		id: 'descripcion';
-		with: [ html text: self pregunta descripcion ]
+		with: [ html text: self pregunta descripcion ].
 ]
 
 { #category : #rendering }
@@ -180,6 +177,7 @@ PreguntaPageComponent >> updateRoot: anHtmlRoot [
 ]
 
 { #category : #'as yet unclassified' }
-PreguntaPageComponent >> verPregunta:unaPregunta [
-self call: CuooraLoginComponent new.
+PreguntaPageComponent >> verPregunta [
+	self session user:nil.
+	self call: CuooraRegisterComponent new.
 ]

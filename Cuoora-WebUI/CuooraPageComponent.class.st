@@ -115,3 +115,8 @@ CuooraPageComponent >> user [
 CuooraPageComponent >> user: anUser [
 	user := anUser.
 ]
+
+{ #category : #'as yet unclassified' }
+CuooraPageComponent >> verPregunta: unaPregunta [
+	self call: (CuooraVerPreguntaComponent pregunta: unaPregunta).
+]

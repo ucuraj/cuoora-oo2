@@ -33,10 +33,18 @@ CuooraVerPreguntaComponent >> renderPreguntaConRespuestasOn: html [
 	html div
 		id: 'verPregunta';
 		with: [ self renderPreguntaOn: html.
-			html horizontalRule.
+			html horizontalRule. ].
 			html div
 				id: 'verRespuesta';
-				with: [ self renderRespuestasOn: html ] ]
+				with: [ self renderRespuestasOn: html ].
+]
+
+{ #category : #rendering }
+CuooraVerPreguntaComponent >> renderPreguntaSinRespuestasOn:html [
+	html div
+		id: 'verPregunta';
+		with: [ self renderPreguntaOn: html.
+			html horizontalRule. ]
 ]
 
 { #category : #rendering }
