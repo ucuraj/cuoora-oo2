@@ -31,7 +31,7 @@ PreguntaPageComponent >> agregarRespuesta [
 
 { #category : #rendering }
 PreguntaPageComponent >> agregarRespuestaConPregunta: unaPregunta [
-	"self call: (RespuestaCrearPageComponent conPregunta: unaPregunta)"
+	self call: (RespuestaCrearPageComponent conPregunta: unaPregunta)
 ]
 
 { #category : #visiting }

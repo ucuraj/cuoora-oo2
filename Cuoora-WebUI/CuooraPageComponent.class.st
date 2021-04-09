@@ -34,6 +34,8 @@ CuooraPageComponent >> proceedWith: unObjeto [
 
 { #category : #rendering }
 CuooraPageComponent >> renderContentOn: html [
+	(self session user) isNotNil 
+	ifTrue:[self renderNavBarOn:html.]. 
 	html container
 		class: 'fill';
 		with: [ html jumbotron
@@ -44,6 +46,39 @@ CuooraPageComponent >> renderContentOn: html [
 { #category : #rendering }
 CuooraPageComponent >> renderContentPageOn: html [
 	self subclassResponsibility. 
+]
+
+{ #category : #rendering }
+CuooraPageComponent >> renderNavBarOn:html [ 
+	| bar id aBlock|
+	aBlock := [
+		html navigationLink url: ''; with: 'Agregar Pregunta'.
+		html navigationLink url: ''; with: 'Buscar Usuario'.
+		html navigationLink url: ''; with: 'Agregar Topico'.
+		html navigationLink beActive; url: ''; class:'pull-right'; with: self session user user.
+		html navigationLink url: '';class:'pull-right'; with: 'Cerrar Session' ].
+	id := '#navbarCollapsed'.
+	bar := html navigationBar.
+	bar beLight; expandLarge.
+	bar background beLight.
+	
+	bar with: [ 
+		html navigationBarBrand: 'CuOOra'.
+		html
+			navigationBarToggler
+			beButtonType;
+			collapse;
+			dataTarget: id;
+			with: [ html navigationBarTogglerIcon ].
+				
+		html navigationBarCollapse collapse id: 'navbarCollapsed'; with: [ 
+			html navigationBarNavigation: [
+				html navigation justifyContentEnd; with: aBlock.
+				].
+			].
+			 
+			
+		]
 ]
 
 { #category : #rendering }
