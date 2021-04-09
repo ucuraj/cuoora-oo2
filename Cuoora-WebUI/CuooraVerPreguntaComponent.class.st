@@ -36,7 +36,8 @@ CuooraVerPreguntaComponent >> renderPreguntaConRespuestasOn: html [
 			html horizontalRule. ].
 			html div
 				id: 'verRespuesta';
-				with: [ self renderRespuestasOn: html ].
+				with: [ 	self renderTotalyAgregarOn: html.
+							self renderRespuestasOn: html ].
 ]
 
 { #category : #rendering }

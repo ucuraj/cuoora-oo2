@@ -19,7 +19,7 @@ RespuestaCrearPageComponent >> accept [
 	| resp |
 	resp := Respuesta
 		conTexto: self respuesta texto
-		Usuario: self session usuario.
+		Usuario: self session user.
 	self pregunta agregarRespuesta: resp.
 	self answer
 ]
@@ -33,12 +33,8 @@ RespuestaCrearPageComponent >> cancel [
 { #category : #initialization }
 RespuestaCrearPageComponent >> conPregunta: unaPregunta [
 	self initialize.
-	self pregunta: unaPregunta
-]
-
-{ #category : #initialization }
-RespuestaCrearPageComponent >> initialize [
-	self respuesta: Respuesta new
+	self pregunta: unaPregunta.
+	self respuesta: Respuesta new.
 ]
 
 { #category : #accessing }
@@ -58,7 +54,7 @@ RespuestaCrearPageComponent >> renderAgregarRespuestaOn: html [
 		with: [ html
 				text: 'Responder';
 				form: [ html textArea
-						callback: [ :descripcion | self respuesta texto: descripcion ].
+						callback: [ :descripcion | self respuesta: (Respuesta conTexto: descripcion Usuario: self session user ) ].
 					self renderButtonsOn: html ] ]
 ]
 

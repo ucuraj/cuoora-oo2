@@ -100,14 +100,16 @@ html, body {
 .fill { 
 	padding-top: 100px;
 	min-height: 100%;
-	height: 100%;
+	height: fit-content;
 	width:100%;
 	min-width: 100%;
 	background: url("https://source.unsplash.com/random/1920x1080");
 	background-size:cover;
 	box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
 }	
-	
+	.navbar{
+	position: fixed;
+    width: inherit;}
 .page-bg { 
 	background-color: rgba(0,0,0,0.5);
 	max-width: 80%;

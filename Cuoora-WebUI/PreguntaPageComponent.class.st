@@ -116,7 +116,7 @@ PreguntaPageComponent >> renderPreguntaOn: html [
 { #category : #rendering }
 PreguntaPageComponent >> renderRespuestasContentOn: html [
 	| rta |
-	self pregunta respuestasOrdenadas
+	self pregunta respuestas
 		do: [ :respuesta | 
 			html div
 				id: 'respuesta';
@@ -135,7 +135,6 @@ PreguntaPageComponent >> renderRespuestasContentOn: html [
 
 { #category : #rendering }
 PreguntaPageComponent >> renderRespuestasOn: html [
-	self renderTotalyAgregarOn: html.
 	self renderRespuestasContentOn: html.
 	
 ]
