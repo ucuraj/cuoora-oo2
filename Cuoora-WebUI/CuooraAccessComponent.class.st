@@ -54,6 +54,8 @@ CuooraAccessComponent >> renderContentPageOn: html [
 				form: [ self renderInputElementsOn: html.
 					self renderBadCredentialsOn: html.
 					self renderButtonsOn: html ].
+					html paragraph: '¿No tenés cuenta? Unite a cuOOra ahora mismo!'.
+					self renderRegisterButtonOn: html
 ]
 
 { #category : #rendering }
@@ -74,4 +76,9 @@ CuooraAccessComponent >> renderInputElementsOn: html [
 						formControl;
 						on: #pass of: self ] ].
 	
+]
+
+{ #category : #rendering }
+CuooraAccessComponent >> renderRegisterButtonOn:html [ 
+self subclassResponsibility. 
 ]

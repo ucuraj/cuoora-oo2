@@ -49,8 +49,6 @@ CuooraLoginComponent >> registerNewUser [
 CuooraLoginComponent >> renderButtonsOn: html [
 	self renderLoginButtonOn: html.
 	html horizontalRule .
-	html paragraph: '¿No tenés cuenta? Unite a cuOOra ahora mismo!'.
-	self renderRegisterButtonOn: html
 ]
 
 { #category : #rendering }
@@ -70,11 +68,14 @@ CuooraLoginComponent >> renderLoginButtonOn: html [
 
 { #category : #rendering }
 CuooraLoginComponent >> renderRegisterButtonOn: html [
-	html outlineButton beWarning; beSmall;
-		callback: [ 
-			self session user: nil.
-			self registerNewUser];
-		with: 'Crear nueva cuenta.'
+	html anchor
+		callback: [ self session user: nil.
+			self registerNewUser ];
+		with:
+			[html outlineButton
+				beWarning;
+				beSmall;
+				with: 'Crear nueva cuenta.'].
 ]
 
 { #category : #rendering }
