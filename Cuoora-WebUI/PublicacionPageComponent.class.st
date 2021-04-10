@@ -31,14 +31,21 @@ PublicacionPageComponent >> renderLikesDislikeOptionsOn: html [
 			html space.
 			html space.
 			html anchor
-				id: 'likes';
-				callback: [ self publicacion likeUsuario: self session user ];
-				with: 'Like '.
-			html text: ' | '.
+		callback: [  self publicacion likeUsuario: self session user];
+		with:
+			[html outlineButton
+				beSuccess;
+				beSmall;
+				with: 'Like'].
+			html space.
+			html space.
 			html anchor
-				id: 'likes';
-				callback: [ self publicacion dislikeUsuario: self session user ];
-				with: ' Dislike' ]
+		callback: [  self publicacion dislikeUsuario: self session user];
+		with:
+			[html outlineButton
+				beDanger;
+				beSmall;
+				with: 'Dislike']].
 ]
 
 { #category : #rendering }

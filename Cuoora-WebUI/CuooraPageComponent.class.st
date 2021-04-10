@@ -124,7 +124,22 @@ html, body {
 	color: white;
 	text-align: center;
  }
-
+#informacion-pregunta{
+	text-align:left
+}
+#respuesta-titulo{
+	text-align:left
+}
+#respuesta-texto{
+	text-align:left
+}
+#respuesta{
+border:2px solid grey;
+border-radius:15px;
+margin-left:15%;
+padding-left:1%;
+margin-bottom:3%;
+}
 .page-bg h1, h2, h3, h4, h5, h6{
 	font-family: "Quicksand", sans-serif;
 }

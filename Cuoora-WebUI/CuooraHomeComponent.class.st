@@ -30,6 +30,7 @@ CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 		with: [ self session user preguntasInteres
 				do: [ :preguntaRelevante | 
 					preguntaRelevante.
+					html horizontalRule.
 					preg := PreguntaPageComponent pregunta: preguntaRelevante.
 					html anchor
 						callback: [ self verPregunta: preguntaRelevante ];

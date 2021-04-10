@@ -105,10 +105,11 @@ PreguntaPageComponent >> renderOwnerOn: html [
 
 { #category : #rendering }
 PreguntaPageComponent >> renderPreguntaOn: html [
+html div id:'informacion-pregunta';with:[
 	self renderTituloDescripcionOn: html.
 	self renderListaTopicosOn: html.
 	self renderCantidadRespuestasOn: html.
-	self renderOwnerOn: html.
+	self renderOwnerOn: html. ].
 	self renderFechaOn: html.
 	self renderLikesDislikesOn: html publicacion: self pregunta
 ]
@@ -117,7 +118,7 @@ PreguntaPageComponent >> renderPreguntaOn: html [
 PreguntaPageComponent >> renderRespuestasContentOn: html [
 	| rta |
 	self pregunta respuestas
-		do: [ :respuesta | 
+		do: [ :respuesta |
 			html div
 				id: 'respuesta';
 				with: [ html div
@@ -130,7 +131,8 @@ PreguntaPageComponent >> renderRespuestasContentOn: html [
 						id: 'respuesta-texto';
 						with: [ html text: respuesta texto ].
 					rta := PublicacionPageComponent publicacion: respuesta.
-					rta renderLikesDislikesOn: html publicacion: respuesta ] ]
+					rta renderLikesDislikesOn: html publicacion: respuesta.
+					] ]
 ]
 
 { #category : #rendering }
@@ -156,8 +158,12 @@ PreguntaPageComponent >> renderTotalyAgregarOn: html [
 			html strong: self totalRespuestas.
 			html text: ') '.
 			html anchor
-				callback: [ self agregarRespuestaConPregunta: self pregunta ];
-				with: [ html button: 'Agregar Respuesta' ] ]
+		callback: [  self agregarRespuestaConPregunta: self pregunta.];
+		with:
+			[html formButton
+				beWarning;
+				beSmall;
+				with: 'Agregar Respuesta']].
 ]
 
 { #category : #callbacks }
