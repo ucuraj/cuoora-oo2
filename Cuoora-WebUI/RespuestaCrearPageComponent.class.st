@@ -16,11 +16,9 @@ RespuestaCrearPageComponent class >> conPregunta: unaPregunta [
 
 { #category : #actions }
 RespuestaCrearPageComponent >> accept [
-	| resp |
-	resp := Respuesta
-		conTexto: self respuesta texto
-		Usuario: self session user.
-	self pregunta agregarRespuesta: resp.
+	self pregunta
+		agregarRespuesta:
+			(Respuesta conTexto: self respuesta texto Usuario: self session user).
 	self answer
 ]
 
@@ -30,9 +28,9 @@ RespuestaCrearPageComponent >> cancel [
 	self answer
 ]
 
-{ #category : #initialization }
+{ #category : #'instance creation' }
 RespuestaCrearPageComponent >> conPregunta: unaPregunta [
-	self initialize.
+	
 	self pregunta: unaPregunta.
 	self respuesta: Respuesta new.
 ]
@@ -54,7 +52,9 @@ RespuestaCrearPageComponent >> renderAgregarRespuestaOn: html [
 		with: [ html
 				text: 'Responder';
 				form: [ html textArea
-						callback: [ :descripcion | self respuesta: (Respuesta conTexto: descripcion Usuario: self session user ) ].
+						callback: [ :descripcion | 
+							self
+								respuesta: (Respuesta conTexto: descripcion Usuario: self session user) ].
 					self renderButtonsOn: html ] ]
 ]
 
@@ -64,7 +64,10 @@ RespuestaCrearPageComponent >> renderButtonsOn: html [
 		paragraph: [ html button
 				callback: [ self cancel ];
 				with: 'Cancelar '.
-			html space; space; space.
+			html
+				space;
+				space;
+				space.
 			html button
 				callback: [ self accept ];
 				with: 'Responder' ]
@@ -89,7 +92,7 @@ RespuestaCrearPageComponent >> respuesta: anObject [
 	respuesta := anObject
 ]
 
-{ #category : #actions }
+{ #category : #updating }
 RespuestaCrearPageComponent >> updateRoot: anHtmlRoot [
 	self
 		updateRoot: anHtmlRoot

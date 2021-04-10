@@ -11,17 +11,6 @@ CuooraVerPreguntaComponent class >> pregunta: unaPregunta [
 		yourself
 ]
 
-{ #category : #visiting }
-CuooraVerPreguntaComponent >> accept [
-	true
-]
-
-{ #category : #visiting }
-CuooraVerPreguntaComponent >> cancel [
-	user := nil.
-	self answer
-]
-
 { #category : #rendering }
 CuooraVerPreguntaComponent >> renderContentPageOn: html [
 self renderTitleOn: html.

@@ -25,6 +25,11 @@ PublicacionPageComponent >> publicacion: anObject [
 ]
 
 { #category : #rendering }
+PublicacionPageComponent >> renderContentPageOn: html [
+	self subclassResponsibility. 
+]
+
+{ #category : #rendering }
 PublicacionPageComponent >> renderLikesDislikeOptionsOn: html [
 	html
 		paragraph: [ html space.

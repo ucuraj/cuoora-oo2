@@ -28,11 +28,6 @@ CuooraPageComponent >> model [
 ]
 
 { #category : #private }
-CuooraPageComponent >> proceedWith: unObjeto [
-	self subclassResponsibility. 
-]
-
-{ #category : #private }
 CuooraPageComponent >> proceedWithHome: unUsuario [
 	self session user: unUsuario.
 	self call: CuooraHomeComponent new.
@@ -173,9 +168,4 @@ CuooraPageComponent >> user [
 { #category : #accessing }
 CuooraPageComponent >> user: anUser [
 	user := anUser.
-]
-
-{ #category : #'as yet unclassified' }
-CuooraPageComponent >> verPregunta: unaPregunta [
-	self call: (CuooraVerPreguntaComponent pregunta: unaPregunta).
 ]

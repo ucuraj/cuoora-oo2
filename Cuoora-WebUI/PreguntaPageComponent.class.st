@@ -15,29 +15,13 @@ PreguntaPageComponent class >> pregunta: unaPregunta [
 ]
 
 { #category : #callbacks }
-PreguntaPageComponent >> TopicoPerfilComponent: unTopico [
-	"self call: (PreguntasDeTopico conTopico: unTopico)"
-]
-
-{ #category : #visiting }
-PreguntaPageComponent >> accept [
-	true
-]
-
-{ #category : #rendering }
 PreguntaPageComponent >> agregarRespuesta [
 	"self call: RespuestaCrearPageComponent new"
 ]
 
-{ #category : #rendering }
+{ #category : #callbacks }
 PreguntaPageComponent >> agregarRespuestaConPregunta: unaPregunta [
 	self call: (RespuestaCrearPageComponent conPregunta: unaPregunta)
-]
-
-{ #category : #visiting }
-PreguntaPageComponent >> cancel [
-	user := nil.
-	self answer
 ]
 
 { #category : #callbacks }
@@ -60,7 +44,7 @@ PreguntaPageComponent >> pregunta: anObject [
 	pregunta := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 PreguntaPageComponent >> proceedWithPregunta: unaPregunta [
 	self pregunta: unaPregunta.
 	self call: CuooraVerPreguntaComponent new.
@@ -73,6 +57,11 @@ PreguntaPageComponent >> renderCantidadRespuestasOn: html [
 		with: [ html text: 'Respuestas: '.
 				  html strong: self pregunta totalRespuestas.]
 			
+]
+
+{ #category : #rendering }
+PreguntaPageComponent >> renderContentPageOn: html [
+	self subclassResponsibility.
 ]
 
 { #category : #rendering }
@@ -89,7 +78,7 @@ PreguntaPageComponent >> renderListaTopicosOn: html [
 		with: [ html text: 'Topicos: '.
 			self pregunta topicos
 				do: [ :topico | html anchor
-											callback:[ self TopicoPerfilComponent:topico];
+											callback:[ self topicoPerfilComponent:topico];
 											with:topico nombre.
 									html text:', '. ]]
 ]
@@ -176,13 +165,7 @@ PreguntaPageComponent >> totalRespuestas [
 	^self pregunta totalRespuestas
 ]
 
-{ #category : #actions }
+{ #category : #updating }
 PreguntaPageComponent >> updateRoot: anHtmlRoot [
 	self updateRoot: anHtmlRoot title: self pregunta titulo , ' | cuOOra'
-]
-
-{ #category : #'as yet unclassified' }
-PreguntaPageComponent >> verPregunta [
-	self session user:nil.
-	self call: CuooraRegisterComponent new.
 ]

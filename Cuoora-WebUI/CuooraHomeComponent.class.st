@@ -4,7 +4,7 @@ Class {
 	#category : #'Cuoora-WebUI'
 }
 
-{ #category : #updating }
+{ #category : #private }
 CuooraHomeComponent >> callLogin [
 	self call: CuooraLoginComponent new
 ]
@@ -54,4 +54,9 @@ CuooraHomeComponent >> renderTitleOn: html [
 { #category : #updating }
 CuooraHomeComponent >> updateRoot: anHtmlRoot [ 
     self updateRoot: anHtmlRoot title: 'Home | cuOOra'
+]
+
+{ #category : #callbacks }
+CuooraHomeComponent >> verPregunta: unaPregunta [
+	self call: (CuooraVerPreguntaComponent pregunta: unaPregunta).
 ]
