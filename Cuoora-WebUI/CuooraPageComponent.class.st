@@ -35,8 +35,8 @@ CuooraPageComponent >> proceedWithHome: unUsuario [
 
 { #category : #rendering }
 CuooraPageComponent >> renderContentOn: html [
-	(self session user) isNotNil 
-	ifTrue:[self renderNavBarOn:html.]. 
+	self session user isNotNil
+		ifTrue: [ self renderNavBarOn: html ].
 	html container
 		class: 'fill';
 		with: [ html jumbotron
@@ -148,11 +148,7 @@ html, body {
 	margin-left: 10%;
 	color: white;
 	text-align: center;
-}
-
-.informacion-pregunta{
-	text-align:left
-}
+}  
 
 .respuesta-titulo{
 	text-align:left
@@ -175,7 +171,16 @@ html, body {
 }
 
 .page-bg hr{
-	background-color: white;
+  border-width: 0 0 1px;
+  color: white;
+  border-image: linear-gradient(90deg, rgba(135, 206, 235, 0), white 50%, rgba(135, 206, 235, 0) 100%) 0 0 100%;
+  border-style: solid;
+ }
+
+.fade-bg { 
+  height: 1px;
+  color: white;
+  background-image: linear-gradient(90deg, rgba(255, 0, 0, 0), white 50%, rgba(255, 0, 0, 0) 100%);
  }
 
 .login-input{
@@ -185,10 +190,6 @@ html, body {
 
 .navbar-bg { 
     background-color: rgb(255,255,255,0.8) !important;
-}
-
-.home-list{
-	
 }
 '
 ]

@@ -93,7 +93,7 @@ PreguntaPageComponent >> renderOwnerOn: html [
 { #category : #rendering }
 PreguntaPageComponent >> renderPreguntaOn: html [
 	html div
-		class: 'informacion-pregunta';
+		class: '';
 		with: [ self renderTituloDescripcionOn: html.
 			self renderListaTopicosOn: html.
 			self renderCantidadRespuestasOn: html.

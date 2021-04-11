@@ -4,16 +4,6 @@ Class {
 	#category : #'Cuoora-WebUI'
 }
 
-{ #category : #private }
-CuooraHomeComponent >> callLogin [
-	self call: CuooraLoginComponent new
-]
-
-{ #category : #rendering }
-CuooraHomeComponent >> renderButtonsOn: html [
-	 "self subclassResponsibility. "
-]
-
 { #category : #rendering }
 CuooraHomeComponent >> renderContentPageOn: html [
 	self renderTitleOn: html.
@@ -24,23 +14,25 @@ CuooraHomeComponent >> renderContentPageOn: html [
 CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 	| preg |
 	html horizontalRule.
-	html heading level4 with: 'Ultimas preguntas'.
-	html listGroup
-		class: 'align-left';
-		with: [ (self session user getPreguntasInteres: 5)
-				do: [ :preguntaRelevante | 
-					preguntaRelevante.
-					html horizontalRule.
-					preg := PreguntaPageComponent pregunta: preguntaRelevante.
-					preg renderPreguntaOn: html.
-					html anchor
-						callback: [ self verPregunta: preguntaRelevante ];
-						with: [ html outlineButton
-								beSuccess;
-								beSmall;
-								with: 'Ver Pregunta' ] ] .
-						html horizontalRule].
-					
+	html heading level3 with: 'Ultimas preguntas'.
+	html break.
+	html container
+		class: 'home-list';
+		with: [ html
+				row: [ (self session user getPreguntasInteres: 5)
+						do: [ :preguntaRelevante | 
+							preguntaRelevante.
+							html
+								column: [ preg := PreguntaPageComponent pregunta: preguntaRelevante.
+									preg renderPreguntaOn: html.
+									html anchor
+										callback: [ self verPregunta: preguntaRelevante ];
+										with: [ html outlineButton
+												beSuccess;
+												beSmall;
+												with: 'Ver Pregunta' ].
+									html horizontalRule class: 'hr-fade' ]
+								mediumSize: 6 ] ] ]
 ]
 
 { #category : #rendering }
