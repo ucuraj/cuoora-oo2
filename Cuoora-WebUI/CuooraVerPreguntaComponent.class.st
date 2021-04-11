@@ -20,11 +20,11 @@ self renderPreguntaConRespuestasOn: html.
 { #category : #rendering }
 CuooraVerPreguntaComponent >> renderPreguntaConRespuestasOn: html [
 	html div
-		id: 'verPregunta';
+		class: 'verPregunta';
 		with: [ self renderPreguntaOn: html.
 			html horizontalRule. ].
 			html div
-				id: 'verRespuesta';
+				class: 'verRespuesta';
 				with: [ 	self renderTotalyAgregarOn: html.
 							self renderRespuestasOn: html ].
 ]
@@ -32,7 +32,7 @@ CuooraVerPreguntaComponent >> renderPreguntaConRespuestasOn: html [
 { #category : #rendering }
 CuooraVerPreguntaComponent >> renderPreguntaSinRespuestasOn:html [
 	html div
-		id: 'verPregunta';
+		class: 'verPregunta';
 		with: [ self renderPreguntaOn: html.
 			html horizontalRule. ]
 ]

@@ -23,23 +23,24 @@ CuooraHomeComponent >> renderContentPageOn: html [
 { #category : #rendering }
 CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 	| preg |
-	html heading level2 with: 'Utimas preguntas'.
-	html span: self session user preguntasInteres size.
+	html horizontalRule.
+	html heading level4 with: 'Ultimas preguntas'.
 	html listGroup
-		class: '';
-		with: [ self session user preguntasInteres
+		class: 'align-left';
+		with: [ (self session user getPreguntasInteres: 5)
 				do: [ :preguntaRelevante | 
 					preguntaRelevante.
 					html horizontalRule.
 					preg := PreguntaPageComponent pregunta: preguntaRelevante.
+					preg renderPreguntaOn: html.
 					html anchor
 						callback: [ self verPregunta: preguntaRelevante ];
 						with: [ html outlineButton
 								beSuccess;
 								beSmall;
-								with: 'Ver Pregunta' ].
-					preg renderPreguntaOn: html.
-					 ] ]
+								with: 'Ver Pregunta' ] ] .
+						html horizontalRule].
+					
 ]
 
 { #category : #rendering }

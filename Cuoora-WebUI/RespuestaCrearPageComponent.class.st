@@ -48,7 +48,7 @@ RespuestaCrearPageComponent >> pregunta: anObject [
 { #category : #rendering }
 RespuestaCrearPageComponent >> renderAgregarRespuestaOn: html [
 	html div
-		id: 'agregarPregunta';
+		class: 'agregarPregunta';
 		with: [ html
 				text: 'Responder';
 				form: [ html textArea
@@ -61,14 +61,10 @@ RespuestaCrearPageComponent >> renderAgregarRespuestaOn: html [
 { #category : #rendering }
 RespuestaCrearPageComponent >> renderButtonsOn: html [
 	html
-		paragraph: [ html button
+		paragraph: [ html button class: 'pr-1';
 				callback: [ self cancel ];
 				with: 'Cancelar '.
-			html
-				space;
-				space;
-				space.
-			html button
+			html button class: 'pl-1';
 				callback: [ self accept ];
 				with: 'Responder' ]
 ]

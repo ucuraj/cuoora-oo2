@@ -32,25 +32,18 @@ PublicacionPageComponent >> renderContentPageOn: html [
 { #category : #rendering }
 PublicacionPageComponent >> renderLikesDislikeOptionsOn: html [
 	html
-		paragraph: [ html space.
-			html space.
-			html space.
+		paragraph: [ html anchor
+				class: 'pr-1';
+				callback: [ self publicacion likeUsuario: self session user ];
+				with: [ html badge
+						beSuccess;
+						with: 'Like' ].
 			html anchor
-		callback: [  self publicacion likeUsuario: self session user];
-		with:
-			[html outlineButton
-				beSuccess;
-				beSmall;
-				with: 'Like'].
-			html space.
-			html space.
-			html anchor
-		callback: [  self publicacion dislikeUsuario: self session user];
-		with:
-			[html outlineButton
-				beDanger;
-				beSmall;
-				with: 'Dislike']].
+				class: 'pl-1';
+				callback: [ self publicacion dislikeUsuario: self session user ];
+				with: [ html badge beDanger
+						beDanger;
+						with: 'Dislike' ] ]
 ]
 
 { #category : #rendering }
@@ -66,8 +59,7 @@ PublicacionPageComponent >> renderTotalLikesDislikesOn: html [
 	html
 		paragraph: [ html
 				strong: self totalLikes;
-				text: ' Likes';
-				text: ' | ';
+				text: ' Likes | ';
 				strong: self totalDislikes;
 				text: ' Dislikes' ]
 ]

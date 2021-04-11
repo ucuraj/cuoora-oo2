@@ -53,10 +53,9 @@ PreguntaPageComponent >> proceedWithPregunta: unaPregunta [
 { #category : #rendering }
 PreguntaPageComponent >> renderCantidadRespuestasOn: html [
 	html paragraph
-		id: 'cant-rtas';
+		class: 'cant-rtas';
 		with: [ html text: 'Respuestas: '.
-				  html strong: self pregunta totalRespuestas.]
-			
+			html strong: self pregunta totalRespuestas ]
 ]
 
 { #category : #rendering }
@@ -66,21 +65,20 @@ PreguntaPageComponent >> renderContentPageOn: html [
 
 { #category : #rendering }
 PreguntaPageComponent >> renderFechaOn: html [
-	html
-		paragraph: [ html text: 'Creado el '.
-			 html strong: self pregunta fechaCreacion asDate ] 
+	html strong: (self pregunta formatearFecha )
 ]
 
 { #category : #rendering }
 PreguntaPageComponent >> renderListaTopicosOn: html [
 	html paragraph
-		id: 'topico';
+		class: 'topico';
 		with: [ html text: 'Topicos: '.
 			self pregunta topicos
-				do: [ :topico | html anchor
-											callback:[ self topicoPerfilComponent:topico];
-											with:topico nombre.
-									html text:', '. ]]
+				do: [ :topico | 
+					html anchor
+						callback: [ self topicoPerfilComponent: topico ];
+						with: topico nombre.
+					html text: ', ' ] ]
 ]
 
 { #category : #rendering }
@@ -89,16 +87,17 @@ PreguntaPageComponent >> renderOwnerOn: html [
 		paragraph: [ html text: 'Creado por '.
 			html anchor
 				callback: [ self perfilPreguntaComponent ];
-				with: [ html strong: self pregunta usuario user ] ]
+				with: [ html strong: self pregunta usuario user ]]
 ]
 
 { #category : #rendering }
 PreguntaPageComponent >> renderPreguntaOn: html [
-html div id:'informacion-pregunta';with:[
-	self renderTituloDescripcionOn: html.
-	self renderListaTopicosOn: html.
-	self renderCantidadRespuestasOn: html.
-	self renderOwnerOn: html. ].
+	html div
+		class: 'informacion-pregunta';
+		with: [ self renderTituloDescripcionOn: html.
+			self renderListaTopicosOn: html.
+			self renderCantidadRespuestasOn: html.
+			self renderOwnerOn: html ].
 	self renderFechaOn: html.
 	self renderLikesDislikesOn: html publicacion: self pregunta
 ]
@@ -107,21 +106,20 @@ html div id:'informacion-pregunta';with:[
 PreguntaPageComponent >> renderRespuestasContentOn: html [
 	| rta |
 	self pregunta respuestas
-		do: [ :respuesta |
+		do: [ :respuesta | 
 			html div
-				id: 'respuesta';
+				class: 'respuesta';
 				with: [ html div
-						id: 'respuesta-titulo';
+						class: 'respuesta-titulo';
 						with: [ html text: 'Respuesta de '.
 							html anchor
 								callback: [ self perfilComponent: respuesta usuario ];
 								with: [ html strong: respuesta usuario user ] ].
 					html div
-						id: 'respuesta-texto';
+						class: 'respuesta-texto';
 						with: [ html text: respuesta texto ].
 					rta := PublicacionPageComponent publicacion: respuesta.
-					rta renderLikesDislikesOn: html publicacion: respuesta.
-					] ]
+					rta renderLikesDislikesOn: html publicacion: respuesta ] ]
 ]
 
 { #category : #rendering }
@@ -133,10 +131,10 @@ PreguntaPageComponent >> renderRespuestasOn: html [
 { #category : #rendering }
 PreguntaPageComponent >> renderTituloDescripcionOn: html [
 	html div
-		id: 'titulo-pregunta';
+		class: 'titulo-pregunta';
 		with: [ html heading: self pregunta titulo].
 	html paragraph
-		id: 'descripcion';
+		class: 'descripcion';
 		with: [ html text: self pregunta descripcion ].
 ]
 
@@ -147,12 +145,11 @@ PreguntaPageComponent >> renderTotalyAgregarOn: html [
 			html strong: self totalRespuestas.
 			html text: ') '.
 			html anchor
-		callback: [  self agregarRespuestaConPregunta: self pregunta.];
-		with:
-			[html formButton
-				beWarning;
-				beSmall;
-				with: 'Agregar Respuesta']].
+				callback: [ self agregarRespuestaConPregunta: self pregunta ];
+				with: [ html formButton
+						beWarning;
+						beSmall;
+						with: 'Agregar Respuesta' ] ]
 ]
 
 { #category : #callbacks }

@@ -27,7 +27,7 @@ CuooraRegisterComponent >> existe: unUsuario [
 { #category : #private }
 CuooraRegisterComponent >> proceedUserExists: unUsuario [
 	existe := unUsuario.
-	self call: (CuooraRegisterComponent newExiste: unUsuario)
+	self call: (self class newExiste: unUsuario)
 ]
 
 { #category : #rendering }
@@ -43,24 +43,39 @@ CuooraRegisterComponent >> registerAndLogin [
 
 { #category : #rendering }
 CuooraRegisterComponent >> renderButtonsOn: html [
-	self renderRegisterButtonOn: html
+	html space.
+]
+
+{ #category : #rendering }
+CuooraRegisterComponent >> renderContentPageOn: html [
+	html heading: 'CuOOra'.
+	html heading
+		level: 3;
+		with: 'La red social de preguntas y respuestas'.
+	html horizontalRule.
+	html
+		form: [ self renderInputElementsOn: html.
+			self renderRegisterButtonOn: html ]
 ]
 
 { #category : #rendering }
 CuooraRegisterComponent >> renderInputElementsOn: html [
-	html heading: 'Registrate en cuOOra, es gratis!'.
+	html heading
+		level: 3;
+		with: 'Registrate en cuOOra, es gratis!'.
+	html break.
 	existe
-		ifNotNil: [ html paragraph.
-			html label: 'Usuario ' , existe , ' ya existe' ].
-	html paragraph: [  ].
+		ifNotNil: [ html label: 'Usuario ' , existe , ' ya existe'.
+			existe := nil ].
 	super renderInputElementsOn: html
 ]
 
 { #category : #rendering }
 CuooraRegisterComponent >> renderRegisterButtonOn: html [
-	html submitButton
+	html anchor
 		callback: [ self registerAndLogin ];
-		with: 'Crear cuenta.'
+		with: [ html formButton beWarning with: 'Crear Cuenta'.
+			html space ]
 ]
 
 { #category : #actions }

@@ -48,14 +48,16 @@ CuooraAccessComponent >> renderButtonsOn: html [
 
 { #category : #rendering }
 CuooraAccessComponent >> renderContentPageOn: html [
-	html heading: 'Bienvenido a CuOOra!'.
-			html horizontalRule.
-			html
-				form: [ self renderInputElementsOn: html.
-					self renderBadCredentialsOn: html.
-					self renderButtonsOn: html ].
-					html paragraph: '¿No tenés cuenta? Unite a cuOOra ahora mismo!'.
-					self renderRegisterButtonOn: html
+	html heading: 'CuOOra'.
+	html heading
+		level: 3;
+		with: 'La red social de preguntas y respuestas'.
+	html horizontalRule.
+	html
+		form: [ self renderInputElementsOn: html.
+			self renderBadCredentialsOn: html.
+			self renderButtonsOn: html ].
+	self renderRegisterButtonOn: html
 ]
 
 { #category : #rendering }

@@ -50,37 +50,58 @@ CuooraPageComponent >> renderContentPageOn: html [
 ]
 
 { #category : #rendering }
-CuooraPageComponent >> renderNavBarOn:html [ 
-	| bar id aBlock|
-	aBlock := [
-		html navigationLink callback:[self proceedWithHome: self session user]; with: 'Home'.
-		html navigationLink url: ''; with: 'Agregar Pregunta'.
-		html navigationLink url: ''; with: 'Buscar Usuario'.
-		html navigationLink url: ''; with: 'Agregar Topico'.
-		html navigationLink beActive; url: ''; class:'pull-right'; with: self session user user.
-		html navigationLink url: '';class:'pull-right'; with: 'Cerrar Session' ].
-	id := '#navbarCollapsed'.
-	bar := html navigationBar.
-	bar beLight; expandLarge.
-	bar background beLight.
+CuooraPageComponent >> renderNavBarDropdownUserOn: html [
+	html navigationItem dropdown
+		with: [ html navigationLink
+				dropdownToggle;
+				dataToggle: 'dropdown';
+				with: [ html span class: 'bi bi-person-circle nav-user mr-2'.
+					html span with: 'pepe' ].
+			html dropdownMenu
+				attributeAt: 'aria-labelledby' put: 'navbarDropdown';
+				with: [ html dropdownItem: self session user user.
+					html dropdownDivider.
+					html dropdownItem
+						callback: [ self call: CuooraLoginComponent logout ];
+						with: [ html span: 'Cerrar Sesión' ] ] ]
+]
+
+{ #category : #rendering }
+CuooraPageComponent >> renderNavBarLinksOn: html [
+	html navigationLink
+		callback: [ self proceedWithHome: self session user ];
+		with: 'Home'.
+	html navigationLink
+		url: '';
+		with: 'Agregar Pregunta'.
+	html navigationLink
+		url: '';
+		with: 'Buscar Usuario'.
+	html navigationLink
+		url: '';
+		with: 'Agregar Topico'.
+	self renderNavBarDropdownUserOn: html.
+
+]
+
+{ #category : #rendering }
+CuooraPageComponent >> renderNavBarOn: html [
 	
-	bar with: [ 
-		html navigationBarBrand:'CuoOOra'.
-		html
-			navigationBarToggler
-			beButtonType;
-			collapse;
-			dataTarget: id;
-			with: [ html navigationBarTogglerIcon ].
-				
-		html navigationBarCollapse collapse id: 'navbarCollapsed'; with: [ 
-			html navigationBarNavigation: [
-				html navigation justifyContentEnd; with: aBlock.
-				].
-			].
-			 
-			
-		]
+	html navigationBar
+		class: 'navbar-bg';
+		beLight;
+		expandLarge;
+		with: [ html navigationBarBrand: 'CuOOra'.
+			html navigationBarToggler
+				beButtonType;
+				collapse;
+				dataTarget: '#navbarCollapsed';
+				with: [ html navigationBarTogglerIcon ].
+			html navigationBarCollapse collapse class:'justify-content-end pr-5 mr-5';
+				id: 'navbarCollapsed';
+				with: [ html
+						navigationBarNavigation: [ html navigation
+								with: [self renderNavBarLinksOn: html] ] ] ]
 ]
 
 { #category : #rendering }
@@ -94,6 +115,8 @@ CuooraPageComponent >> style [
 	^ '
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 	
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css");
+
 html, body {
 	height: 100%;
 	width:100%
@@ -109,32 +132,44 @@ html, body {
 	background-size:cover;
 	box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
 }	
-	.navbar{
+
+.navbar {
 	position: fixed;
-    width: inherit;}
+   width: inherit;
+}
+
+.nav-user { 
+	font-size: 18px;
+}
+
 .page-bg { 
 	background-color: rgba(0,0,0,0.5);
 	max-width: 80%;
 	margin-left: 10%;
 	color: white;
 	text-align: center;
- }
-#informacion-pregunta{
+}
+
+.informacion-pregunta{
 	text-align:left
 }
-#respuesta-titulo{
+
+.respuesta-titulo{
 	text-align:left
 }
-#respuesta-texto{
+
+.respuesta-texto{
 	text-align:left
 }
-#respuesta{
-border:2px solid grey;
-border-radius:15px;
-margin-left:15%;
-padding-left:1%;
-margin-bottom:3%;
+
+.respuesta{
+  border:2px solid grey;
+  border-radius:15px;
+  margin-left:15%;
+  padding-left:1%;
+  margin-bottom:3%;
 }
+
 .page-bg h1, h2, h3, h4, h5, h6{
 	font-family: "Quicksand", sans-serif;
 }
@@ -143,9 +178,13 @@ margin-bottom:3%;
 	background-color: white;
  }
 
- .login-input{
+.login-input{
 	max-width: 400px;
 	margin: auto;
+}
+
+.navbar-bg { 
+    background-color: rgb(255,255,255,0.8) !important;
 }
 
 .home-list{

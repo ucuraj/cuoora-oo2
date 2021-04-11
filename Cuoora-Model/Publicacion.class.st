@@ -95,6 +95,11 @@ Publicacion >> fechaCreacion: anObject [
 	fechaCreacion := anObject
 ]
 
+{ #category : #methods }
+Publicacion >> formatearFecha [
+	^ self fechaCreacion asDate asString , ' ' , self fechaCreacion asTime asString.
+]
+
 { #category : #initialization }
 Publicacion >> initialize [ 
 	self likes: Set new.
