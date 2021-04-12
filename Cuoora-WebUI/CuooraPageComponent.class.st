@@ -61,10 +61,11 @@ CuooraPageComponent >> renderNavBarDropdownUserOn: html [
 				dropdownToggle;
 				dataToggle: 'dropdown';
 				with: [ html span class: 'bi bi-person-circle nav-user mr-2'.
-					html span with: 'pepe' ].
+					html span with: self session user user ].
 			html dropdownMenu
 				attributeAt: 'aria-labelledby' put: 'navbarDropdown';
-				with: [ html dropdownItem: self session user user.
+				with: [ html dropdownItem callback: [ self call: (self verPerfil: self session user) ];
+						with: [ html span: self session user user ].
 					html dropdownDivider.
 					html dropdownItem
 						callback: [ self call: CuooraLoginComponent logout ];
@@ -79,9 +80,6 @@ CuooraPageComponent >> renderNavBarLinksOn: html [
 	html navigationLink
 		callback: [ self callCrearPreguntaComponent ];
 		with: 'Agregar Pregunta'.
-	html navigationLink
-		url: '';
-		with: 'Buscar Usuario'.
 	self renderNavBarDropdownUserOn: html.
 
 ]
@@ -303,6 +301,15 @@ z-index: 100000;
 	font-size: 12px;
 }
 
+/* Perfil */
+
+.perfil-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content:center;
+}
+
 '
 ]
 
@@ -320,4 +327,9 @@ CuooraPageComponent >> user [
 { #category : #accessing }
 CuooraPageComponent >> user: anUser [
 	user := anUser.
+]
+
+{ #category : #actions }
+CuooraPageComponent >> verPerfil: unUsuario [
+	self call: (CuooraPerfilComponent conUsuario: unUsuario).
 ]

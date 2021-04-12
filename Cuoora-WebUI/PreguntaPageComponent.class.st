@@ -25,13 +25,13 @@ PreguntaPageComponent >> agregarRespuestaConPregunta: unaPregunta [
 ]
 
 { #category : #callbacks }
-PreguntaPageComponent >> perfilComponent: unPerfil [
-	"self call: (CuooraPerfilComponent conPerfil: unPerfil)"
+PreguntaPageComponent >> perfilComponent: unUsuario [
+	self call: (CuooraPerfilComponent conUsuario: unUsuario)
 ]
 
 { #category : #callbacks }
 PreguntaPageComponent >> perfilPreguntaComponent [
-	self perfilComponent: self pregunta usuario.
+	self perfilComponent: self pregunta usuario. 
 ]
 
 { #category : #accessing }
