@@ -75,7 +75,12 @@ Usuario >> buscarPregunta: unTitulo [
 Usuario >> calcularPuntaje [
 	"Recorre las preguntas de un usuario y llama a calcularPuntaje
 	Obtiene las respuestas de un usuario y llama a calcularPuntaje.
-	Preguntar soleInstance de cuoora."
+	Preguntar soleInstance de cuoora.
+	http://forum.world.st/sum-detectSum-sumNumbers-td4864461.html
+	#sum:
+- uses #inject:into: with #anyOne as the injected element and will thus fail for empty collections
+^((self preguntas) sum:[:eachPregunta | eachPregunta calcularPuntaje]) + ((Cuoora soleInstance getRespuestasDeUnUsuario: self) sum:[:eachPregunta | eachPregunta calcularPuntaje])
+"
 
 	| puntaje |
 	puntaje := self preguntas
