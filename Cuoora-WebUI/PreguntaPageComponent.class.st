@@ -108,7 +108,7 @@ PreguntaPageComponent >> renderPreguntaOn: html [
 ]
 
 { #category : #rendering }
-PreguntaPageComponent >> renderRespuestasContentOn: html [
+PreguntaPageComponent >> renderRespuestasOn: html [
 	| rta |
 	self pregunta respuestas
 		do: [ :respuesta | 
@@ -128,12 +128,6 @@ PreguntaPageComponent >> renderRespuestasContentOn: html [
 ]
 
 { #category : #rendering }
-PreguntaPageComponent >> renderRespuestasOn: html [
-	self renderRespuestasContentOn: html.
-	
-]
-
-{ #category : #rendering }
 PreguntaPageComponent >> renderTituloDescripcionOn: html [
 	html div
 		class: 'titulo-pregunta';
@@ -146,15 +140,13 @@ PreguntaPageComponent >> renderTituloDescripcionOn: html [
 { #category : #rendering }
 PreguntaPageComponent >> renderTotalyAgregarOn: html [
 	html
-		paragraph: [ html text: 'Respuestas ('.
-			html strong: self totalRespuestas.
-			html text: ') '.
+		paragraph: [ html strong style:'font-size:14px'; with:('Respuestas ({1})' format: {self totalRespuestas}).
+			html break.
 			html anchor
 				callback: [ self agregarRespuestaConPregunta: self pregunta ];
-				with: [ html formButton
+				with: [ html badge class:'text-white p-2';
 						beWarning;
-						beSmall;
-						with: 'Agregar Respuesta' ] ]
+						with: [html strong: 'Agregar Respuesta' ] ] ]
 ]
 
 { #category : #callbacks }

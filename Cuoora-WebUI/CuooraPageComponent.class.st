@@ -82,16 +82,12 @@ CuooraPageComponent >> renderNavBarLinksOn: html [
 	html navigationLink
 		url: '';
 		with: 'Buscar Usuario'.
-	html navigationLink
-		url: '';
-		with: 'Agregar Topico'.
 	self renderNavBarDropdownUserOn: html.
 
 ]
 
 { #category : #rendering }
 CuooraPageComponent >> renderNavBarOn: html [
-	
 	html navigationBar
 		class: 'navbar-bg';
 		beLight;
@@ -102,11 +98,11 @@ CuooraPageComponent >> renderNavBarOn: html [
 				collapse;
 				dataTarget: '#navbarCollapsed';
 				with: [ html navigationBarTogglerIcon ].
-			html navigationBarCollapse collapse class:'justify-content-end pr-5 mr-5';
+			html navigationBarCollapse collapse
+				class: 'justify-content-end pr-5 mr-5';
 				id: 'navbarCollapsed';
 				with: [ html
-						navigationBarNavigation: [ html navigation
-								with: [self renderNavBarLinksOn: html] ] ] ]
+						navigationBarNavigation: [ html navigation with: [ self renderNavBarLinksOn: html ] ] ] ]
 ]
 
 { #category : #rendering }
@@ -211,20 +207,31 @@ html, body {
 /* respuesta */
 
 .respuesta-titulo{
-  text-align:left
+  text-align:left;
+  font-size: 16px;
 }
 
 .respuesta-texto{
-  text-align:left
+  text-align:left;
+  padding-left: 20px;
+  font-size: 14px;
 }
 
 .respuesta{
   border:2px solid grey;
-  border-radius:15px;
-  margin-left:15%;
-  padding-left:1%;
-  margin-bottom:3%;
+  border-radius:10px;
+  margin: 1% 15% 3% 15%;  
+  padding: 1%;
 }
+
+.respuesta-input {
+  max-width: 650px;
+  width: 100%;
+  min-height: 150px;
+  height: 100%;
+  margin: auto;
+}
+
 
 /* pregunta */
 
@@ -240,6 +247,7 @@ html, body {
 
 .pregunta-input{
   max-width: 650px;
+  width: 100%;
   margin: auto;
 }
 
