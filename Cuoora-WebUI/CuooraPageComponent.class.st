@@ -275,8 +275,9 @@ z-index: 100000;
 	color: inherit;
 }
 
-.descripcion-pregunta { 
-	font-size: 1rem; 
+.descripcion-pregunta {
+    padding-top: 20px; 
+	font-size: 1.2rem !important;
 }
 
 /* login */

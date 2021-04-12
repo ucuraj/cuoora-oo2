@@ -65,6 +65,13 @@ PreguntaPageComponent >> renderContentPageOn: html [
 ]
 
 { #category : #rendering }
+PreguntaPageComponent >> renderDescripcionOn: html [
+	html div
+		class: 'descripcion-pregunta';
+		with: [ html span: self pregunta descripcion.]
+]
+
+{ #category : #rendering }
 PreguntaPageComponent >> renderFechaOn: html [
 	html span: [ html text: 'el ' , self pregunta formatearFecha ].
 	html break.
@@ -95,9 +102,23 @@ PreguntaPageComponent >> renderOwnerOn: html [
 ]
 
 { #category : #rendering }
+PreguntaPageComponent >> renderPreguntaDescripcionOn: html [
+	html div
+		with: [ self renderTituloOn: html.
+			html horizontalRule class: 'hr-pregunta'.
+			self renderOwnerOn: html.
+			self renderFechaOn: html.
+			self renderListaTopicosOn: html.
+			self renderCantidadRespuestasOn: html.
+			self renderDescripcionOn: html.
+			html break.
+			self renderLikesDislikesOn: html publicacion: self pregunta ]
+]
+
+{ #category : #rendering }
 PreguntaPageComponent >> renderPreguntaOn: html [
 	html div
-		with: [ self renderTituloDescripcionOn: html.
+		with: [ self renderTituloOn: html.
 			html horizontalRule class: 'hr-pregunta'.
 			self renderOwnerOn: html.
 			self renderFechaOn: html.
@@ -128,13 +149,10 @@ PreguntaPageComponent >> renderRespuestasOn: html [
 ]
 
 { #category : #rendering }
-PreguntaPageComponent >> renderTituloDescripcionOn: html [
+PreguntaPageComponent >> renderTituloOn: html [
 	html div
 		class: 'titulo-pregunta';
-		with: [ html span: self pregunta titulo.
-			html div
-				class: 'descripcion-pregunta';
-				with: [ html span: self pregunta descripcion ] ]
+		with: [ html span: self pregunta titulo ]
 ]
 
 { #category : #rendering }
