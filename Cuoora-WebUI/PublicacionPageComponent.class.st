@@ -38,10 +38,12 @@ PublicacionPageComponent >> renderLikesDislikeOptionsOn: html [
 				with: [ ((self publicacion buscarLike:self session user user) isNotNil)
 					ifTrue:[html outlineButton
 						beActive;
+						beSmall;
 						beSuccess;
 						with: 'Like'];
 					ifFalse:[html outlineButton
 						beSuccess;
+						beSmall;
 						with: 'Like']
 					 ].
 				].
@@ -50,11 +52,13 @@ PublicacionPageComponent >> renderLikesDislikeOptionsOn: html [
 				callback: [ self publicacion dislikeUsuario: self session user ];
 				with: [ ((self publicacion buscarDislike:self session user user) isNotNil)
 					ifTrue:[html outlineButton
-						beActive
+						beActive;
+						beSmall;
 						beDanger;
 						with: 'Dislike'] 
 					ifFalse:[html outlineButton
 						beDanger;
+						beSmall;
 						with: 'Dislike'].
 					 ].
 	html break. 
