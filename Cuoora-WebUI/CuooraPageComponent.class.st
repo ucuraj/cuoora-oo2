@@ -130,7 +130,17 @@ html, body {
 }
 
 /* template main */
-
+.col-md-5{
+background-color:#00000073;
+border-radius:25px;
+margin: 5px
+}
+.col-md-5:hover{
+background-color:#000000ad;
+}
+.home-list{ 
+margin-left:8%;
+}
 .fill { 
   padding-top: 100px;
   min-height: 100%;
@@ -162,7 +172,9 @@ html, body {
   border-style: solid;
  }
 */
-
+#topicos{
+ color:grey;
+}
 .page-bg hr {
   border-image: none;
   border-color: rgb(255,255,255,.3);

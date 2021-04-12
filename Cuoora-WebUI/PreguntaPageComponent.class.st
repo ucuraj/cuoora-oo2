@@ -77,9 +77,9 @@ PreguntaPageComponent >> renderListaTopicosOn: html [
 		with: [ html text: 'topicos: '.
 			self pregunta topicos
 				do: [ :topico | 
-					html anchor
-						callback: [ self topicoPerfilComponent: topico ];
-						with: [ html strong: topico nombre ].
+					html span
+					id:'topicos';
+					with: [ html strong: topico nombre ].
 					html text: ', ' ] ].
 	html break
 ]
