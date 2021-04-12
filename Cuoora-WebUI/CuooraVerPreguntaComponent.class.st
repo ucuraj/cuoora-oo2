@@ -21,7 +21,7 @@ self renderPreguntaConRespuestasOn: html.
 CuooraVerPreguntaComponent >> renderPreguntaConRespuestasOn: html [
 	html div
 		class: 'verPregunta';
-		with: [ self renderPreguntaOn: html.
+		with: [ self renderPreguntaDescripcionOn: html.
 			html horizontalRule. ].
 			html div
 				class: 'verRespuesta';
@@ -33,13 +33,13 @@ CuooraVerPreguntaComponent >> renderPreguntaConRespuestasOn: html [
 CuooraVerPreguntaComponent >> renderPreguntaSinRespuestasOn:html [
 	html div
 		class: 'verPregunta';
-		with: [ self renderPreguntaOn: html.
+		with: [ self renderPreguntaDescripcionOn: html.
 			html horizontalRule. ]
 ]
 
 { #category : #rendering }
 CuooraVerPreguntaComponent >> renderTitleOn:html [
 	html heading
-		level:2;
+		level:2; 
 		with:'Informacion de Pregunta'.
 ]
