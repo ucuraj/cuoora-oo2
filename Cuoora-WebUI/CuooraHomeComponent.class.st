@@ -27,7 +27,7 @@ CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 										column: [ preg := PreguntaPageComponent pregunta: preguntaRelevante.
 											preg renderPreguntaOn: html.
 											html horizontalRule class: 'hr-dots mt-4 mb-5' ]
-										mediumSize: 6 ] ] ] ]
+										mediumSize: 5 ] ] ] ]
 ]
 
 { #category : #rendering }

@@ -126,7 +126,17 @@ html, body {
 }
 
 /* template main */
-
+.col-md-5{
+background-color:#00000073;
+border-radius:25px;
+margin: 5px
+}
+.col-md-5:hover{
+background-color:#000000ad;
+}
+.home-list{ 
+margin-left:8%;
+}
 .fill { 
   padding-top: 100px;
   min-height: 100%;
@@ -158,7 +168,9 @@ html, body {
   border-style: solid;
  }
 */
-
+#topicos{
+ color:grey;
+}
 .page-bg hr {
   border-image: none;
   border-color: rgb(255,255,255,.3);
@@ -207,31 +219,20 @@ html, body {
 /* respuesta */
 
 .respuesta-titulo{
-  text-align:left;
-  font-size: 16px;
+  text-align:left
 }
 
 .respuesta-texto{
-  text-align:left;
-  padding-left: 20px;
-  font-size: 14px;
+  text-align:left
 }
 
 .respuesta{
   border:2px solid grey;
-  border-radius:10px;
-  margin: 1% 15% 3% 15%;  
-  padding: 1%;
+  border-radius:15px;
+  margin-left:15%;
+  padding-left:1%;
+  margin-bottom:3%;
 }
-
-.respuesta-input {
-  max-width: 650px;
-  width: 100%;
-  min-height: 150px;
-  height: 100%;
-  margin: auto;
-}
-
 
 /* pregunta */
 
@@ -247,7 +248,6 @@ html, body {
 
 .pregunta-input{
   max-width: 650px;
-  width: 100%;
   margin: auto;
 }
 
