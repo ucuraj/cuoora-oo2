@@ -1,38 +1,37 @@
 Class {
-	#name : #CuooraHomeComponent,
+	#name : #CuooraPerfilComponent,
 	#superclass : #CuooraPageComponent,
 	#category : #'Cuoora-WebUI'
 }
 
 { #category : #rendering }
-CuooraHomeComponent >> renderContentPageOn: html [
+CuooraPerfilComponent >> renderContentPageOn: html [
 	self renderTitleOn: html.
 	self renderPreguntasRelevantesOn: html 
 ]
 
 { #category : #rendering }
-CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
+CuooraPerfilComponent >> renderPreguntasRelevantesOn: html [
 	| preg |
 	html horizontalRule class: 'mb-4'.
 	html heading level2 with: 'Últimas preguntas'.
 	html container
 		class: 'home-list mt-5';
-		with: [ html row
-				class: 'pregunta-anchor';
-				with: [ (self session user getPreguntasInteres: 5)
+		with: [ html
+				row class:'pregunta-anchor'; with: [ (self session user getPreguntasInteres: 5)
 						do: [ :preguntaRelevante | 
-							html anchor
-								class: 'pregunta-anchor';
+							preguntaRelevante.
+							html anchor class: 'pregunta-anchor'; 
 								callback: [ self verPregunta: preguntaRelevante ];
-								with: [ html column
-										class: 'col-md-5 mb-4 mr-auto';
-										with: [ "html horizontalRule class: 'hr-dots mt-4 mb-5'"
-											preg := PreguntaPageComponent pregunta: preguntaRelevante.
-											preg renderPreguntaOn: html ] ] ] ] ]
+								with: [ html
+										column: [ preg := PreguntaPageComponent pregunta: preguntaRelevante.
+											preg renderPreguntaOn: html.
+											html horizontalRule class: 'hr-dots mt-4 mb-5' ]
+										mediumSize: 6 ] ] ] ]
 ]
 
 { #category : #rendering }
-CuooraHomeComponent >> renderTitleOn: html [
+CuooraPerfilComponent >> renderTitleOn: html [
 	html
 		heading: 'Bienvenido a cuOOra, ' , self session user user , '!'.
 	html heading
@@ -41,11 +40,11 @@ CuooraHomeComponent >> renderTitleOn: html [
 ]
 
 { #category : #updating }
-CuooraHomeComponent >> updateRoot: anHtmlRoot [ 
+CuooraPerfilComponent >> updateRoot: anHtmlRoot [ 
     self updateRoot: anHtmlRoot title: 'Home | cuOOra'
 ]
 
 { #category : #callbacks }
-CuooraHomeComponent >> verPregunta: unaPregunta [
+CuooraPerfilComponent >> verPregunta: unaPregunta [
 	self call: (CuooraVerPreguntaComponent pregunta: unaPregunta).
 ]

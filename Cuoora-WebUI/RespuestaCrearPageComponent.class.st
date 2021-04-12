@@ -49,9 +49,10 @@ RespuestaCrearPageComponent >> pregunta: anObject [
 RespuestaCrearPageComponent >> renderAgregarRespuestaOn: html [
 	html div
 		class: 'agregarPregunta';
-		with: [ html
-				text: 'Responder';
+		with: [ html heading level5; with: 'Responder'.
+			html
 				form: [ html textArea
+						class: 'respuesta-input';
 						callback: [ :descripcion | 
 							self
 								respuesta: (Respuesta conTexto: descripcion Usuario: self session user) ].
@@ -61,19 +62,23 @@ RespuestaCrearPageComponent >> renderAgregarRespuestaOn: html [
 { #category : #rendering }
 RespuestaCrearPageComponent >> renderButtonsOn: html [
 	html
-		paragraph: [ html button class: 'pr-1';
-				callback: [ self cancel ];
-				with: 'Cancelar '.
-			html button class: 'pl-1';
+		paragraph: [ html formButton
+				class: 'mr-1';
+				beSuccess;
+				beSmall;
 				callback: [ self accept ];
-				with: 'Responder' ]
+				with: 'Responder'.
+			html formButton
+				class: 'ml-1';
+				beDanger;
+				beSmall;
+				callback: [ self cancel ];
+				with: 'Cancelar ' ]
 ]
 
 { #category : #rendering }
 RespuestaCrearPageComponent >> renderContentPageOn: html [
-	html div
-		id: 'verPregunta';
-		with: [ self renderPreguntaOn: html ].
+	html div with: [ self renderPreguntaOn: html ].
 	html horizontalRule.
 	self renderAgregarRespuestaOn: html
 ]

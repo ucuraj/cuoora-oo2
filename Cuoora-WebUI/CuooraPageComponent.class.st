@@ -82,16 +82,12 @@ CuooraPageComponent >> renderNavBarLinksOn: html [
 	html navigationLink
 		url: '';
 		with: 'Buscar Usuario'.
-	html navigationLink
-		url: '';
-		with: 'Agregar Topico'.
 	self renderNavBarDropdownUserOn: html.
 
 ]
 
 { #category : #rendering }
 CuooraPageComponent >> renderNavBarOn: html [
-	
 	html navigationBar
 		class: 'navbar-bg';
 		beLight;
@@ -102,11 +98,11 @@ CuooraPageComponent >> renderNavBarOn: html [
 				collapse;
 				dataTarget: '#navbarCollapsed';
 				with: [ html navigationBarTogglerIcon ].
-			html navigationBarCollapse collapse class:'justify-content-end pr-5 mr-5';
+			html navigationBarCollapse collapse
+				class: 'justify-content-end pr-5 mr-5';
 				id: 'navbarCollapsed';
 				with: [ html
-						navigationBarNavigation: [ html navigation
-								with: [self renderNavBarLinksOn: html] ] ] ]
+						navigationBarNavigation: [ html navigation with: [ self renderNavBarLinksOn: html ] ] ] ]
 ]
 
 { #category : #rendering }
@@ -131,16 +127,14 @@ html, body {
 
 /* template main */
 .col-md-5{
-background-color:#00000073;
-border-radius:25px;
-margin: 5px
+  background-color:#00000073;
+  border-radius:20px;
 }
+
 .col-md-5:hover{
-background-color:#000000ad;
+  background-color:#000000ad;
 }
-.home-list{ 
-margin-left:8%;
-}
+
 .fill { 
   padding-top: 100px;
   min-height: 100%;
@@ -209,12 +203,10 @@ margin-left:8%;
 .navbar {
   position: fixed;
   width: inherit;
-    z-index: 100000;
-
 }
 
 .navbar-bg { 
-  background-color: rgb(255,255,255,1) !important;
+  background-color: rgb(255,255,255,0.8) !important;
 }
 
 .nav-user { 
@@ -225,19 +217,29 @@ margin-left:8%;
 /* respuesta */
 
 .respuesta-titulo{
-  text-align:left
+  text-align:left;
+  font-size: 16px;
 }
 
 .respuesta-texto{
-  text-align:left
+  text-align:left;
+  padding-left: 20px;
+  font-size: 14px;
 }
 
 .respuesta{
   border:2px solid grey;
   border-radius:15px;
-  margin-left:15%;
-  padding-left:1%;
-  margin-bottom:3%;
+  margin: 1% 15% 3% 15%;  
+  padding: 1%;
+}
+
+.respuesta-input {
+  max-width: 650px;
+  width: 100%;
+  min-height: 150px;
+  height: 100%;
+  margin: auto;
 }
 
 /* pregunta */
@@ -249,6 +251,7 @@ margin-left:8%;
 
 .pregunta-input{
   max-width: 650px;
+  width: 100%;
   margin: auto;
 }
 
@@ -286,6 +289,10 @@ margin-left:8%;
 
 .home-list { 
 	font-size: 14px; 
+}
+
+.home-col {
+	background: rgba(0,0,0,.7);
 }
 
 /* interaccion */
