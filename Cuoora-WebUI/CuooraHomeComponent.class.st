@@ -17,17 +17,18 @@ CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 	html heading level2 with: 'Últimas preguntas'.
 	html container
 		class: 'home-list mt-5';
-		with: [ html
-				row class:'pregunta-anchor'; with: [ (self session user getPreguntasInteres: 5)
+		with: [ html row
+				class: 'pregunta-anchor';
+				with: [ (self session user getPreguntasInteres: 5)
 						do: [ :preguntaRelevante | 
-							preguntaRelevante.
-							html anchor class: 'pregunta-anchor'; 
+							html anchor
+								class: 'pregunta-anchor';
 								callback: [ self verPregunta: preguntaRelevante ];
-								with: [ html
-										column: [ preg := PreguntaPageComponent pregunta: preguntaRelevante.
-											preg renderPreguntaOn: html.
-											html horizontalRule class: 'hr-dots mt-4 mb-5' ]
-										mediumSize: 5 ] ] ] ]
+								with: [ html column
+										class: 'col-md-5 mb-4 mr-auto';
+										with: [ "html horizontalRule class: 'hr-dots mt-4 mb-5'"
+											preg := PreguntaPageComponent pregunta: preguntaRelevante.
+											preg renderPreguntaOn: html ] ] ] ] ]
 ]
 
 { #category : #rendering }
