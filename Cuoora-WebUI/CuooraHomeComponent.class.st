@@ -14,7 +14,7 @@ CuooraHomeComponent >> renderContentPageOn: html [
 CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 	| preg |
 	html horizontalRule class: 'mb-4'.
-	html heading level2 with: 'Últimas preguntas.'.
+	html heading level2 with: 'Últimas preguntas'.
 	html container
 		class: 'home-list mt-5';
 		with: [ html row
