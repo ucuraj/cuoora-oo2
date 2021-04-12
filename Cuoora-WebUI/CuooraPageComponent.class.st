@@ -209,10 +209,12 @@ margin-left:8%;
 .navbar {
   position: fixed;
   width: inherit;
+    z-index: 100000;
+
 }
 
 .navbar-bg { 
-  background-color: rgb(255,255,255,0.8) !important;
+  background-color: rgb(255,255,255,1) !important;
 }
 
 .nav-user { 
