@@ -113,49 +113,89 @@ CuooraPageComponent >> rendererClass [
 { #category : #style }
 CuooraPageComponent >> style [
 	^ '
+/* imports */
+
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
-	
+  
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css");
 
 html, body {
-	height: 100%;
-	width:100%
+  height: 100%;
+  width:100%
 }
 
+/* template main */
+
 .fill { 
-	padding-top: 100px;
-	min-height: 100%;
-	height: fit-content;
-	width:100%;
-	min-width: 100%;
-	background: url("https://source.unsplash.com/random/1920x1080");
-	background-size:cover;
-	box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
-}	
+  padding-top: 100px;
+  min-height: 100%;
+  height: fit-content;
+  width:100%;
+  min-width: 100%;
+  background: url("https://source.unsplash.com/random/1920x1080");
+  background-size:cover;
+  box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+}  
+
+
+.page-bg { 
+  background-color: rgba(0,0,0,0.5);
+  max-width: 80%;
+  margin-left: 10%;
+  color: white;
+  text-align: center;
+}  
+
+.page-bg h1, h2, h3, h4, h5, h6{
+  font-family: "Quicksand", sans-serif;
+}
+
+.page-bg hr {
+  border-width: 0 0 2px;
+  color: white;
+  border-image: linear-gradient(90deg, rgba(255, 255, 255, 0), white 50%, rgba(135, 206, 235, 0) 100%) 0 0 100%;
+  border-style: solid;
+ }
+
+
+.hr-fade { 
+  height: 1px;
+  color: white;
+  background-image: linear-gradient(90deg, rgba(255, 0, 0, 0), white 50%, rgba(255, 0, 0, 0) 100%);
+ }
+
+.hr-dots {
+  color: orange !important;
+  border-width: 0 0 10px !important;
+  border-style: solid;
+  border-image: url(''data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 1" width="8" height="4"><circle fill="white" cx="1" cy="0.5" r="0.5"/></svg>'') 0 0 100% repeat !important;
+  width: 54px !important;
+}
+
+/* nav */
 
 .navbar {
-	position: fixed;
-   width: inherit;
+  position: fixed;
+  width: inherit;
+}
+
+.navbar-bg { 
+  background-color: rgb(255,255,255,0.8) !important;
 }
 
 .nav-user { 
-	font-size: 18px;
+  font-size: 18px;
 }
 
-.page-bg { 
-	background-color: rgba(0,0,0,0.5);
-	max-width: 80%;
-	margin-left: 10%;
-	color: white;
-	text-align: center;
-}  
+
+/* respuesta */
 
 .respuesta-titulo{
-	text-align:left
+  text-align:left
 }
 
 .respuesta-texto{
-	text-align:left
+  text-align:left
 }
 
 .respuesta{
@@ -166,31 +206,16 @@ html, body {
   margin-bottom:3%;
 }
 
-.page-bg h1, h2, h3, h4, h5, h6{
-	font-family: "Quicksand", sans-serif;
-}
 
-.page-bg hr{
-  border-width: 0 0 1px;
-  color: white;
-  border-image: linear-gradient(90deg, rgba(135, 206, 235, 0), white 50%, rgba(135, 206, 235, 0) 100%) 0 0 100%;
-  border-style: solid;
- }
-
-.fade-bg { 
-  height: 1px;
-  color: white;
-  background-image: linear-gradient(90deg, rgba(255, 0, 0, 0), white 50%, rgba(255, 0, 0, 0) 100%);
- }
+/* login */
 
 .login-input{
-	max-width: 400px;
-	margin: auto;
+  max-width: 400px;
+  margin: auto;
 }
 
-.navbar-bg { 
-    background-color: rgb(255,255,255,0.8) !important;
-}
+
+
 '
 ]
 

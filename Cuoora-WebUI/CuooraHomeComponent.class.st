@@ -13,11 +13,10 @@ CuooraHomeComponent >> renderContentPageOn: html [
 { #category : #rendering }
 CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 	| preg |
-	html horizontalRule.
+	html horizontalRule class:'mb-4'.
 	html heading level3 with: 'Ultimas preguntas'.
-	html break.
 	html container
-		class: 'home-list';
+		class: 'home-list mt-5';
 		with: [ html
 				row: [ (self session user getPreguntasInteres: 5)
 						do: [ :preguntaRelevante | 
@@ -31,7 +30,7 @@ CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 												beSuccess;
 												beSmall;
 												with: 'Ver Pregunta' ].
-									html horizontalRule class: 'hr-fade' ]
+									html horizontalRule class: 'hr-dots mt-5 mb-5' ]
 								mediumSize: 6 ] ] ]
 ]
 

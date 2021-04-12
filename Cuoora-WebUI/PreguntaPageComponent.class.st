@@ -65,7 +65,7 @@ PreguntaPageComponent >> renderContentPageOn: html [
 
 { #category : #rendering }
 PreguntaPageComponent >> renderFechaOn: html [
-	html strong: (self pregunta formatearFecha )
+	html text: 'el ', (self pregunta formatearFecha )
 ]
 
 { #category : #rendering }
@@ -84,10 +84,11 @@ PreguntaPageComponent >> renderListaTopicosOn: html [
 { #category : #rendering }
 PreguntaPageComponent >> renderOwnerOn: html [
 	html
-		paragraph: [ html text: 'Creado por '.
+		paragraph: [ html text: 'creado por: '.
 			html anchor
 				callback: [ self perfilPreguntaComponent ];
-				with: [ html strong: self pregunta usuario user ]]
+				with: [ html strong: self pregunta usuario user ].
+				]
 ]
 
 { #category : #rendering }
@@ -95,10 +96,11 @@ PreguntaPageComponent >> renderPreguntaOn: html [
 	html div
 		class: '';
 		with: [ self renderTituloDescripcionOn: html.
+			self renderOwnerOn: html.
+			self renderFechaOn: html.
 			self renderListaTopicosOn: html.
-			self renderCantidadRespuestasOn: html.
-			self renderOwnerOn: html ].
-	self renderFechaOn: html.
+			self renderCantidadRespuestasOn: html
+		].
 	self renderLikesDislikesOn: html publicacion: self pregunta
 ]
 

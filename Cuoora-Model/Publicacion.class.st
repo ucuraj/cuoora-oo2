@@ -97,7 +97,20 @@ Publicacion >> fechaCreacion: anObject [
 
 { #category : #methods }
 Publicacion >> formatearFecha [
-	^ self fechaCreacion asDate asString , ' ' , self fechaCreacion asTime asString.
+	| f |
+	f := self fechaCreacion.
+	^ '{1} {2} de {3} del {4} a las {5}:{6}'
+		format:
+			{f dayOfWeekName asString.
+			f dayOfMonth asString.
+			f monthName asString.
+			f year asString.
+			(f hour24 < 10
+				ifTrue: [ '0' , f hour24 asString ]
+				ifFalse: [ f hour24 asString ]).
+			(f minute < 10
+				ifTrue: [ '0' , f minute asString ]
+				ifFalse: [ f minute asString ])}
 ]
 
 { #category : #initialization }
