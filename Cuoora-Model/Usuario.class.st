@@ -99,6 +99,16 @@ Usuario >> conNombre: unNombre Password: unaPassword [
 	self pass: unaPassword.
 ]
 
+{ #category : #methods }
+Usuario >> dejarDeSeguirUsuario: unUsuario [
+	"Elimino un usuario a la lista de usuarios seguidos."
+
+	unUsuario = self
+		ifTrue: [ ^ false ].
+		
+	^ self seguidos remove: unUsuario ifAbsent: false.
+]
+
 { #category : #accessing }
 Usuario >> fechaCreacion [
 	^ fechaCreacion
@@ -187,6 +197,13 @@ Usuario >> seguirUsuario: unUsuario [
 		
 	(self seguidos includes: unUsuario)
 		ifFalse: [ self seguidos add: unUsuario ]
+]
+
+{ #category : #methods }
+Usuario >> sigueA: unUsuario [
+	unUsuario = self
+		ifTrue: [ ^ false ].
+	^ self seguidos includes: unUsuario
 ]
 
 { #category : #accessing }
