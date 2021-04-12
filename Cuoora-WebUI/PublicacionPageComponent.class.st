@@ -35,16 +35,29 @@ PublicacionPageComponent >> renderLikesDislikeOptionsOn: html [
 		span: [ html anchor
 				class: 'pr-1';
 				callback: [ self publicacion likeUsuario: self session user ];
-				with: [ html badge
+				with: [ ((self publicacion buscarLike:self session user user) isNotNil)
+					ifTrue:[html outlineButton
+						beActive;
 						beSuccess;
-						with: 'Like' ].
+						with: 'Like'];
+					ifFalse:[html outlineButton
+						beSuccess;
+						with: 'Like']
+					 ].
+				].
 			html anchor
 				class: 'pl-1';
 				callback: [ self publicacion dislikeUsuario: self session user ];
-				with: [ html badge beDanger
+				with: [ ((self publicacion buscarDislike:self session user user) isNotNil)
+					ifTrue:[html outlineButton
+						beActive
 						beDanger;
-						with: 'Dislike' ] ].
-	html break.
+						with: 'Dislike'] 
+					ifFalse:[html outlineButton
+						beDanger;
+						with: 'Dislike'].
+					 ].
+	html break. 
 ]
 
 { #category : #rendering }
