@@ -52,10 +52,11 @@ PreguntaPageComponent >> proceedWithPregunta: unaPregunta [
 
 { #category : #rendering }
 PreguntaPageComponent >> renderCantidadRespuestasOn: html [
-	html paragraph
+	html span
 		class: 'cant-rtas';
-		with: [ html text: 'Respuestas: '.
-			html strong: self pregunta totalRespuestas ]
+		with: [ html text: 'respuestas: '.
+			html strong: self pregunta totalRespuestas ].
+	html break.
 ]
 
 { #category : #rendering }
@@ -65,43 +66,45 @@ PreguntaPageComponent >> renderContentPageOn: html [
 
 { #category : #rendering }
 PreguntaPageComponent >> renderFechaOn: html [
-	html text: 'el ', (self pregunta formatearFecha )
+	html span: [ html text: 'el ' , self pregunta formatearFecha ].
+	html break.
 ]
 
 { #category : #rendering }
 PreguntaPageComponent >> renderListaTopicosOn: html [
-	html paragraph
+	html span
 		class: 'topico';
-		with: [ html text: 'Topicos: '.
+		with: [ html text: 'topicos: '.
 			self pregunta topicos
 				do: [ :topico | 
 					html anchor
 						callback: [ self topicoPerfilComponent: topico ];
-						with: topico nombre.
-					html text: ', ' ] ]
+						with: [ html strong: topico nombre ].
+					html text: ', ' ] ].
+	html break
 ]
 
 { #category : #rendering }
 PreguntaPageComponent >> renderOwnerOn: html [
 	html
-		paragraph: [ html text: 'creado por: '.
+		span: [ html text: 'creado por: '.
 			html anchor
 				callback: [ self perfilPreguntaComponent ];
-				with: [ html strong: self pregunta usuario user ].
-				]
+				with: [ html strong: self pregunta usuario user ] ].
+	html break.
 ]
 
 { #category : #rendering }
 PreguntaPageComponent >> renderPreguntaOn: html [
 	html div
-		class: '';
 		with: [ self renderTituloDescripcionOn: html.
+			html horizontalRule class: 'hr-pregunta'.
 			self renderOwnerOn: html.
 			self renderFechaOn: html.
 			self renderListaTopicosOn: html.
-			self renderCantidadRespuestasOn: html
-		].
-	self renderLikesDislikesOn: html publicacion: self pregunta
+			self renderCantidadRespuestasOn: html.
+			html break.
+			self renderLikesDislikesOn: html publicacion: self pregunta ]
 ]
 
 { #category : #rendering }
@@ -134,10 +137,10 @@ PreguntaPageComponent >> renderRespuestasOn: html [
 PreguntaPageComponent >> renderTituloDescripcionOn: html [
 	html div
 		class: 'titulo-pregunta';
-		with: [ html heading: self pregunta titulo].
-	html paragraph
-		class: 'descripcion';
-		with: [ html text: self pregunta descripcion ].
+		with: [ html span: self pregunta titulo.
+			html div
+				class: 'descripcion-pregunta';
+				with: [ html span: self pregunta descripcion ] ]
 ]
 
 { #category : #rendering }
@@ -167,4 +170,9 @@ PreguntaPageComponent >> totalRespuestas [
 { #category : #updating }
 PreguntaPageComponent >> updateRoot: anHtmlRoot [
 	self updateRoot: anHtmlRoot title: self pregunta titulo , ' | cuOOra'
+]
+
+{ #category : #callbacks }
+PreguntaPageComponent >> verPregunta [
+	self call: (CuooraVerPreguntaComponent pregunta: self pregunta).
 ]

@@ -32,7 +32,7 @@ PublicacionPageComponent >> renderContentPageOn: html [
 { #category : #rendering }
 PublicacionPageComponent >> renderLikesDislikeOptionsOn: html [
 	html
-		paragraph: [ html anchor
+		span: [ html anchor
 				class: 'pr-1';
 				callback: [ self publicacion likeUsuario: self session user ];
 				with: [ html badge
@@ -43,25 +43,28 @@ PublicacionPageComponent >> renderLikesDislikeOptionsOn: html [
 				callback: [ self publicacion dislikeUsuario: self session user ];
 				with: [ html badge beDanger
 						beDanger;
-						with: 'Dislike' ] ]
+						with: 'Dislike' ] ].
+	html break.
 ]
 
 { #category : #rendering }
 PublicacionPageComponent >> renderLikesDislikesOn: html publicacion: unaPublicacion [
 
 	self publicacion: unaPublicacion.
+	self renderLikesDislikeOptionsOn: html.
 	self renderTotalLikesDislikesOn: html.
-	self renderLikesDislikeOptionsOn: html
+	
 ]
 
 { #category : #rendering }
 PublicacionPageComponent >> renderTotalLikesDislikesOn: html [
 	html
-		paragraph: [ html
-				strong: self totalLikes;
+		span: [ html
+				strong class:'texto-interaccion'; with: [html text: self totalLikes;
 				text: ' Likes | ';
 				strong: self totalDislikes;
-				text: ' Dislikes' ]
+				text: ' Dislikes' ]].
+	html break.
 ]
 
 { #category : #actions }

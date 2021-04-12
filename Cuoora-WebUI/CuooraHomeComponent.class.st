@@ -7,31 +7,27 @@ Class {
 { #category : #rendering }
 CuooraHomeComponent >> renderContentPageOn: html [
 	self renderTitleOn: html.
-	self renderPreguntasRelevantesOn: html
+	self renderPreguntasRelevantesOn: html 
 ]
 
 { #category : #rendering }
 CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 	| preg |
-	html horizontalRule class:'mb-4'.
-	html heading level3 with: 'Ultimas preguntas'.
+	html horizontalRule class: 'mb-4'.
+	html heading level2 with: 'Últimas preguntas'.
 	html container
 		class: 'home-list mt-5';
 		with: [ html
-				row: [ (self session user getPreguntasInteres: 5)
+				row class:'pregunta-anchor'; with: [ (self session user getPreguntasInteres: 5)
 						do: [ :preguntaRelevante | 
 							preguntaRelevante.
-							html
-								column: [ preg := PreguntaPageComponent pregunta: preguntaRelevante.
-									preg renderPreguntaOn: html.
-									html anchor
-										callback: [ self verPregunta: preguntaRelevante ];
-										with: [ html outlineButton
-												beSuccess;
-												beSmall;
-												with: 'Ver Pregunta' ].
-									html horizontalRule class: 'hr-dots mt-5 mb-5' ]
-								mediumSize: 6 ] ] ]
+							html anchor class: 'pregunta-anchor'; 
+								callback: [ self verPregunta: preguntaRelevante ];
+								with: [ html
+										column: [ preg := PreguntaPageComponent pregunta: preguntaRelevante.
+											preg renderPreguntaOn: html.
+											html horizontalRule class: 'hr-dots mt-4 mb-5' ]
+										mediumSize: 6 ] ] ] ]
 ]
 
 { #category : #rendering }

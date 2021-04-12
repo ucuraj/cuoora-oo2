@@ -14,8 +14,20 @@ Class {
 }
 
 { #category : #'instance creation' }
-Pregunta class >> conTitulo: unTitulo Descripcion: unaDescripcion Usuario:unUsuario [
-	^ self new conTitulo: unTitulo Descripcion: unaDescripcion Usuario:unUsuario.
+Pregunta class >> conTitulo: unTitulo Descripcion: unaDescripcion Usuario: unUsuario [
+	^ self new
+		conTitulo: unTitulo
+		Descripcion: unaDescripcion
+		Usuario: unUsuario
+]
+
+{ #category : #'instance creation' }
+Pregunta class >> conTitulo: unTitulo Descripcion: unaDescripcion Usuario: unUsuario Topicos: unosTopicos [
+	^ self new
+		conTitulo: unTitulo
+		Descripcion: unaDescripcion
+		Usuario: unUsuario
+		Topicos: unosTopicos
 ]
 
 { #category : #methods }
@@ -29,6 +41,18 @@ Pregunta >> agregarTopico: unTopico [
 ]
 
 { #category : #methods }
+Pregunta >> agregarTopicos: unosTopicos [
+	" recibe un string con topicos separados por coma, 
+	los agrega a la lista de topicos"
+
+	(unosTopicos splitOn: ',')
+		do: [ :topico | 
+			| t |
+			(t := Cuoora soleInstance existeTopico: topico)
+				ifNotNil: [ self agregarTopico: t ] ]
+]
+
+{ #category : #methods }
 Pregunta >> calcularPuntaje [
 
 	^ 20 + (self totalLikes asNumber - self totalDislikes asNumber)
@@ -39,6 +63,14 @@ Pregunta >> conTitulo: unTitulo Descripcion: unaDescripcion Usuario:unUsuario [
    self usuario: unUsuario.
 	self titulo: unTitulo.
 	self descripcion: unaDescripcion.
+]
+
+{ #category : #'instance creation' }
+Pregunta >> conTitulo: unTitulo Descripcion: unaDescripcion Usuario:unUsuario Topicos: unosTopicos [.
+   self usuario: unUsuario.
+	self titulo: unTitulo.
+	self descripcion: unaDescripcion.
+	self agregarTopicos: unosTopicos.
 ]
 
 { #category : #accessing }

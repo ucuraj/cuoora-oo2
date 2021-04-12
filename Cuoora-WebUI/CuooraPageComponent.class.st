@@ -16,6 +16,11 @@ Class {
 	#category : #'Cuoora-WebUI'
 }
 
+{ #category : #private }
+CuooraPageComponent >> callCrearPreguntaComponent [
+	self call: CrearPreguntaComponent new.
+]
+
 { #category : #actions }
 CuooraPageComponent >> logueado [
 	^ self user isNotNil.
@@ -72,7 +77,7 @@ CuooraPageComponent >> renderNavBarLinksOn: html [
 		callback: [ self proceedWithHome: self session user ];
 		with: 'Home'.
 	html navigationLink
-		url: '';
+		callback: [ self callCrearPreguntaComponent ];
 		with: 'Agregar Pregunta'.
 	html navigationLink
 		url: '';
@@ -150,12 +155,21 @@ html, body {
   font-family: "Quicksand", sans-serif;
 }
 
-.page-bg hr {
+/* .page-bg hr {
   border-width: 0 0 2px;
   color: white;
   border-image: linear-gradient(90deg, rgba(255, 255, 255, 0), white 50%, rgba(135, 206, 235, 0) 100%) 0 0 100%;
   border-style: solid;
  }
+*/
+
+.page-bg hr {
+  border-image: none;
+  border-color: rgb(255,255,255,.3);
+  color: white;
+  border-width: 0 0 2px;
+  border-style: solid;
+}
 
 
 .hr-fade { 
@@ -165,11 +179,17 @@ html, body {
  }
 
 .hr-dots {
-  color: orange !important;
+  color: white !important;
   border-width: 0 0 10px !important;
-  border-style: solid;
-  border-image: url(''data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 1" width="8" height="4"><circle fill="white" cx="1" cy="0.5" r="0.5"/></svg>'') 0 0 100% repeat !important;
+  border-style: solid !important;
+  border-image: url(''data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 1" width="8" height="4"><circle fill="rgba(255,255,255,0.7)" cx="1" cy="0.5" r="0.5"/></svg>'') 0 0 100% repeat !important;
   width: 54px !important;
+}
+
+.hr-pregunta { 
+  border-image: none !important;
+  border-color: rgb(255,255,255,.3);
+  max-width: 65%;
 }
 
 /* nav */
@@ -206,6 +226,40 @@ html, body {
   margin-bottom:3%;
 }
 
+/* pregunta */
+
+.pregunta-anchor a{
+  text-decoration: none; 
+  color: white;
+}
+
+.pregunta-input{
+  max-width: 650px;
+  margin: auto;
+}
+
+.pregunta-input{
+  max-width: 650px;
+  margin: auto;
+}
+
+.pregunta-textinput{
+  min-height: 400px;
+  align-items: start !important;
+}
+
+.titulo-pregunta{
+	font-size: 2rem !important;
+	font-family: "Quicksand", sans-serif;
+}
+
+.titulo-pregunta a {
+	color: inherit;
+}
+
+.descripcion-pregunta { 
+	font-size: 1rem; 
+}
 
 /* login */
 
@@ -214,7 +268,17 @@ html, body {
   margin: auto;
 }
 
+/* home */
 
+.home-list { 
+	font-size: 14px; 
+}
+
+/* interaccion */
+
+.texto-interaccion {
+	font-size: 12px;
+}
 
 '
 ]
@@ -222,7 +286,7 @@ html, body {
 { #category : #actions }
 CuooraPageComponent >> updateRoot: anHtmlRoot title: aTitle [
 	super updateRoot: anHtmlRoot.
-	anHtmlRoot title: aTitle.
+	anHtmlRoot title: aTitle, ' | CuOOra'.
 ]
 
 { #category : #accessing }
