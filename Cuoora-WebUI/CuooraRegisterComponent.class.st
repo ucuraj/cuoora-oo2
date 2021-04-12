@@ -72,10 +72,9 @@ CuooraRegisterComponent >> renderInputElementsOn: html [
 
 { #category : #rendering }
 CuooraRegisterComponent >> renderRegisterButtonOn: html [
-	html anchor
+	html formButton beWarning;
 		callback: [ self registerAndLogin ];
-		with: [ html formButton beWarning with: 'Crear Cuenta'.
-			html space ]
+		with: 'Crear Cuenta'.
 ]
 
 { #category : #actions }

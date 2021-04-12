@@ -52,7 +52,7 @@ RespuestaCrearPageComponent >> renderAgregarRespuestaOn: html [
 		with: [ html heading level5; with: 'Responder'.
 			html
 				form: [ html textArea
-						class: 'respuesta-input';
+						class: 'respuesta-input form-control';
 						callback: [ :descripcion | 
 							self
 								respuesta: (Respuesta conTexto: descripcion Usuario: self session user) ].
