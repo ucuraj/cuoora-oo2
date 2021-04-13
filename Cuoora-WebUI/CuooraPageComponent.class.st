@@ -35,7 +35,7 @@ CuooraPageComponent >> model [
 { #category : #private }
 CuooraPageComponent >> proceedWithHome: unUsuario [
 	self session user: unUsuario.
-	self call: CuooraHomeComponent new.
+	self call: HomeComponent new.
 ]
 
 { #category : #rendering }
@@ -68,7 +68,7 @@ CuooraPageComponent >> renderNavBarDropdownUserOn: html [
 						with: [ html span: self session user user ].
 					html dropdownDivider.
 					html dropdownItem
-						callback: [ self call: CuooraLoginComponent logout ];
+						callback: [ self call: LoginComponent logout ];
 						with: [ html span: 'Cerrar Sesión' ] ] ]
 ]
 
@@ -331,5 +331,5 @@ CuooraPageComponent >> user: anUser [
 
 { #category : #actions }
 CuooraPageComponent >> verPerfil: unUsuario [
-	self call: (CuooraPerfilComponent conUsuario: unUsuario).
+	self call: (PerfilComponent conUsuario: unUsuario).
 ]

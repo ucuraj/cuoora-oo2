@@ -1,5 +1,5 @@
 Class {
-	#name : #CuooraPerfilComponent,
+	#name : #PerfilComponent,
 	#superclass : #CuooraPageComponent,
 	#instVars : [
 		'usuarioPerfil'
@@ -8,23 +8,23 @@ Class {
 }
 
 { #category : #'instance creation' }
-CuooraPerfilComponent class >> conUsuario: unUsuario [
+PerfilComponent class >> conUsuario: unUsuario [
 	^ self new usuarioPerfil: unUsuario.
 ]
 
 { #category : #actions }
-CuooraPerfilComponent >> dejarDeSeguirA: unUsuario [
+PerfilComponent >> dejarDeSeguirA: unUsuario [
 	self session user dejarDeSeguirUsuario: unUsuario
 ]
 
 { #category : #rendering }
-CuooraPerfilComponent >> renderContentPageOn: html [
+PerfilComponent >> renderContentPageOn: html [
 	self renderTitleOn: html.
 	self renderPreguntasDelUsuarioOn: html 
 ]
 
 { #category : #rendering }
-CuooraPerfilComponent >> renderPreguntasDelUsuarioOn: html [
+PerfilComponent >> renderPreguntasDelUsuarioOn: html [
 	| preg |
 	html horizontalRule class: 'mb-4'.
 	html container
@@ -36,14 +36,14 @@ CuooraPerfilComponent >> renderPreguntasDelUsuarioOn: html [
 							html anchor class: 'pregunta-anchor'; 
 								callback: [ self verPregunta: pregunta ];
 								with: [ html
-										column: [ preg := PreguntaPageComponent pregunta: pregunta.
+										column: [ preg := PreguntaComponent pregunta: pregunta.
 											preg renderPreguntaOn: html.
 											html horizontalRule class: 'hr-dots mt-5 pt-3 mb-5' ]
 										mediumSize: 6 ] ] ] ]
 ]
 
 { #category : #rendering }
-CuooraPerfilComponent >> renderSeguirOn: html [
+PerfilComponent >> renderSeguirOn: html [
 	usuarioPerfil ~= self session user
 		ifFalse: [ ^ self ].
 	(self session user sigueA: usuarioPerfil)
@@ -62,7 +62,7 @@ CuooraPerfilComponent >> renderSeguirOn: html [
 ]
 
 { #category : #rendering }
-CuooraPerfilComponent >> renderTitleOn: html [
+PerfilComponent >> renderTitleOn: html [
 	html div
 		class: 'perfil-header';
 		with: [ html
@@ -71,26 +71,26 @@ CuooraPerfilComponent >> renderTitleOn: html [
 ]
 
 { #category : #actions }
-CuooraPerfilComponent >> seguirA: unUsuario [
+PerfilComponent >> seguirA: unUsuario [
 	self session user seguirUsuario: unUsuario
 ]
 
 { #category : #updating }
-CuooraPerfilComponent >> updateRoot: anHtmlRoot [ 
+PerfilComponent >> updateRoot: anHtmlRoot [ 
     self updateRoot: anHtmlRoot title: 'Perfil de ', usuarioPerfil user.
 ]
 
 { #category : #accessing }
-CuooraPerfilComponent >> usuarioPerfil [
+PerfilComponent >> usuarioPerfil [
 	^ usuarioPerfil 
 ]
 
 { #category : #accessing }
-CuooraPerfilComponent >> usuarioPerfil: unUsuario [
+PerfilComponent >> usuarioPerfil: unUsuario [
 	usuarioPerfil := unUsuario
 ]
 
 { #category : #callbacks }
-CuooraPerfilComponent >> verPregunta: unaPregunta [
-	self call: (CuooraVerPreguntaComponent pregunta: unaPregunta).
+PerfilComponent >> verPregunta: unaPregunta [
+	self call: (VerPreguntaComponent pregunta: unaPregunta).
 ]

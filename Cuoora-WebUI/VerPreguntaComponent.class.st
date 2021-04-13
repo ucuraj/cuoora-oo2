@@ -1,24 +1,24 @@
 Class {
-	#name : #CuooraVerPreguntaComponent,
-	#superclass : #PreguntaPageComponent,
+	#name : #VerPreguntaComponent,
+	#superclass : #PreguntaComponent,
 	#category : #'Cuoora-WebUI'
 }
 
 { #category : #accessing }
-CuooraVerPreguntaComponent class >> pregunta: unaPregunta [
+VerPreguntaComponent class >> pregunta: unaPregunta [
 	^ self new
 		pregunta: unaPregunta;
 		yourself
 ]
 
 { #category : #rendering }
-CuooraVerPreguntaComponent >> renderContentPageOn: html [
+VerPreguntaComponent >> renderContentPageOn: html [
 self renderTitleOn: html.
 self renderPreguntaConRespuestasOn: html.
 ]
 
 { #category : #rendering }
-CuooraVerPreguntaComponent >> renderPreguntaConRespuestasOn: html [
+VerPreguntaComponent >> renderPreguntaConRespuestasOn: html [
 	html div
 		class: 'verPregunta';
 		with: [ self renderPreguntaDescripcionOn: html.
@@ -30,7 +30,7 @@ CuooraVerPreguntaComponent >> renderPreguntaConRespuestasOn: html [
 ]
 
 { #category : #rendering }
-CuooraVerPreguntaComponent >> renderPreguntaSinRespuestasOn:html [
+VerPreguntaComponent >> renderPreguntaSinRespuestasOn:html [
 	html div
 		class: 'verPregunta';
 		with: [ self renderPreguntaDescripcionOn: html.
@@ -38,7 +38,7 @@ CuooraVerPreguntaComponent >> renderPreguntaSinRespuestasOn:html [
 ]
 
 { #category : #rendering }
-CuooraVerPreguntaComponent >> renderTitleOn:html [
+VerPreguntaComponent >> renderTitleOn:html [
 	html heading
 		level:2; 
 		with:'Informacion de Pregunta'.

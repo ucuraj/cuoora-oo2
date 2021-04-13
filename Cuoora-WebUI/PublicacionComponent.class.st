@@ -1,5 +1,5 @@
 Class {
-	#name : #PublicacionPageComponent,
+	#name : #PublicacionComponent,
 	#superclass : #CuooraPageComponent,
 	#instVars : [
 		'publicacion'
@@ -8,29 +8,29 @@ Class {
 }
 
 { #category : #accessing }
-PublicacionPageComponent class >> publicacion: unaPublicacion [
+PublicacionComponent class >> publicacion: unaPublicacion [
 	^ self new
 		publicacion: unaPublicacion;
 		yourself
 ]
 
 { #category : #accessing }
-PublicacionPageComponent >> publicacion [
+PublicacionComponent >> publicacion [
 	^ publicacion
 ]
 
 { #category : #accessing }
-PublicacionPageComponent >> publicacion: anObject [
+PublicacionComponent >> publicacion: anObject [
 	publicacion := anObject
 ]
 
 { #category : #rendering }
-PublicacionPageComponent >> renderContentPageOn: html [
+PublicacionComponent >> renderContentPageOn: html [
 	self subclassResponsibility. 
 ]
 
 { #category : #rendering }
-PublicacionPageComponent >> renderLikesDislikeOptionsOn: html [
+PublicacionComponent >> renderLikesDislikeOptionsOn: html [
 	html
 		span: [ html anchor
 				class: 'pr-1';
@@ -65,7 +65,7 @@ PublicacionPageComponent >> renderLikesDislikeOptionsOn: html [
 ]
 
 { #category : #rendering }
-PublicacionPageComponent >> renderLikesDislikesOn: html publicacion: unaPublicacion [
+PublicacionComponent >> renderLikesDislikesOn: html publicacion: unaPublicacion [
 
 	self publicacion: unaPublicacion.
 	self renderLikesDislikeOptionsOn: html.
@@ -74,7 +74,7 @@ PublicacionPageComponent >> renderLikesDislikesOn: html publicacion: unaPublicac
 ]
 
 { #category : #rendering }
-PublicacionPageComponent >> renderTotalLikesDislikesOn: html [
+PublicacionComponent >> renderTotalLikesDislikesOn: html [
 	html
 		span: [ html
 				strong class:'texto-interaccion'; with: [html text: self totalLikes;
@@ -85,11 +85,11 @@ PublicacionPageComponent >> renderTotalLikesDislikesOn: html [
 ]
 
 { #category : #actions }
-PublicacionPageComponent >> totalDislikes [
+PublicacionComponent >> totalDislikes [
 	^ publicacion totalDislikes
 ]
 
 { #category : #actions }
-PublicacionPageComponent >> totalLikes [
+PublicacionComponent >> totalLikes [
 	^ publicacion totalLikes
 ]

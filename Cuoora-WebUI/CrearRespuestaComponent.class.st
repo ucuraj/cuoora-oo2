@@ -1,6 +1,6 @@
 Class {
-	#name : #RespuestaCrearPageComponent,
-	#superclass : #PreguntaPageComponent,
+	#name : #CrearRespuestaComponent,
+	#superclass : #PreguntaComponent,
 	#instVars : [
 		'respuesta'
 	],
@@ -8,14 +8,14 @@ Class {
 }
 
 { #category : #accessing }
-RespuestaCrearPageComponent class >> conPregunta: unaPregunta [
+CrearRespuestaComponent class >> conPregunta: unaPregunta [
 	^ self new
 		pregunta: unaPregunta;
 		yourself
 ]
 
 { #category : #actions }
-RespuestaCrearPageComponent >> accept [
+CrearRespuestaComponent >> accept [
 	self pregunta
 		agregarRespuesta:
 			(Respuesta conTexto: self respuesta texto Usuario: self session user).
@@ -23,30 +23,30 @@ RespuestaCrearPageComponent >> accept [
 ]
 
 { #category : #actions }
-RespuestaCrearPageComponent >> cancel [
+CrearRespuestaComponent >> cancel [
 	respuesta texto: nil.
 	self answer
 ]
 
 { #category : #'instance creation' }
-RespuestaCrearPageComponent >> conPregunta: unaPregunta [
+CrearRespuestaComponent >> conPregunta: unaPregunta [
 	
 	self pregunta: unaPregunta.
 	self respuesta: Respuesta new.
 ]
 
 { #category : #accessing }
-RespuestaCrearPageComponent >> pregunta [
+CrearRespuestaComponent >> pregunta [
 	^ pregunta
 ]
 
 { #category : #accessing }
-RespuestaCrearPageComponent >> pregunta: anObject [
+CrearRespuestaComponent >> pregunta: anObject [
 	pregunta := anObject
 ]
 
 { #category : #rendering }
-RespuestaCrearPageComponent >> renderAgregarRespuestaOn: html [
+CrearRespuestaComponent >> renderAgregarRespuestaOn: html [
 	html div
 		class: 'agregarPregunta';
 		with: [ html heading level5; with: 'Responder'.
@@ -60,7 +60,7 @@ RespuestaCrearPageComponent >> renderAgregarRespuestaOn: html [
 ]
 
 { #category : #rendering }
-RespuestaCrearPageComponent >> renderButtonsOn: html [
+CrearRespuestaComponent >> renderButtonsOn: html [
 	html
 		paragraph class: 'mt-2'; with: [ html formButton
 				class: 'mr-1';
@@ -77,24 +77,24 @@ RespuestaCrearPageComponent >> renderButtonsOn: html [
 ]
 
 { #category : #rendering }
-RespuestaCrearPageComponent >> renderContentPageOn: html [
+CrearRespuestaComponent >> renderContentPageOn: html [
 	html div with: [ self renderPreguntaOn: html ].
 	html horizontalRule.
 	self renderAgregarRespuestaOn: html
 ]
 
 { #category : #accessing }
-RespuestaCrearPageComponent >> respuesta [
+CrearRespuestaComponent >> respuesta [
 	^ respuesta
 ]
 
 { #category : #accessing }
-RespuestaCrearPageComponent >> respuesta: anObject [
+CrearRespuestaComponent >> respuesta: anObject [
 	respuesta := anObject
 ]
 
 { #category : #updating }
-RespuestaCrearPageComponent >> updateRoot: anHtmlRoot [
+CrearRespuestaComponent >> updateRoot: anHtmlRoot [
 	self
 		updateRoot: anHtmlRoot
 		title: 'Responder a ' , pregunta titulo

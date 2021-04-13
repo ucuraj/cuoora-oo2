@@ -1,17 +1,17 @@
 Class {
-	#name : #CuooraHomeComponent,
+	#name : #HomeComponent,
 	#superclass : #CuooraPageComponent,
 	#category : #'Cuoora-WebUI'
 }
 
 { #category : #rendering }
-CuooraHomeComponent >> renderContentPageOn: html [
+HomeComponent >> renderContentPageOn: html [
 	self renderTitleOn: html.
 	self renderPreguntasRelevantesOn: html 
 ]
 
 { #category : #rendering }
-CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
+HomeComponent >> renderPreguntasRelevantesOn: html [
 	| preg |
 	html horizontalRule class: 'mb-4'.
 	html heading level2 with: 'Últimas preguntas'.
@@ -26,13 +26,12 @@ CuooraHomeComponent >> renderPreguntasRelevantesOn: html [
 								callback: [ self verPregunta: preguntaRelevante ];
 								with: [ html column
 										class: 'col-md-5 mb-4 mr-auto';
-										with: [ "html horizontalRule class: 'hr-dots mt-4 mb-5'"
-											preg := PreguntaPageComponent pregunta: preguntaRelevante.
+										with: [ preg := PreguntaComponent pregunta: preguntaRelevante.
 											preg renderPreguntaOn: html ] ] ] ] ]
 ]
 
 { #category : #rendering }
-CuooraHomeComponent >> renderTitleOn: html [
+HomeComponent >> renderTitleOn: html [
 	html
 		heading: 'Bienvenido a cuOOra, ' , self session user user , '!'.
 	html heading
@@ -41,11 +40,11 @@ CuooraHomeComponent >> renderTitleOn: html [
 ]
 
 { #category : #updating }
-CuooraHomeComponent >> updateRoot: anHtmlRoot [ 
+HomeComponent >> updateRoot: anHtmlRoot [ 
     self updateRoot: anHtmlRoot title: 'Home'
 ]
 
 { #category : #callbacks }
-CuooraHomeComponent >> verPregunta: unaPregunta [
-	self call: (CuooraVerPreguntaComponent pregunta: unaPregunta).
+HomeComponent >> verPregunta: unaPregunta [
+	self call: (VerPreguntaComponent pregunta: unaPregunta).
 ]
