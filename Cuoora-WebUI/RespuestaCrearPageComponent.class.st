@@ -62,7 +62,7 @@ RespuestaCrearPageComponent >> renderAgregarRespuestaOn: html [
 { #category : #rendering }
 RespuestaCrearPageComponent >> renderButtonsOn: html [
 	html
-		paragraph: [ html formButton
+		paragraph class: 'mt-2'; with: [ html formButton
 				class: 'mr-1';
 				beSuccess;
 				beSmall;
@@ -97,5 +97,5 @@ RespuestaCrearPageComponent >> respuesta: anObject [
 RespuestaCrearPageComponent >> updateRoot: anHtmlRoot [
 	self
 		updateRoot: anHtmlRoot
-		title: 'Responder a ' , pregunta titulo , ' | cuOOra'
+		title: 'Responder a ' , pregunta titulo
 ]

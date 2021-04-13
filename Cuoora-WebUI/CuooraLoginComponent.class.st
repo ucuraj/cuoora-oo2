@@ -80,5 +80,5 @@ CuooraLoginComponent >> renderRegisterButtonOn: html [
 
 { #category : #rendering }
 CuooraLoginComponent >> updateRoot: anHtmlRoot [ 
-    self updateRoot: anHtmlRoot title: 'Login | cuOOra'
+    self updateRoot: anHtmlRoot title: 'Login'
 ]

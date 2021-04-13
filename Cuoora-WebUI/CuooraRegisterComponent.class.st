@@ -79,5 +79,5 @@ CuooraRegisterComponent >> renderRegisterButtonOn: html [
 
 { #category : #actions }
 CuooraRegisterComponent >> updateRoot: anHtmlRoot [
-	self updateRoot: anHtmlRoot title: 'Registro | cuOOra'
+	self updateRoot: anHtmlRoot title: 'Registro'
 ]

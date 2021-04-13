@@ -179,7 +179,7 @@ PreguntaPageComponent >> totalRespuestas [
 
 { #category : #updating }
 PreguntaPageComponent >> updateRoot: anHtmlRoot [
-	self updateRoot: anHtmlRoot title: self pregunta titulo , ' | cuOOra'
+	self updateRoot: anHtmlRoot title: self pregunta titulo
 ]
 
 { #category : #callbacks }

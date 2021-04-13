@@ -42,7 +42,7 @@ CuooraHomeComponent >> renderTitleOn: html [
 
 { #category : #updating }
 CuooraHomeComponent >> updateRoot: anHtmlRoot [ 
-    self updateRoot: anHtmlRoot title: 'Home | cuOOra'
+    self updateRoot: anHtmlRoot title: 'Home'
 ]
 
 { #category : #callbacks }
