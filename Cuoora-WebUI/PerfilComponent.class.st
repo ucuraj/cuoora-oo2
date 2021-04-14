@@ -19,8 +19,9 @@ PerfilComponent >> dejarDeSeguirA: unUsuario [
 
 { #category : #rendering }
 PerfilComponent >> renderContentPageOn: html [
+
 	self renderTitleOn: html.
-	self renderPreguntasDelUsuarioOn: html 
+	self renderPreguntasDelUsuarioOn: html .
 ]
 
 { #category : #rendering }

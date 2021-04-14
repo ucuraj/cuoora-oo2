@@ -14,6 +14,27 @@ PublicacionComponent class >> publicacion: unaPublicacion [
 		yourself
 ]
 
+{ #category : #actions }
+PublicacionComponent >> buscarDislike [
+	^ self publicacion buscarDislike: self session user user.
+	
+]
+
+{ #category : #actions }
+PublicacionComponent >> buscarLike [
+	^ self publicacion buscarLike: self session user user.
+]
+
+{ #category : #actions }
+PublicacionComponent >> dislikeUsuario [
+	self publicacion dislikeUsuario: self session user.
+]
+
+{ #category : #actions }
+PublicacionComponent >> likeUsuario [
+	self publicacion likeUsuario: self session user.
+]
+
 { #category : #accessing }
 PublicacionComponent >> publicacion [
 	^ publicacion
@@ -34,54 +55,45 @@ PublicacionComponent >> renderLikesDislikeOptionsOn: html [
 	html
 		span: [ html anchor
 				class: 'pr-1';
-				callback: [ self publicacion likeUsuario: self session user ];
-				with: [ ((self publicacion buscarLike:self session user user) isNotNil)
-					ifTrue:[html outlineButton
-						beActive;
+				callback: [ self likeUsuario ];
+				with: [ html outlineButton
+						class:
+							(self buscarLike isNotNil
+								ifTrue: [ 'active' ]);
 						beSmall;
 						beSuccess;
-						with: 'Like'];
-					ifFalse:[html outlineButton
-						beSuccess;
-						beSmall;
-						with: 'Like']
-					 ].
-				].
-			html anchor
-				class: 'pl-1';
-				callback: [ self publicacion dislikeUsuario: self session user ];
-				with: [ ((self publicacion buscarDislike:self session user user) isNotNil)
-					ifTrue:[html outlineButton
-						beActive;
-						beSmall;
-						beDanger;
-						with: 'Dislike'] 
-					ifFalse:[html outlineButton
-						beDanger;
-						beSmall;
-						with: 'Dislike'].
-					 ].
-	html break. 
+						with: 'Like' ] ].
+	html anchor
+		class: 'pl-1';
+		callback: [ self dislikeUsuario ];
+		with: [ html outlineButton
+				class:
+					(self buscarDislike isNotNil
+						ifTrue: [ 'active' ]);
+				beSmall;
+				beDanger;
+				with: 'Dislike' ].
+	html break
 ]
 
 { #category : #rendering }
 PublicacionComponent >> renderLikesDislikesOn: html publicacion: unaPublicacion [
-
 	self publicacion: unaPublicacion.
 	self renderLikesDislikeOptionsOn: html.
-	self renderTotalLikesDislikesOn: html.
-	
+	self renderTotalLikesDislikesOn: html
 ]
 
 { #category : #rendering }
 PublicacionComponent >> renderTotalLikesDislikesOn: html [
 	html
-		span: [ html
-				strong class:'texto-interaccion'; with: [html text: self totalLikes;
-				text: ' Likes | ';
-				strong: self totalDislikes;
-				text: ' Dislikes' ]].
-	html break.
+		span: [ html strong
+				class: 'texto-interaccion';
+				with: [ html
+						text: self totalLikes;
+						text: ' Likes | ';
+						strong: self totalDislikes;
+						text: ' Dislikes' ] ].
+	html break
 ]
 
 { #category : #actions }

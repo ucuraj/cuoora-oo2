@@ -8,15 +8,22 @@ Class {
 }
 
 { #category : #accessing }
-PreguntaComponent class >> pregunta: unaPregunta [
+PreguntaComponent class >> conPregunta: unaPregunta [
 	^ self new
 		pregunta: unaPregunta;
 		yourself
 ]
 
-{ #category : #callbacks }
-PreguntaComponent >> agregarRespuesta [
-	"self call: RespuestaCrearPageComponent new"
+{ #category : #accessing }
+PreguntaComponent class >> conPregunta: unaPregunta renderPreguntaOn: html [
+	^ self new
+		pregunta: unaPregunta;
+		renderPreguntaOn: html
+]
+
+{ #category : #accessing }
+PreguntaComponent class >> pregunta: unaPregunta [
+	^ self new pregunta: unaPregunta
 ]
 
 { #category : #callbacks }
@@ -41,7 +48,7 @@ PreguntaComponent >> pregunta [
 
 { #category : #accessing }
 PreguntaComponent >> pregunta: anObject [
-	pregunta := anObject
+	pregunta := anObject.
 ]
 
 { #category : #private }
@@ -98,7 +105,7 @@ PreguntaComponent >> renderOwnerOn: html [
 			html anchor
 				callback: [ self perfilPreguntaComponent ];
 				with: [ html strong: self pregunta usuario user ] ].
-	html break.
+	html break
 ]
 
 { #category : #rendering }
@@ -117,15 +124,14 @@ PreguntaComponent >> renderPreguntaDescripcionOn: html [
 
 { #category : #rendering }
 PreguntaComponent >> renderPreguntaOn: html [
-	html div
-		with: [ self renderTituloOn: html.
-			html horizontalRule class: 'hr-pregunta'.
-			self renderOwnerOn: html.
-			self renderFechaOn: html.
-			self renderListaTopicosOn: html.
-			self renderCantidadRespuestasOn: html.
-			html break.
-			self renderLikesDislikesOn: html publicacion: self pregunta ]
+	self renderTituloOn: html.
+	html horizontalRule class: 'hr-pregunta'.
+	self renderOwnerOn: html.
+	self renderFechaOn: html.
+	self renderListaTopicosOn: html.
+	self renderCantidadRespuestasOn: html.
+	html break.
+	self renderLikesDislikesOn: html publicacion: self pregunta.
 ]
 
 { #category : #rendering }
@@ -145,14 +151,16 @@ PreguntaComponent >> renderRespuestasOn: html [
 						class: 'respuesta-texto';
 						with: [ html text: respuesta texto ].
 					rta := PublicacionComponent publicacion: respuesta.
-					rta renderLikesDislikesOn: html publicacion: respuesta ] ]
+					rta renderLikesDislikesOn: html publicacion: respuesta ].
+				html span: 'asdasd'. ].
 ]
 
 { #category : #rendering }
 PreguntaComponent >> renderTituloOn: html [
 	html div
 		class: 'titulo-pregunta';
-		with: [ html span: self pregunta titulo ]
+		with: [ html span: self pregunta titulo ] 
+		
 ]
 
 { #category : #rendering }
@@ -165,11 +173,6 @@ PreguntaComponent >> renderTotalyAgregarOn: html [
 				with: [ html badge class:'text-white p-2';
 						beWarning;
 						with: [html strong: 'Agregar Respuesta' ] ] ]
-]
-
-{ #category : #callbacks }
-PreguntaComponent >> topicoPerfilComponent: unTopico [
-	"self call: (PreguntasDeTopico conTopico: unTopico)"
 ]
 
 { #category : #actions }

@@ -12,22 +12,20 @@ HomeComponent >> renderContentPageOn: html [
 
 { #category : #rendering }
 HomeComponent >> renderPreguntasRelevantesOn: html [
-	| preg |
 	html horizontalRule class: 'mb-4'.
 	html heading level2 with: 'Últimas preguntas'.
 	html container
-		class: 'home-list mt-5';
-		with: [ html row
-				class: 'pregunta-anchor';
-				with: [ (self session user getPreguntasInteres: 5)
+		class: 'home-list mt-5 pregunta-anchor';
+		with: [ html
+				row: [ (self session user getPreguntasInteres: 5)
 						do: [ :preguntaRelevante | 
-							html anchor
-								class: 'pregunta-anchor';
-								callback: [ self verPregunta: preguntaRelevante ];
-								with: [ html column
-										class: 'col-md-5 mb-4 mr-auto';
-										with: [ preg := PreguntaComponent pregunta: preguntaRelevante.
-											preg renderPreguntaOn: html ] ] ] ] ]
+							html column
+								class: 'col-md-5 mb-4 mr-auto';
+								with: [ html anchor
+										callback: [ self verPregunta: preguntaRelevante ];
+										with: [ PreguntaComponent
+												conPregunta: preguntaRelevante
+												renderPreguntaOn: html ] ] ] ] ]
 ]
 
 { #category : #rendering }

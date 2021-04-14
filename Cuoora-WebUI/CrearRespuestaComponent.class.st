@@ -7,13 +7,6 @@ Class {
 	#category : #'Cuoora-WebUI'
 }
 
-{ #category : #accessing }
-CrearRespuestaComponent class >> conPregunta: unaPregunta [
-	^ self new
-		pregunta: unaPregunta;
-		yourself
-]
-
 { #category : #actions }
 CrearRespuestaComponent >> accept [
 	self pregunta

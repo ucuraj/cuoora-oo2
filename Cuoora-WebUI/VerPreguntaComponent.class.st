@@ -4,13 +4,6 @@ Class {
 	#category : #'Cuoora-WebUI'
 }
 
-{ #category : #accessing }
-VerPreguntaComponent class >> pregunta: unaPregunta [
-	^ self new
-		pregunta: unaPregunta;
-		yourself
-]
-
 { #category : #rendering }
 VerPreguntaComponent >> renderContentPageOn: html [
 self renderTitleOn: html.
@@ -38,8 +31,8 @@ VerPreguntaComponent >> renderPreguntaSinRespuestasOn:html [
 ]
 
 { #category : #rendering }
-VerPreguntaComponent >> renderTitleOn:html [
+VerPreguntaComponent >> renderTitleOn: html [
 	html heading
-		level:2; 
-		with:'Informacion de Pregunta'.
+		level: 2;
+		with: 'Viendo pregunta'
 ]
