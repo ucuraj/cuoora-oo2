@@ -28,16 +28,6 @@ CrearRespuestaComponent >> conPregunta: unaPregunta [
 	self respuesta: Respuesta new.
 ]
 
-{ #category : #accessing }
-CrearRespuestaComponent >> pregunta [
-	^ pregunta
-]
-
-{ #category : #accessing }
-CrearRespuestaComponent >> pregunta: anObject [
-	pregunta := anObject
-]
-
 { #category : #rendering }
 CrearRespuestaComponent >> renderAgregarRespuestaOn: html [
 	html div

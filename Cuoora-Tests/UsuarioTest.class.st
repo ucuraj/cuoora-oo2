@@ -91,7 +91,6 @@ UsuarioTest >> testBuscarPregunta [
 { #category : #tests }
 UsuarioTest >> testCalcularPuntaje [ 
 	
-	"El metodo calcularPuntaje de usuario llama a Cuoora soleInstance"
 	
 	self assert: juan calcularPuntaje equals: 0.
 	self assert: pedro calcularPuntaje equals: 40.
@@ -117,6 +116,39 @@ UsuarioTest >> testConNombrePassword [
 ]
 
 { #category : #tests }
+UsuarioTest >> testDejarDeSeguirUsuario [
+	
+	self assert: pedro seguidos isEmpty.
+	self assert: juan seguidos isEmpty.
+	
+	pedro seguirUsuario: juan.
+	juan seguirUsuario: pedro.
+	self assert: juan seguidos size equals: 1.
+	self assert: juan seguidos size equals: 1.
+	
+	pedro dejarDeSeguirUsuario: juan.
+	self assert: pedro seguidos size equals: 0.
+	
+	juan dejarDeSeguirUsuario: pedro.
+	self assert: juan seguidos size equals: 0.
+	
+]
+
+{ #category : #tests }
+UsuarioTest >> testGetPreguntasInteres [
+	
+	self assert: juan preguntasInteres isEmpty.
+	self assert: pedro preguntasInteres isEmpty.
+	
+	juan seguirUsuario: pedro.
+	self assert: juan topicosInteres size equals: 0.
+	self assert: (juan getPreguntasInteres:1 ) size equals: 1.
+	self assert: (juan getPreguntasInteres:2 ) size equals: 2.
+	self assert: (juan getPreguntasInteres:5 ) size equals: 2.	
+	self assert: (juan getPreguntasInteres:0 ) isEmpty	
+]
+
+{ #category : #tests }
 UsuarioTest >> testInitialize [
 
 	| jorge |
@@ -139,7 +171,7 @@ UsuarioTest >> testPreguntasInteres [
 	self assert: juan topicosInteres size equals: 0.
 	self assert: juan preguntasInteres size equals: 2
 	
-	" para testear los topicos de interes preguntar, porque usa cuoora sole instance"
+
 ]
 
 { #category : #tests }
@@ -168,14 +200,30 @@ UsuarioTest >> testSeguirUsuario [
 	
 	pedro seguirUsuario: juan.
 	juan seguirUsuario: pedro.
-	self assert: juan seguidos size equals: 1.
+	self assert: pedro seguidos size equals: 1.
 	self assert: juan seguidos size equals: 1.
 	
 	pedro seguirUsuario: pedro.
 	juan seguirUsuario: juan.
-	self assert: juan seguidos size equals: 1.
+	self assert: pedro seguidos size equals: 1.
 	self assert: juan seguidos size equals: 1.
 	
 	self assert: (pedro seguirUsuario: pedro) equals: false.
 	self assert: (juan seguirUsuario: juan) equals: false.
+]
+
+{ #category : #tests }
+UsuarioTest >> testSigueA [
+	
+	self assert: pedro seguidos isEmpty.
+	self assert: juan seguidos isEmpty.
+	
+	pedro seguirUsuario: juan.
+	juan seguirUsuario: pedro.
+	
+	self assert: (pedro sigueA: juan) equals: true.
+	self assert: (juan sigueA: pedro) equals: true.
+	
+	pedro dejarDeSeguirUsuario: juan.
+   self assert: (pedro sigueA: juan) equals: false. 
 ]

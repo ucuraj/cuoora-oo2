@@ -122,7 +122,8 @@ Usuario >> fechaCreacion: anObject [
 { #category : #private }
 Usuario >> getPreguntasInteres: unNumero [
 	"Devuelve una colección preguntas ordenadas 
-	por fecha de creación(mayor a menor) de longitud unNumero"
+	por fecha de creación(mayor a menor) de longitud unNumero
+	Utiliza preguntasInteres para obtener las preguntas de interes."
 
 	| preg |
 	preg := self preguntasInteres asSortedCollection reverse.

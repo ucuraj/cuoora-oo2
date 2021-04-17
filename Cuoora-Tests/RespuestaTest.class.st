@@ -30,6 +30,14 @@ RespuestaTest >> testCalcularPuntaje [
 ]
 
 { #category : #tests }
+RespuestaTest >> testConTextoUsuario [
+	| r |
+	r := Respuesta conTexto: 'Probando la respuestilla' Usuario: usuario.
+	self assert: r usuario user equals: usuario user.
+	self assert: r texto equals: 'Probando la respuestilla'
+]
+
+{ #category : #tests }
 RespuestaTest >> testDisLikes [
 
 	respuesta dislikeUsuario: usuario.
