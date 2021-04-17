@@ -103,8 +103,8 @@ Cuoora >> getPreguntasDeTopico: unTopico [
 
 { #category : #methods }
 Cuoora >> getPreguntasDeTopicos: unosTopicos [
-	^ unosTopicos
-		collectAll: [ :topico | self getPreguntasDeTopico: topico ] asSet.
+	^ (unosTopicos
+		collectAll: [ :topico | self getPreguntasDeTopico: topico ]) asSet.
 ]
 
 { #category : #methods }
