@@ -1,5 +1,5 @@
 Class {
-	#name : #CuooraAccessComponent,
+	#name : #AccessComponent,
 	#superclass : #CuooraPageComponent,
 	#instVars : [
 		'pass',
@@ -9,28 +9,28 @@ Class {
 }
 
 { #category : #actions }
-CuooraAccessComponent >> logout [
+AccessComponent >> logout [
 	self session logout
 ]
 
 { #category : #accessing }
-CuooraAccessComponent >> pass [
+AccessComponent >> pass [
 	^ pass
 ]
 
 { #category : #accessing }
-CuooraAccessComponent >> pass: unaPass [
+AccessComponent >> pass: unaPass [
 	pass := unaPass
 ]
 
 { #category : #private }
-CuooraAccessComponent >> proceedWith: unUsuario [
+AccessComponent >> proceedWith: unUsuario [
 	self session user: unUsuario.
-	self call: CuooraHomeComponent new.
+	self call: HomeComponent new.
 ]
 
 { #category : #rendering }
-CuooraAccessComponent >> renderBadCredentialsOn: html [
+AccessComponent >> renderBadCredentialsOn: html [
 	self session badCredentials
 		ifFalse: [ ^ self ].
 	html alert
@@ -42,12 +42,12 @@ CuooraAccessComponent >> renderBadCredentialsOn: html [
 ]
 
 { #category : #rendering }
-CuooraAccessComponent >> renderButtonsOn: html [
+AccessComponent >> renderButtonsOn: html [
 	 self subclassResponsibility. 
 ]
 
 { #category : #rendering }
-CuooraAccessComponent >> renderContentPageOn: html [
+AccessComponent >> renderContentPageOn: html [
 	html heading: 'CuOOra'.
 	html heading
 		level: 3;
@@ -61,7 +61,7 @@ CuooraAccessComponent >> renderContentPageOn: html [
 ]
 
 { #category : #rendering }
-CuooraAccessComponent >> renderInputElementsOn: html [
+AccessComponent >> renderInputElementsOn: html [
 	html div
 		with: [ html inputGroup
 				class: 'login-input';
@@ -81,6 +81,6 @@ CuooraAccessComponent >> renderInputElementsOn: html [
 ]
 
 { #category : #rendering }
-CuooraAccessComponent >> renderRegisterButtonOn:html [ 
+AccessComponent >> renderRegisterButtonOn:html [ 
 self subclassResponsibility. 
 ]

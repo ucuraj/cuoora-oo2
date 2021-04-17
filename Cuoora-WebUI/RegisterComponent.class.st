@@ -1,6 +1,6 @@
 Class {
-	#name : #CuooraRegisterComponent,
-	#superclass : #CuooraAccessComponent,
+	#name : #RegisterComponent,
+	#superclass : #AccessComponent,
 	#instVars : [
 		'existe'
 	],
@@ -8,30 +8,30 @@ Class {
 }
 
 { #category : #'instance creation' }
-CuooraRegisterComponent class >> newExiste: unUsuario [
+RegisterComponent class >> newExiste: unUsuario [
 	^ self new
 		existe: unUsuario;
 		yourself
 ]
 
 { #category : #accessing }
-CuooraRegisterComponent >> existe [
+RegisterComponent >> existe [
 	^existe
 ]
 
 { #category : #accessing }
-CuooraRegisterComponent >> existe: unUsuario [
+RegisterComponent >> existe: unUsuario [
 	existe := unUsuario
 ]
 
 { #category : #private }
-CuooraRegisterComponent >> proceedUserExists: unUsuario [
+RegisterComponent >> proceedUserExists: unUsuario [
 	existe := unUsuario.
 	self call: (self class newExiste: unUsuario)
 ]
 
 { #category : #rendering }
-CuooraRegisterComponent >> registerAndLogin [
+RegisterComponent >> registerAndLogin [
 	| usuarioNuevo |
 	(Cuoora soleInstance existeUsuario: user)
 		ifNil: [ usuarioNuevo := Usuario conNombre: user Password: pass.
@@ -42,12 +42,12 @@ CuooraRegisterComponent >> registerAndLogin [
 ]
 
 { #category : #rendering }
-CuooraRegisterComponent >> renderButtonsOn: html [
+RegisterComponent >> renderButtonsOn: html [
 	html space.
 ]
 
 { #category : #rendering }
-CuooraRegisterComponent >> renderContentPageOn: html [
+RegisterComponent >> renderContentPageOn: html [
 	html heading: 'CuOOra'.
 	html heading
 		level: 3;
@@ -59,7 +59,7 @@ CuooraRegisterComponent >> renderContentPageOn: html [
 ]
 
 { #category : #rendering }
-CuooraRegisterComponent >> renderInputElementsOn: html [
+RegisterComponent >> renderInputElementsOn: html [
 	html heading
 		level: 3;
 		with: 'Registrate en cuOOra, es gratis!'.
@@ -71,13 +71,13 @@ CuooraRegisterComponent >> renderInputElementsOn: html [
 ]
 
 { #category : #rendering }
-CuooraRegisterComponent >> renderRegisterButtonOn: html [
+RegisterComponent >> renderRegisterButtonOn: html [
 	html formButton beWarning;
 		callback: [ self registerAndLogin ];
 		with: 'Crear Cuenta'.
 ]
 
 { #category : #actions }
-CuooraRegisterComponent >> updateRoot: anHtmlRoot [
-	self updateRoot: anHtmlRoot title: 'Registro | cuOOra'
+RegisterComponent >> updateRoot: anHtmlRoot [
+	self updateRoot: anHtmlRoot title: 'Registro'
 ]

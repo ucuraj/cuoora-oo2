@@ -1,6 +1,6 @@
 Class {
 	#name : #CrearPreguntaComponent,
-	#superclass : #PublicacionPageComponent,
+	#superclass : #PublicacionComponent,
 	#instVars : [
 		'tituloPregunta',
 		'descripcionPregunta',

@@ -10,13 +10,13 @@
 
 "
 Class {
-	#name : #CuooraLoginComponent,
-	#superclass : #CuooraAccessComponent,
+	#name : #LoginComponent,
+	#superclass : #AccessComponent,
 	#category : #'Cuoora-WebUI'
 }
 
 { #category : #actions }
-CuooraLoginComponent class >> logout [
+LoginComponent class >> logout [
 	"CUando cierro la sesión llamo a lougout, que me devuelve una nueva pagina de login con usuario en nil"
 
 	^ self new
@@ -25,7 +25,7 @@ CuooraLoginComponent class >> logout [
 ]
 
 { #category : #callbacks }
-CuooraLoginComponent >> login [
+LoginComponent >> login [
 	"Chequea que user y pass sean correctos.
 	Si no setea user pass session->user en nil 
 	y badCredentials en true, para mostrar msj de error"
@@ -41,18 +41,18 @@ CuooraLoginComponent >> login [
 ]
 
 { #category : #callbacks }
-CuooraLoginComponent >> registerNewUser [
-	self call: CuooraRegisterComponent new.
+LoginComponent >> registerNewUser [
+	self call: RegisterComponent new.
 ]
 
 { #category : #rendering }
-CuooraLoginComponent >> renderButtonsOn: html [
+LoginComponent >> renderButtonsOn: html [
 	self renderLoginButtonOn: html.
 	html horizontalRule.
 ]
 
 { #category : #rendering }
-CuooraLoginComponent >> renderInputElementsOn: html [
+LoginComponent >> renderInputElementsOn: html [
 	html heading level:5; with: 'Ingresá tus datos para iniciar sesión'.
 	html paragraph.
 	super renderInputElementsOn: html
@@ -60,14 +60,14 @@ CuooraLoginComponent >> renderInputElementsOn: html [
 ]
 
 { #category : #rendering }
-CuooraLoginComponent >> renderLoginButtonOn: html [
+LoginComponent >> renderLoginButtonOn: html [
 	html formButton beSuccess; beSmall;
 		callback: [ self login ];
 		with: 'Iniciar sesión'.
 ]
 
 { #category : #rendering }
-CuooraLoginComponent >> renderRegisterButtonOn: html [
+LoginComponent >> renderRegisterButtonOn: html [
 	html paragraph: '¿No tenés cuenta? Unite a cuOOra ahora mismo!'.
 	html anchor
 		callback: [ self session user: nil.
@@ -79,6 +79,6 @@ CuooraLoginComponent >> renderRegisterButtonOn: html [
 ]
 
 { #category : #rendering }
-CuooraLoginComponent >> updateRoot: anHtmlRoot [ 
-    self updateRoot: anHtmlRoot title: 'Login | cuOOra'
+LoginComponent >> updateRoot: anHtmlRoot [ 
+    self updateRoot: anHtmlRoot title: 'Login'
 ]
