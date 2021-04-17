@@ -47,9 +47,10 @@ Pregunta >> agregarTopicos: unosTopicos [
 
 	(unosTopicos splitOn: ',')
 		do: [ :topico | 
-			| t |
-			(t := Cuoora soleInstance existeTopico: topico)
-				ifNotNil: [ self agregarTopico: t ] ]
+			|t|
+			t := Topico conNombre: topico Descripcion: ''.
+			Cuoora soleInstance agregarTopico: t.
+			self agregarTopico: t].
 ]
 
 { #category : #methods }
@@ -107,7 +108,7 @@ Pregunta >> respuestasOrdenadas [
 	| rtas |
 	rtas := SortedCollection
 		sortBlock:
-			[ :p1 :p2 | p1 totalLikes - p1 totalDislikes >= (p2 totalLikes - p2 totalDislikes) ].
+			[ :p1 :p2 | (p1 totalLikes) asNumber - (p1 totalDislikes) asNumber >= ((p2 totalLikes) asNumber - (p2 totalDislikes) asNumber) ].
 	rtas addAll: self respuestas.
 	^ rtas
 ]
