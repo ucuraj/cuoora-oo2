@@ -45,11 +45,6 @@ HomeComponent >> updateRoot: anHtmlRoot [
     self updateRoot: anHtmlRoot title: 'Home'
 ]
 
-{ #category : #'as yet unclassified' }
-HomeComponent >> verPerfil: unUsuario [
-	self call: (PerfilComponent conUsuario: unUsuario).
-]
-
 { #category : #callbacks }
 HomeComponent >> verPregunta: unaPregunta [
 	self call: (VerPreguntaComponent pregunta: unaPregunta).
