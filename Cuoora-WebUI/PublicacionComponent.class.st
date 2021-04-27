@@ -27,12 +27,12 @@ PublicacionComponent >> buscarLike [
 
 { #category : #actions }
 PublicacionComponent >> dislikeUsuario [
-	self publicacion dislikeUsuario: self session user.
+	self publicacion iteraccionConUsuario: (self session user) unTipo:'Dislike'.
 ]
 
 { #category : #actions }
 PublicacionComponent >> likeUsuario [
-	self publicacion likeUsuario: self session user.
+	self publicacion iteraccionConUsuario: (self session user) unTipo:'Like'.
 ]
 
 { #category : #accessing }

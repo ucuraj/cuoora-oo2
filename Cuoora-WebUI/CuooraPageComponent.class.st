@@ -328,8 +328,3 @@ CuooraPageComponent >> user [
 CuooraPageComponent >> user: anUser [
 	user := anUser.
 ]
-
-{ #category : #actions }
-CuooraPageComponent >> verPerfil: unUsuario [
-	self call: (PerfilComponent conUsuario: unUsuario).
-]

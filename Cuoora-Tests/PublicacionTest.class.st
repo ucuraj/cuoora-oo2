@@ -68,9 +68,9 @@ PublicacionTest >> testTotalDislikes [
 	publicacion dislikeUsuario: usuario.
 	publicacion dislikeUsuario: usuario2.
 	
-	self assert: publicacion totalDislikes equals: '2'.
-	self deny: publicacion totalDislikes equals: 2.
-	self deny: publicacion totalDislikes equals: '3'. 
+	self assert: publicacion totalDislikes equals: 2.
+	self deny: publicacion totalDislikes equals: '2'.
+	self deny: publicacion totalDislikes equals: 3. 
 
 ]
 
@@ -80,8 +80,8 @@ PublicacionTest >> testTotalLikes [
 	publicacion likeUsuario: usuario.
 	publicacion likeUsuario: usuario2.
 	
-	self assert: publicacion totalLikes equals: '2'.
-	self deny: publicacion totalLikes equals: 2.
-	self deny: publicacion totalLikes equals: '3'. 
+	self assert: publicacion totalLikes equals: 2.
+	self deny: publicacion totalLikes equals: '2'.
+	self deny: publicacion totalLikes equals: 3. 
 
 ]

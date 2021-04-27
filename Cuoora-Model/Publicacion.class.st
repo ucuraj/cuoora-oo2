@@ -121,6 +121,22 @@ Publicacion >> initialize [
 
 ]
 
+{ #category : #'as yet unclassified' }
+Publicacion >> iteraccionConUsuario:unUsuario unTipo:unString [
+	"Busca primero si la publicacion tiene un like de unUsuario, si existe lo elimina.
+	Chequea que no haya un dislike de unUsuario, si no existe lo agrega."
+	| like dislike |
+	like := self buscarLike: unUsuario user.
+	like ifNotNil: [ self likes remove: like ].
+	dislike  := self buscarDislike: unUsuario user.
+	dislike ifNotNil: [ self dislikes remove: dislike ].
+	(unString = 'Like')
+	ifTrue:[self likes
+				add: (Interaccion conUsuario: unUsuario Publicacion: self)]
+	ifFalse:[ self dislikes
+				add: (Interaccion conUsuario: unUsuario Publicacion: self)].
+]
+
 { #category : #methods }
 Publicacion >> likeUsuario: unUsuario [
 	"Busca primero si la publicaciontiene un dislike de unUsuario, si existe lo elimina.
@@ -148,12 +164,12 @@ Publicacion >> likes: anObject [
 
 { #category : #methods }
 Publicacion >> totalDislikes [
-	^ self dislikes size asString 
+	^ self dislikes size. 
 ]
 
 { #category : #methods }
 Publicacion >> totalLikes [
-	^ self likes size asString.
+	^ self likes size.
 ]
 
 { #category : #accessing }

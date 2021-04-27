@@ -25,7 +25,10 @@ HomeComponent >> renderPreguntasRelevantesOn: html [
 										callback: [ self verPregunta: preguntaRelevante ];
 										with: [ PreguntaComponent
 												conPregunta: preguntaRelevante
-												renderPreguntaOn: html ] ] ] ] ]
+												renderTituloOn: html ].
+											 PreguntaComponent
+												conPregunta: preguntaRelevante
+												renderPreguntaOn: html] ] ] ]
 ]
 
 { #category : #rendering }
@@ -40,6 +43,11 @@ HomeComponent >> renderTitleOn: html [
 { #category : #updating }
 HomeComponent >> updateRoot: anHtmlRoot [ 
     self updateRoot: anHtmlRoot title: 'Home'
+]
+
+{ #category : #'as yet unclassified' }
+HomeComponent >> verPerfil: unUsuario [
+	self call: (PerfilComponent conUsuario: unUsuario).
 ]
 
 { #category : #callbacks }

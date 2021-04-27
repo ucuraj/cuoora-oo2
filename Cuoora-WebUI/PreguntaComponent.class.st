@@ -14,11 +14,25 @@ PreguntaComponent class >> conPregunta: unaPregunta [
 		yourself
 ]
 
+{ #category : #'as yet unclassified' }
+PreguntaComponent class >> conPregunta: unaPregunta renderPreguntaDescripcionOn: html [
+	^ self new
+		pregunta: unaPregunta;
+		renderPreguntaDescripcionOn: html. 
+]
+
 { #category : #accessing }
 PreguntaComponent class >> conPregunta: unaPregunta renderPreguntaOn: html [
 	^ self new
 		pregunta: unaPregunta;
 		renderPreguntaOn: html
+]
+
+{ #category : #'as yet unclassified' }
+PreguntaComponent class >> conPregunta: unaPregunta renderTituloOn: html [
+	^ self new
+		pregunta: unaPregunta;
+		renderTituloOn: html.
 ]
 
 { #category : #accessing }
@@ -100,12 +114,12 @@ PreguntaComponent >> renderListaTopicosOn: html [
 
 { #category : #rendering }
 PreguntaComponent >> renderOwnerOn: html [
-	html
+html
 		span: [ html text: 'creado por: '.
 			html anchor
-				callback: [ self perfilPreguntaComponent ];
+				callback: [ self verPerfil];
 				with: [ html strong: self pregunta usuario user ] ].
-	html break
+	html break.
 ]
 
 { #category : #rendering }
@@ -124,7 +138,6 @@ PreguntaComponent >> renderPreguntaDescripcionOn: html [
 
 { #category : #rendering }
 PreguntaComponent >> renderPreguntaOn: html [
-	self renderTituloOn: html.
 	html horizontalRule class: 'hr-pregunta'.
 	self renderOwnerOn: html.
 	self renderFechaOn: html.
@@ -183,6 +196,16 @@ PreguntaComponent >> totalRespuestas [
 { #category : #updating }
 PreguntaComponent >> updateRoot: anHtmlRoot [
 	self updateRoot: anHtmlRoot title: self pregunta titulo
+]
+
+{ #category : #'as yet unclassified' }
+PreguntaComponent >> verPerfil [
+	self call: (PerfilComponent conUsuario: self pregunta usuario).
+]
+
+{ #category : #'as yet unclassified' }
+PreguntaComponent >> verPerfil:unUsuario [
+	self call: (PerfilComponent conUsuario: unUsuario).
 ]
 
 { #category : #callbacks }

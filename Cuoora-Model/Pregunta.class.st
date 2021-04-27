@@ -105,12 +105,9 @@ Pregunta >> respuestas: anObject [
 
 { #category : #methods }
 Pregunta >> respuestasOrdenadas [
-	| rtas |
-	rtas := SortedCollection
-		sortBlock:
-			[ :p1 :p2 | (p1 totalLikes) asNumber - (p1 totalDislikes) asNumber >= ((p2 totalLikes) asNumber - (p2 totalDislikes) asNumber) ].
-	rtas addAll: self respuestas.
-	^ rtas
+	^ self respuestas
+		asSortedCollection:
+			[ :p1 :p2 | p1 totalLikes - p1 totalDislikes >= (p2 totalLikes - p2 totalDislikes) ]
 ]
 
 { #category : #accessing }

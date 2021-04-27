@@ -86,19 +86,12 @@ Cuoora >> existeUsuario: unUsername [
 Cuoora >> getPreguntasDeTopico: unTopico [
 	"Recorre todos los usuarios y obtiene las preguntas 
 	cuyo topico sea unTopico. Devuelve a un set de preguntas"
-
-	| preguntas |
-	preguntas := Set new.
 	
-	self usuariosCreados
-		do: [ :usuario | 
-			preguntas
-				addAll:
-					(usuario preguntas
+	^ (self usuariosCreados
+		flatCollect: [ :usuario |
+					usuario preguntas
 						select:
-							[ :pregunta | pregunta topicos anySatisfy: [ :topico | topico = unTopico ] ]) ].
-					
-	^ preguntas
+							[ :pregunta | pregunta topicos anySatisfy: [ :topico | topico = unTopico ] ] ])
 ]
 
 { #category : #methods }
@@ -114,18 +107,27 @@ Cuoora >> getRespuestasDeUnUsuario: unUsuario [
 	de cada pregunta,  agregando a un conjunto las 
 	preguntas que  hayan sido creadas por unUsuario "
 	
-	| rtas |
-	rtas := Set new.
+	^ self usuariosCreados
+		flatCollect: [ :usuario | 
+			(usuario preguntas)
+				flatCollect: [ :eachPregunta | 
+							eachPregunta respuestas
+								select: [ :each | each usuario user = unUsuario user ] ] ].
+]
+
+{ #category : #'as yet unclassified' }
+Cuoora >> getRespuestasParaPuntaje: unUsuario [
+	"Recorre usuariosCreados. Por cada usuario 
+	recorre sus preguntas, y a su vez las respuestas 
+	de cada pregunta,  agregando a un conjunto las 
+	preguntas que  hayan sido creadas por unUsuario "
 	
-	self usuariosCreados
-		do: [ :usuario | 
-			usuario preguntas
-				do: [ :eachPregunta | 
-					rtas
-						addAll:
-							(eachPregunta respuestas
-								select: [ :each | each usuario user = unUsuario user ]) ] ].
-	^ rtas
+	^ ((self usuariosCreados))
+		flatCollect: [ :usuario | 
+			(usuario preguntas)
+				flatCollect: [ :eachPregunta | 
+							eachPregunta respuestas
+								select: [ :each | each usuario user = unUsuario user ] ] ].
 ]
 
 { #category : #initialization }
@@ -139,7 +141,7 @@ Cuoora >> loginUser: unUser password: unaPass [
 
 	^ self usuariosCreados
 		detect:
-			[ :eachUsuario | eachUsuario user = unUser & (eachUsuario pass = unaPass) ]
+			[ :eachUsuario | (eachUsuario checkUser:unUser unaPass:unaPass) ]
 		ifNone: [ nil ]
 ]
 

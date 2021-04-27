@@ -12,6 +12,13 @@ PerfilComponent class >> conUsuario: unUsuario [
 	^ self new usuarioPerfil: unUsuario.
 ]
 
+{ #category : #'as yet unclassified' }
+PerfilComponent class >> conUsuario: unUsuario renderOwnerOn: html [
+	^ self new
+		usuarioPerfil: unUsuario;
+		renderOwnerOn: html. 
+]
+
 { #category : #actions }
 PerfilComponent >> dejarDeSeguirA: unUsuario [
 	self session user dejarDeSeguirUsuario: unUsuario
@@ -21,7 +28,17 @@ PerfilComponent >> dejarDeSeguirA: unUsuario [
 PerfilComponent >> renderContentPageOn: html [
 
 	self renderTitleOn: html.
-	self renderPreguntasDelUsuarioOn: html .
+	self renderPreguntasDelUsuarioOn: html.
+]
+
+{ #category : #rendering }
+PerfilComponent >> renderOwnerOn: html [
+	html
+		span: [ html text: 'creado por: '.
+			html anchor
+				callback: [self call: (self class conUsuario: self usuarioPerfil)];
+				with: [ html strong: self usuarioPerfil user ] ].
+	html break
 ]
 
 { #category : #rendering }
@@ -38,6 +55,7 @@ PerfilComponent >> renderPreguntasDelUsuarioOn: html [
 								callback: [ self verPregunta: pregunta ];
 								with: [ html
 										column: [ preg := PreguntaComponent pregunta: pregunta.
+											preg renderTituloOn: html.
 											preg renderPreguntaOn: html.
 											html horizontalRule class: 'hr-dots mt-5 pt-3 mb-5' ]
 										mediumSize: 6 ] ] ] ]

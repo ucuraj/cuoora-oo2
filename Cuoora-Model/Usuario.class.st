@@ -82,15 +82,21 @@ Usuario >> calcularPuntaje [
 ^((self preguntas) sum:[:eachPregunta | eachPregunta calcularPuntaje]) + ((Cuoora soleInstance getRespuestasDeUnUsuario: self) sum:[:eachPregunta | eachPregunta calcularPuntaje])
 "
 
-	| puntaje |
+	| puntaje rtasPropias |
+	rtasPropias := Set new.
 	puntaje := self preguntas
-		inject: 0
-		into: [ :punt :eachPregunta | punt + eachPregunta calcularPuntaje ].
+		sumNumbers: [ :eachPregunta | 
+			eachPregunta calcularPuntaje ].
 	^ puntaje
-		+
-			((Cuoora soleInstance getRespuestasDeUnUsuario: self)
-				inject: 0
-				into: [ :punt :eachRespuesta | punt + eachRespuesta calcularPuntaje ])
+		+((Cuoora soleInstance getRespuestasParaPuntaje: self))
+		sumNumbers: [ :eachRespuesta | eachRespuesta calcularPuntaje ]
+]
+
+{ #category : #'as yet unclassified' }
+Usuario >> checkUser:unUsuario unaPass:unaPass [
+(user = unUsuario & ( pass = unaPass))
+ifTrue: [  ^true ]
+ifFalse: [ ^false ]
 ]
 
 { #category : #'instance creation' }

@@ -17,7 +17,7 @@ Class {
 
 { #category : #running }
 CuooraTest >> setUp [
-|usuarios topicos rta1 rta2 rta3 rta4 pregunta pregunta2 |
+|usuarios topicos rta1 rta2 rta3 rta4 rta5 pregunta pregunta2 |
  super setUp.
 	usuarios := Set new.
 	topicos := Set new.
@@ -33,6 +33,7 @@ CuooraTest >> setUp [
 	rta2 := Respuesta conTexto: 'Respuesta 2' Usuario: user1.
 	rta3 := Respuesta conTexto: 'Respuesta 3' Usuario: user2.
 	rta4 := Respuesta conTexto: 'Respuesta 4' Usuario: user1.
+	rta5 := Respuesta conTexto: 'Respuesta 5' Usuario: user2.
 		pregunta := Pregunta
 		conTitulo: '¿Para qué sirve el método SetUp?'
 		Descripcion: 'Lorem ipsum dolor sit amet.'
@@ -48,6 +49,7 @@ CuooraTest >> setUp [
 	pregunta agregarRespuesta: rta2.
 	pregunta2 agregarRespuesta: rta3.
 	pregunta agregarRespuesta: rta4.
+	pregunta2 agregarRespuesta: rta5.
 	user1 agregarPregunta: pregunta.
 	user2 agregarPregunta: pregunta2.
 	usuarios addAll:(OrderedCollection with: user1 with: user2 with: user3).
