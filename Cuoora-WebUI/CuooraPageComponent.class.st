@@ -22,6 +22,16 @@ CuooraPageComponent >> callCrearPreguntaComponent [
 ]
 
 { #category : #actions }
+CuooraPageComponent >> callLogout [
+	self call: LoginComponent logout
+]
+
+{ #category : #actions }
+CuooraPageComponent >> callVerPerfil: unUsuario [
+	self call: (PerfilComponent conUsuario: unUsuario).
+]
+
+{ #category : #actions }
 CuooraPageComponent >> logueado [
 	^ self user isNotNil.
 	
@@ -55,24 +65,6 @@ CuooraPageComponent >> renderContentPageOn: html [
 ]
 
 { #category : #rendering }
-CuooraPageComponent >> renderNavBarDropdownUserOn: html [
-	html navigationItem dropdown
-		with: [ html navigationLink
-				dropdownToggle;
-				dataToggle: 'dropdown';
-				with: [ html span class: 'bi bi-person-circle nav-user mr-2'.
-					html span with: self session user user ].
-			html dropdownMenu
-				attributeAt: 'aria-labelledby' put: 'navbarDropdown';
-				with: [ html dropdownItem callback: [ self call: (self verPerfil: self session user) ];
-						with: [ html span: self session user user ].
-					html dropdownDivider.
-					html dropdownItem
-						callback: [ self call: LoginComponent logout ];
-						with: [ html span: 'Cerrar Sesión' ] ] ]
-]
-
-{ #category : #rendering }
 CuooraPageComponent >> renderNavBarLinksOn: html [
 	html navigationLink
 		callback: [ self proceedWithHome: self session user ];
@@ -80,8 +72,13 @@ CuooraPageComponent >> renderNavBarLinksOn: html [
 	html navigationLink
 		callback: [ self callCrearPreguntaComponent ];
 		with: 'Agregar Pregunta'.
-	self renderNavBarDropdownUserOn: html.
-
+	html navigationLink
+		callback: [ self callVerPerfil: self session user ];
+		with: [ html span class: 'bi bi-person-circle nav-user mr-2'.
+			html span with: self session user user ].
+	html navigationLink
+		callback: [ self callLogout ];
+		with: 'Cerrar Sesión'
 ]
 
 { #category : #rendering }
