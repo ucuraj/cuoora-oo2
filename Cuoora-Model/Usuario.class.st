@@ -82,14 +82,16 @@ Usuario >> calcularPuntaje [
 ^((self preguntas) sum:[:eachPregunta | eachPregunta calcularPuntaje]) + ((Cuoora soleInstance getRespuestasDeUnUsuario: self) sum:[:eachPregunta | eachPregunta calcularPuntaje])
 "
 
-	| puntaje rtasPropias |
+	| puntaje rtasPropias rtas|
 	rtasPropias := Set new.
+	rtas:=((Cuoora soleInstance getRespuestasDeUnUsuario: self) asSet).
 	puntaje := self preguntas
 		sumNumbers: [ :eachPregunta | 
 			eachPregunta calcularPuntaje ].
+	rtasPropias := self preguntas flatCollect: [ :eachPregunta | eachPregunta respuestas collect:[:eachRespuesta | eachRespuesta usuario = self ] ] .
 	^ puntaje
-		+((Cuoora soleInstance getRespuestasParaPuntaje: self))
-		sumNumbers: [ :eachRespuesta | eachRespuesta calcularPuntaje ]
+		+ ((rtas removeAll:rtasPropias)
+		sumNumbers: [ :eachRespuesta | eachRespuesta calcularPuntaje ])
 ]
 
 { #category : #'as yet unclassified' }

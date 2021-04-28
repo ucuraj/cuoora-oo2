@@ -64,15 +64,8 @@ Publicacion >> calcularPuntaje [
 Publicacion >> dislikeUsuario: unUsuario [
 	"Busca primero si la publicacion tiene un like de unUsuario, si existe lo elimina.
 	Chequea que no haya un dislike de unUsuario, si no existe lo agrega."
-
-	| like dislike |
-	like := self buscarLike: unUsuario user.
-	like ifNotNil: [ self likes remove: like ].
-	
-	dislike := self buscarDislike: unUsuario user.
-	dislike
-		ifNil: [ self dislikes
-				add: (Interaccion conUsuario: unUsuario Publicacion: self) ]
+	self limpiarLikesYdislikes: unUsuario.
+	self dislikes add: (Interaccion conUsuario: unUsuario Publicacion: self).
 ]
 
 { #category : #accessing }
@@ -141,15 +134,8 @@ Publicacion >> iteraccionConUsuario:unUsuario unTipo:unString [
 Publicacion >> likeUsuario: unUsuario [
 	"Busca primero si la publicaciontiene un dislike de unUsuario, si existe lo elimina.
 	Chequea que no haya un like de unUsuario, si no existe lo agrega."
-
-	| dislike like |
-	dislike := self buscarDislike: unUsuario user.
-	dislike ifNotNil: [ self dislikes remove: dislike ].
-	
-	like := self buscarLike: unUsuario user.
-	like
-		ifNil: [ self likes
-				add: (Interaccion conUsuario: unUsuario Publicacion: self) ]
+self limpiarLikesYdislikes: unUsuario.
+self likes add: (Interaccion conUsuario: unUsuario Publicacion: self)
 ]
 
 { #category : #accessing }
@@ -160,6 +146,15 @@ Publicacion >> likes [
 { #category : #accessing }
 Publicacion >> likes: anObject [
 	likes := anObject
+]
+
+{ #category : #'as yet unclassified' }
+Publicacion >> limpiarLikesYdislikes:unUsuario [
+| like dislike |
+	like := self buscarLike: unUsuario user.
+	like ifNotNil: [ self likes remove: like ].
+	dislike  := self buscarDislike: unUsuario user.
+	dislike ifNotNil: [ self dislikes remove: dislike ].
 ]
 
 { #category : #methods }

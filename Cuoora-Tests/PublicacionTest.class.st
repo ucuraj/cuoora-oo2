@@ -44,6 +44,8 @@ PublicacionTest >> testBuscarLike [
 PublicacionTest >> testDislikeUsuario [
 
 	publicacion dislikeUsuario: usuario.
+	publicacion dislikeUsuario: usuario.
+	publicacion dislikeUsuario: usuario.
 	publicacion dislikeUsuario: usuario2.
 	
 	self assert: (publicacion buscarDislike: usuario user) usuario user equals: usuario user. 
@@ -55,6 +57,8 @@ PublicacionTest >> testDislikeUsuario [
 PublicacionTest >> testLikeUsuario [
 
 	publicacion likeUsuario: usuario.
+	publicacion likeUsuario: usuario2.
+	publicacion likeUsuario: usuario2.
 	publicacion likeUsuario: usuario2.
 	
 	self assert: (publicacion buscarLike: usuario user) usuario user equals: usuario user. 
