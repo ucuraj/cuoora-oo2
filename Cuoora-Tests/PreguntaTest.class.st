@@ -93,13 +93,13 @@ PreguntaTest >> testDisLikes [
 
 	pregunta dislikeUsuario: usuario.
 	pregunta dislikeUsuario: usuario.
-	self assert: pregunta totalDislikes equals: '1'.
+	self assert: pregunta totalDislikes equals: 1.
 	
 	pregunta dislikeUsuario: usuario2.
-	self assert: pregunta totalDislikes equals: '2'.
+	self assert: pregunta totalDislikes equals: 2.
 	
 	pregunta likeUsuario: usuario2.
-	self assert: pregunta totalDislikes equals: '1'.
+	self assert: pregunta totalDislikes equals: 1.
 ]
 
 { #category : #tests }
@@ -107,15 +107,15 @@ PreguntaTest >> testLikes [
 
 	pregunta likeUsuario: usuario.
 	pregunta likeUsuario: usuario.
-	self assert: pregunta totalLikes equals: '1'.
+	self assert: pregunta totalLikes equals: 1.
 	
 	pregunta dislikeUsuario: usuario.
-	self assert: pregunta totalLikes equals: '0'.
+	self assert: pregunta totalLikes equals: 0.
 	
 	pregunta likeUsuario: usuario.
 	pregunta likeUsuario: usuario2.
 	
-	self assert: pregunta totalLikes equals: '2'.
+	self assert: pregunta totalLikes equals: 2.
 ]
 
 { #category : #tests }

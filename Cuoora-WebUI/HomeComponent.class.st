@@ -17,7 +17,7 @@ HomeComponent >> renderPreguntasRelevantesOn: html [
 	html container
 		class: 'home-list mt-5 pregunta-anchor';
 		with: [ html
-				row: [ (self session user getPreguntasInteres: 5)
+				row: [ (self session user getPrimerasPreguntasInteres: 5)
 						do: [ :preguntaRelevante | 
 							html column
 								class: 'col-md-5 mb-4 mr-auto';

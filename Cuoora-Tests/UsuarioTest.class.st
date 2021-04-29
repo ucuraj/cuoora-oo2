@@ -89,6 +89,19 @@ UsuarioTest >> testBuscarPregunta [
 ]
 
 { #category : #tests }
+UsuarioTest >> testBuscarTodasPreguntasInteres [
+	
+	self assert: juan buscarTodasPreguntasInteres isEmpty.
+	self assert: pedro buscarTodasPreguntasInteres isEmpty.
+	
+	juan seguirUsuario: pedro.
+	self assert: juan topicosInteres size equals: 0.
+	self assert: juan buscarTodasPreguntasInteres size equals: 2
+	
+
+]
+
+{ #category : #tests }
 UsuarioTest >> testCalcularPuntaje [ 
 	
 	
@@ -135,17 +148,17 @@ UsuarioTest >> testDejarDeSeguirUsuario [
 ]
 
 { #category : #tests }
-UsuarioTest >> testGetPreguntasInteres [
+UsuarioTest >> testGetPrimerasPreguntasInteres [
 	
-	self assert: juan preguntasInteres isEmpty.
-	self assert: pedro preguntasInteres isEmpty.
+	self assert: juan buscarTodasPreguntasInteres isEmpty.
+	self assert: pedro buscarTodasPreguntasInteres isEmpty.
 	
 	juan seguirUsuario: pedro.
 	self assert: juan topicosInteres size equals: 0.
-	self assert: (juan getPreguntasInteres:1 ) size equals: 1.
-	self assert: (juan getPreguntasInteres:2 ) size equals: 2.
-	self assert: (juan getPreguntasInteres:5 ) size equals: 2.	
-	self assert: (juan getPreguntasInteres:0 ) isEmpty	
+	self assert: (juan getPrimerasPreguntasInteres:1 ) size equals: 1.
+	self assert: (juan getPrimerasPreguntasInteres:2 ) size equals: 2.
+	self assert: (juan getPrimerasPreguntasInteres:5 ) size equals: 2.	
+	self assert: (juan getPrimerasPreguntasInteres:0 ) isEmpty	
 ]
 
 { #category : #tests }
@@ -159,19 +172,6 @@ UsuarioTest >> testInitialize [
 	self assert: jorge seguidos isEmpty.
 	self assert: jorge topicosInteres isEmpty.
 	self assert: jorge preguntas isEmpty
-]
-
-{ #category : #tests }
-UsuarioTest >> testPreguntasInteres [
-	
-	self assert: juan preguntasInteres isEmpty.
-	self assert: pedro preguntasInteres isEmpty.
-	
-	juan seguirUsuario: pedro.
-	self assert: juan topicosInteres size equals: 0.
-	self assert: juan preguntasInteres size equals: 2
-	
-
 ]
 
 { #category : #tests }

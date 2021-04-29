@@ -120,7 +120,7 @@ CuooraTest >> testGetRespuestasDeUnUsuario [
 	cuoora agregarUsuario: user1.
 	cuoora agregarUsuario: user2.
 	self assert: (cuoora getRespuestasDeUnUsuario: user1) size equals:3.
-	self assert: (cuoora getRespuestasDeUnUsuario: user2) size equals:1.
+	self assert: (cuoora getRespuestasDeUnUsuario: user2) size equals:2.
 	self assert: (cuoora getRespuestasDeUnUsuario: user3) size equals:0.
 ]
 

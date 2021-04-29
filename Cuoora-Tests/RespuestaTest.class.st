@@ -42,26 +42,26 @@ RespuestaTest >> testDisLikes [
 
 	respuesta dislikeUsuario: usuario.
 	respuesta dislikeUsuario: usuario.
-	self assert: respuesta totalDislikes equals: '1'.
+	self assert: respuesta totalDislikes equals: 1.
 	
 	respuesta dislikeUsuario: usuario2.
-	self assert: respuesta totalDislikes equals: '2'.
+	self assert: respuesta totalDislikes equals: 2.
 	
 	respuesta likeUsuario: usuario2.
-	self assert: respuesta totalDislikes equals: '1'.
+	self assert: respuesta totalDislikes equals: 1.
 ]
 
 { #category : #tests }
 RespuestaTest >> testLikes [
 	respuesta likeUsuario: usuario.
 	respuesta likeUsuario: usuario.
-	self assert: respuesta totalLikes equals: '1'.
+	self assert: respuesta totalLikes equals: 1.
 	
 	respuesta dislikeUsuario: usuario.
-	self assert: respuesta totalLikes equals: '0'.
+	self assert: respuesta totalLikes equals: 0.
 	
 	respuesta likeUsuario: usuario.
 	respuesta likeUsuario: usuario2.
 	
-	self assert: respuesta totalLikes equals: '2'.
+	self assert: respuesta totalLikes equals: 2.
 ]

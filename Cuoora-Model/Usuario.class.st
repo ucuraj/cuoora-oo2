@@ -71,6 +71,19 @@ Usuario >> buscarPregunta: unTitulo [
 		ifNone: [ nil ]
 ]
 
+{ #category : #private }
+Usuario >> buscarTodasPreguntasInteres [
+	"Recorre los usuarios seguidos y obtiene las preguntas realizadas por cada uno de ellos. 
+	Recorre los topicos de interes y obtiene las preguntas de cada tópico, a través de Cuoora.
+	Devuelve un set de preguntas para evitar repetidos" 
+
+	| pregs |
+	pregs := self topicosInteres
+		collectAll: [ :topico | Cuoora soleInstance getPreguntasDeTopico: topico ].
+	self seguidos do: [ :seguido | pregs addAll: seguido preguntas ].
+	^ pregs asSet
+]
+
 { #category : #methods }
 Usuario >> calcularPuntaje [
 	"Recorre las preguntas de un usuario y llama a calcularPuntaje
@@ -128,13 +141,13 @@ Usuario >> fechaCreacion: anObject [
 ]
 
 { #category : #private }
-Usuario >> getPreguntasInteres: unNumero [
+Usuario >> getPrimerasPreguntasInteres: unNumero [
 	"Devuelve una colección preguntas ordenadas 
 	por fecha de creación(mayor a menor) de longitud unNumero
 	Utiliza preguntasInteres para obtener las preguntas de interes."
 
 	| preg |
-	preg := self preguntasInteres asSortedCollection reverse.
+	preg := self buscarTodasPreguntasInteres asSortedCollection reverse.
 	preg size >= unNumero
 		ifTrue: [ ^ preg first: unNumero ].
 	^preg
@@ -166,19 +179,6 @@ Usuario >> preguntas [
 { #category : #accessing }
 Usuario >> preguntas: anObject [
 	preguntas := anObject
-]
-
-{ #category : #private }
-Usuario >> preguntasInteres [
-	"Recorre los usuarios seguidos y obtiene las preguntas realizadas por cada uno de ellos. 
-	Recorre los topicos de interes y obtiene las preguntas de cada tópico, a través de Cuoora.
-	Devuelve un set de preguntas para evitar repetidos" 
-
-	| pregs |
-	pregs := self topicosInteres
-		collectAll: [ :topico | Cuoora soleInstance getPreguntasDeTopico: topico ].
-	self seguidos do: [ :seguido | pregs addAll: seguido preguntas ].
-	^ pregs asSet
 ]
 
 { #category : #methods }
