@@ -32,8 +32,17 @@ Cuoora class >> conUsuarios: usuarios Topicos: topicos [
 ]
 
 { #category : #'instance creation' }
+Cuoora class >> initialData [
+   "Instancia un objeto Cuoora con datos por defecto"
+ 
+	^self new initialData
+]
+
+{ #category : #'instance creation' }
 Cuoora class >> soleInstance [
-	^ soleInstance ifNil: [ soleInstance := self new ]
+	"^ soleInstance ifNil: [ soleInstance := self new ]"
+	
+	^ soleInstance ifNil: [ soleInstance := self initialData ]
 ]
 
 { #category : #methods }
@@ -128,6 +137,66 @@ Cuoora >> getRespuestasParaPuntaje: unUsuario [
 				flatCollect: [ :eachPregunta | 
 							eachPregunta respuestas
 								select: [ :each | each usuario user = unUsuario user ] ] ].
+]
+
+{ #category : #initialization }
+Cuoora >> initialData [
+	"Carga datos de prueba a la instancia actual de cuoora"
+
+	| juan diego pedro topicoOO1 topicoTU topicoST preguntaPedro preguntaDiego r1 r2 |
+	pedro := Usuario
+		conNombre: 'pedro@cuoora.com'
+		Password: 'pedro@cuoora.com'.
+	juan := Usuario
+		conNombre: 'juan@cuoora.com'
+		Password: 'juan@cuoora.com'.
+	diego := Usuario
+		conNombre: 'diego@cuoora.com'
+		Password: 'diego@cuoora.com'.
+	juan seguirUsuario: diego.
+	pedro seguirUsuario: juan.
+	preguntaPedro := Pregunta
+		conTitulo: '¿Para qué sirve el método SetUp?'
+		Descripcion:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget turpis fringilla metus dictum consequat. Quisque leo augue, suscipit in commodo vitae, viverra quis magna. Suspendisse ultrices lobortis metus, a ullamcorper dui mattis eget. Nulla ut erat at enim dictum laoreet sit amet ut lacus. Maecenas posuere, nisi nec faucibus aliquam, lorem ligula feugiat purus, et finibus ipsum tortor bibendum leo'
+		Usuario: pedro.
+	preguntaDiego := Pregunta
+		conTitulo: '¿Qué significa #messageNotUnderstood?'
+		Descripcion:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget turpis fringilla metus dictum consequat. Quisque leo augue, suscipit in commodo vitae, viverra quis magna. Suspendisse ultrices lobortis metus, a ullamcorper dui mattis eget. Nulla ut erat at enim dictum laoreet sit amet ut lacus. Maecenas posuere, nisi nec faucibus aliquam, lorem ligula feugiat purus, et finibus ipsum tortor bibendum leo'
+		Usuario: diego.
+	topicoOO1 := Topico conNombre: 'OO1' Descripcion: ''.
+	topicoTU := Topico conNombre: 'Test de unidad' Descripcion: ''.
+	topicoST := Topico conNombre: 'Smalltalk' Descripcion: ''.
+	preguntaPedro
+		agregarTopico: topicoOO1;
+		agregarTopico: topicoTU.
+	preguntaDiego
+		agregarTopico: topicoOO1;
+		agregarTopico: topicoST.
+	r1 := Respuesta
+		conTexto:
+			'Sirve para instanciar los objetos que son
+evaluados por el test en un único método y que se ejecute
+siempre antes de cada test.'
+		Usuario: diego.
+	r2 := Respuesta
+		conTexto:
+			'Significa que el objeto que recibió el mensaje
+no encontró ningún método para ejecutar en respuesta'
+		Usuario: pedro.
+	preguntaPedro agregarRespuesta: r1.
+	preguntaDiego agregarRespuesta: r2.
+	pedro agregarPregunta: preguntaPedro.
+	diego agregarPregunta: preguntaDiego.
+	self
+		agregarUsuario: pedro;
+		agregarUsuario: diego;
+		agregarUsuario: juan.
+	self
+		agregarTopico: topicoOO1;
+		agregarTopico: topicoTU;
+		agregarTopico: topicoST
 ]
 
 { #category : #initialization }
